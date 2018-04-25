@@ -17,14 +17,14 @@ let PluginControllerWindowLevel: UIWindowLevel = UIWindowLevelStatusBar - 1
 private final class AssistiveButtonPresenterViewController: UIViewController {
     
     override var prefersStatusBarHidden: Bool {
-        if let vc = UIApplication.shared.keyWindow?.rootViewController {
+        if let vc = UIApplication.shared.keyWindow?.rootViewController, vc !== self {
             return vc.prefersStatusBarHidden
         }
         return false
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
-        if let vc = UIApplication.shared.keyWindow?.rootViewController {
+        if let vc = UIApplication.shared.keyWindow?.rootViewController, vc !== self {
             return vc.preferredStatusBarStyle
         }
         return .lightContent
