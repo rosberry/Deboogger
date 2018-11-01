@@ -48,6 +48,12 @@ public final class Deboogger {
     }()
 
     private weak var pluginViewController: PluginViewController?
+    var viewController: UIViewController? {
+        return pluginViewController
+    }
+    var navigationController: UINavigationController? {
+        return pluginViewController?.navigationController
+    }
 
     private init() {}
 
