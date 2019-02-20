@@ -41,7 +41,7 @@ final class AssistiveButton: UIButton {
 
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(orientationChanged),
-                                               name: NSNotification.Name.UIDeviceOrientationDidChange,
+                                               name: UIDevice.orientationDidChangeNotification,
                                                object: nil)
     }
     
@@ -175,13 +175,13 @@ private extension UserDefaults {
     var currentButtonFrame: CGRect? {
         get {
             if let stringRect = string(forKey: #function) {
-                return CGRectFromString(stringRect)
+                return NSCoder.cgRect(for: stringRect)
             }
             return nil
         }
         set {
             if let value = newValue {
-                let stringRect = NSStringFromCGRect(value)
+                let stringRect = NSCoder.string(for: value)
                 setValue(stringRect, forKey: #function)
             }
             else {

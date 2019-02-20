@@ -11,8 +11,8 @@ extension NSNotification.Name {
     public static let DebooggerDidHide: NSNotification.Name = .init(rawValue: "DebooggerDidHide")
 }
 
-let AssistiveButtonWindowLevel: UIWindowLevel = UIWindowLevelAlert + 1
-let PluginControllerWindowLevel: UIWindowLevel = UIWindowLevelStatusBar - 1
+let AssistiveButtonWindowLevel: UIWindow.Level = UIWindow.Level.alert + 1
+let PluginControllerWindowLevel: UIWindow.Level = UIWindow.Level.statusBar - 1
 
 private final class AssistiveButtonPresenterViewController: UIViewController {
     

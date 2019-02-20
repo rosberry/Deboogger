@@ -77,7 +77,7 @@ final class PluginViewController: UIViewController {
     }
 
     @objc private func settingsButtonPressed() {
-        guard let settingsURL = URL(string:UIApplicationOpenSettingsURLString) else {
+        guard let settingsURL = URL(string: UIApplication.openSettingsURLString) else {
             return
         }
 
