@@ -16,7 +16,7 @@ final class SegmentTableViewCell: BaseTextTableViewCell {
         segmentControl.removeAllSegments()        
         plugin.items.enumerated().forEach { offset, item in
             segmentControl.insertSegment(withTitle: item, at: offset, animated: false)
-            segmentControl.setTitleTextAttributes([NSAttributedStringKey.font: UIFont.systemFont(ofSize: 10, weight: .light)],
+            segmentControl.setTitleTextAttributes([.font: UIFont.systemFont(ofSize: 10, weight: .light)],
                                                   for: .normal)
         }
         segmentControl.selectedSegmentIndex = Int(plugin.initialSelectedIndex)

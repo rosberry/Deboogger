@@ -14,6 +14,7 @@ public protocol SliderPlugin: TextPlugin {
     var minValue: Float { get }
     var maxValue: Float { get }
     var initialValue: Float { get }
+    var sliderTitle: String { get }
 
     func sliderValueChanged(_ slider: UISlider)
 }
@@ -48,6 +49,10 @@ public extension SliderPlugin {
         set {
             _currentValue = newValue
         }
+    }
+
+    var sliderTitle: String {
+        return "\(currentValue) / \(maxValue)"
     }
 
     var nib: UINib {

@@ -29,9 +29,6 @@ final class SliderTableViewCell: BaseTextTableViewCell {
     }
 
     private func configureSliderTitle() {
-        guard let plugin = self.plugin else {
-            return
-        }
-        sliderLabel.text = "\(plugin.currentValue) / \(plugin.maxValue)"
+        sliderLabel.text = plugin?.sliderTitle
     }
 }

@@ -59,7 +59,7 @@ final class ButtonTableViewCell: BaseTextTableViewCell {
         animation.toValue = value
         animation.duration = Animation.duration
         animation.isRemovedOnCompletion = false
-        animation.fillMode = kCAFillModeForwards
+        animation.fillMode = .forwards
         activateButton.layer.add(animation, forKey: nil)
     }
 

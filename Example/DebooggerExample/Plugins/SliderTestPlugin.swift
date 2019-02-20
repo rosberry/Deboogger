@@ -7,28 +7,19 @@ import Deboogger
 
 final class SliderTestPlugin: SliderPlugin {
 
-    var initialValue: Float {
-        return 50.0
+    let initialValue: Float = 50
+
+    let minValue: Float = 10
+
+    let maxValue: Float = 105
+
+    var sliderTitle: String {
+        return "\(Int(currentValue)) / \(Int(maxValue))"
     }
 
-    var minValue: Float {
-        return 10.0
-    }
-
-    var maxValue: Float {
-        return 105.0
-    }
-
-    var title: NSAttributedString {
-        return NSAttributedString(string: "Title")
-    }
-
-    var description: NSAttributedString? {
-        return NSAttributedString(string: "Description Description Description Description Description Description Description Description")
-    }
+    let title: NSAttributedString = .init(string: "Title")
 
     func sliderValueChanged(_ slider: UISlider) {
         print(currentValue)
     }
 }
-
