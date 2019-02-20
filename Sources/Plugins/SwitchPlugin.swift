@@ -6,8 +6,8 @@ import UIKit
 
  public protocol SwitchPlugin: TextPlugin {
 
-     var isOn: Bool { get }
-     func switchStateChanged(_ sender: UISwitch)
+    var isOn: Bool { get }
+    func switchStateChanged(_ sender: UISwitch)
 }
 
 public extension SwitchPlugin {
