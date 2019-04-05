@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		06D462662085DC610005009C /* Bundle+Deboogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06D462652085DC610005009C /* Bundle+Deboogger.swift */; };
+		629A65CBC829B940726B0CD3 /* UIWindow+Deboogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 629A65FCE423F310729E625C /* UIWindow+Deboogger.h */; };
+		629A673D3EBDAFECC1593719 /* UIWindow+Deboogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 629A6936E1B391DE557214E9 /* UIWindow+Deboogger.swift */; };
+		629A6C724D7EE0C256CD9035 /* UIWindow+Deboogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 629A63D44E7C17FA7B5D3789 /* UIWindow+Deboogger.m */; };
 		8408703F1FD7B238007741AB /* SegmentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 840870341FD7B237007741AB /* SegmentTableViewCell.xib */; };
 		840870401FD7B238007741AB /* SegmentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840870351FD7B237007741AB /* SegmentTableViewCell.swift */; };
 		840870411FD7B238007741AB /* DescriptionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 840870371FD7B237007741AB /* DescriptionTableViewCell.xib */; };
@@ -39,6 +42,9 @@
 
 /* Begin PBXFileReference section */
 		06D462652085DC610005009C /* Bundle+Deboogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Deboogger.swift"; sourceTree = "<group>"; };
+		629A63D44E7C17FA7B5D3789 /* UIWindow+Deboogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWindow+Deboogger.m"; sourceTree = "<group>"; };
+		629A65FCE423F310729E625C /* UIWindow+Deboogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIWindow+Deboogger.h"; sourceTree = "<group>"; };
+		629A6936E1B391DE557214E9 /* UIWindow+Deboogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIWindow+Deboogger.swift"; sourceTree = "<group>"; };
 		840870341FD7B237007741AB /* SegmentTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SegmentTableViewCell.xib; sourceTree = "<group>"; };
 		840870351FD7B237007741AB /* SegmentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentTableViewCell.swift; sourceTree = "<group>"; };
 		840870371FD7B237007741AB /* DescriptionTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DescriptionTableViewCell.xib; sourceTree = "<group>"; };
@@ -203,6 +209,9 @@
 				849B83501EC7564000B0DF9D /* UIViewController+Presenter.swift */,
 				849B83721EC756DA00B0DF9D /* UIView+SuperviewOffset.swift */,
 				06D462652085DC610005009C /* Bundle+Deboogger.swift */,
+				629A6936E1B391DE557214E9 /* UIWindow+Deboogger.swift */,
+				629A63D44E7C17FA7B5D3789 /* UIWindow+Deboogger.m */,
+				629A65FCE423F310729E625C /* UIWindow+Deboogger.h */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -237,6 +246,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				849B83761EC7570E00B0DF9D /* Deboogger.h in Headers */,
+				629A65CBC829B940726B0CD3 /* UIWindow+Deboogger.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -336,6 +346,8 @@
 				849B83731EC756DA00B0DF9D /* UIView+SuperviewOffset.swift in Sources */,
 				849B835C1EC7564000B0DF9D /* BaseTextTableViewCell.swift in Sources */,
 				840870421FD7B238007741AB /* DescriptionTableViewCell.swift in Sources */,
+				629A673D3EBDAFECC1593719 /* UIWindow+Deboogger.swift in Sources */,
+				629A6C724D7EE0C256CD9035 /* UIWindow+Deboogger.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

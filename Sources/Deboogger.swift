@@ -47,13 +47,15 @@ public final class Deboogger {
         return window
     }()
 
-    private weak var pluginViewController: PluginViewController?
+    weak var pluginViewController: PluginViewController?
     public var viewController: UIViewController? {
         return pluginViewController
     }
     public var navigationController: UINavigationController? {
         return pluginViewController?.navigationController
     }
+
+    var configuration: Configuration?
 
     private init() {}
 
@@ -95,6 +97,8 @@ public final class Deboogger {
     // MARK: - Helpers
 
     private func configure(with configuration: Configuration) {
+        self.configuration = configuration
+
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
 
             let button = AssistiveButton(tapHandler: { [unowned self] in
