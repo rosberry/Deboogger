@@ -4,6 +4,7 @@
 
 #import <objc/runtime.h>
 #import "UIWindow+Deboogger.h"
+#import <Deboogger/Deboogger-Swift.h>
 
 @implementation UIWindow(Deboogger)
 
@@ -27,6 +28,16 @@
         [self swizzleMethodWithOriginalSelector:@selector(initWithCoder:)
                                swizzledSelector:@selector(swizzled_initWithCoder:)];
     });
+}
+
+- (instancetype)swizzled_initWithFrame:(CGRect)frame {
+    [self setupGestureRecognizer];
+    return [self swizzled_initWithFrame:frame];
+}
+
+- (instancetype)swizzled_initWithCoder:(NSCoder *)aDecoder {
+    [self setupGestureRecognizer];
+    return [self swizzled_initWithCoder:aDecoder];
 }
 
 @end

@@ -324,6 +324,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				629A6C724D7EE0C256CD9035 /* UIWindow+Deboogger.m in Sources */,
 				849B836A1EC7564000B0DF9D /* SwitchPlugin.swift in Sources */,
 				849B836D1EC7564000B0DF9D /* PluginViewController.swift in Sources */,
 				840870441FD7B238007741AB /* SwitchTableViewCell.swift in Sources */,
@@ -347,7 +348,6 @@
 				849B835C1EC7564000B0DF9D /* BaseTextTableViewCell.swift in Sources */,
 				840870421FD7B238007741AB /* DescriptionTableViewCell.swift in Sources */,
 				629A673D3EBDAFECC1593719 /* UIWindow+Deboogger.swift in Sources */,
-				629A6C724D7EE0C256CD9035 /* UIWindow+Deboogger.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

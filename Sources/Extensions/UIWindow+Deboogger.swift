@@ -6,17 +6,17 @@ import UIKit
 
 extension UIWindow {
 
-    @objc private func swizzled_init(frame: CGRect) {
-        swizzled_init(frame: frame)
-        setupGestureRecognizer()
-    }
+//    @objc private func swizzled_init(frame: CGRect) {
+//        swizzled_init(frame: frame)
+//        setupGestureRecognizer()
+//    }
+//
+//    @objc private func swizzled_init(coder: NSCoder) {
+//        swizzled_init(coder: coder)
+//        setupGestureRecognizer()
+//    }
 
-    @objc private func swizzled_init(coder: NSCoder) {
-        swizzled_init(coder: coder)
-        setupGestureRecognizer()
-    }
-
-    private func setupGestureRecognizer() {
+    @objc private func setupGestureRecognizer() {
         let recognizer = UITapGestureRecognizer(target: self, action: #selector(showDeboogger))
         recognizer.numberOfTapsRequired = 2
         recognizer.numberOfTouchesRequired = 4

@@ -6,4 +6,7 @@
 #import <UIKit/UIKit.h>
 
 @interface UIWindow(Deboogger)
+
+- (void)setupGestureRecognizer;
+
 @end
