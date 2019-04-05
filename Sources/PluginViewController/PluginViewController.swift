@@ -13,7 +13,7 @@ final class PluginViewController: UIViewController {
         tableView.delegate = configuration
         tableView.dataSource = configuration
         tableView.estimatedRowHeight = 100
-        tableView.separatorInset = .zero
+        tableView.separatorInset = .init(top: 0, left: 10, bottom: 0, right: 0)
         return tableView
     }()
 
