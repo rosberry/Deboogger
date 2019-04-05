@@ -26,25 +26,6 @@ extension UIWindow {
     // MARK: Show/Hide
 
     @objc private func showDeboogger() {
-        let deboogger = Deboogger.shared
-        guard let configuration = deboogger.configuration else {
-            return
-        }
-
-        let pluginViewController = PluginViewController(configuration: configuration)
-        pluginViewController.closeEventHandler = { [weak deboogger] in
-            deboogger?.close()
-        }
-
-        let navigationController = UINavigationController(rootViewController: pluginViewController)
-        deboogger.pluginViewController = pluginViewController
-
-        self.rootViewController?.beginAppearanceTransition(false, animated: true)
-        NotificationCenter.default.post(name: .DebooggerWillShow, object: nil)
-
-        navigationController.present {
-            self.rootViewController?.endAppearanceTransition()
-            NotificationCenter.default.post(name: .DebooggerDidShow, object: nil)
-        }
+        Deboogger.shared.show()
     }
 }
