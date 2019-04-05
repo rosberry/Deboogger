@@ -57,24 +57,48 @@ public final class Deboogger {
 
     var configuration: Configuration?
 
+    private var _shouldShowAssistiveButton: Bool = false
+    var shouldShowAssistiveButton: Bool {
+        get {
+            #if targetEnvironment(simulator)
+                return true
+            #endif
+            return _shouldShowAssistiveButton
+        }
+        set {
+            _shouldShowAssistiveButton = newValue
+        }
+    }
+
     private init() {}
 
     // MARK: - Configurations
 
     public static func configure(with plugins: [Plugin]) {
-        shared.configure(with: PluginsConfiguration(plugins: plugins))
+        #if targetEnvironment(simulator)
+            shared.configure(with: PluginsConfiguration(plugins: plugins))
+        #else
+            let section = Section(title: "App plugins", plugins: plugins)
+            configure(with: [section])
+        #endif
     }
 
     public static func configure(with plugins: Plugin...) {
         configure(with: plugins)
     }
 
-    public static func configure(with sections: [Section]) {
-        shared.configure(with: SectionsConfiguration(sections: sections))
-    }
-
     public static func configure(with sections: Section...) {
         configure(with: sections)
+    }
+
+    public static func configure(with sections: [Section]) {
+        #if targetEnvironment(simulator)
+            shared.configure(with: SectionsConfiguration(sections: sections))
+        #else
+            var adjustedSections = sections
+            adjustedSections.insert(shared.makeDefaultSection(), at: 0)
+            shared.configure(with: SectionsConfiguration(sections: adjustedSections))
+        #endif
     }
 
     // MARK: - Appearance
@@ -88,7 +112,7 @@ public final class Deboogger {
         NotificationCenter.default.post(name: .DebooggerWillHide, object: nil)
 
         pluginViewController?.dismiss(animated: true, completion: { [unowned self] in
-            self.assistiveButtonWindow.isHidden = false
+            self.assistiveButtonWindow.isHidden = !self.shouldShowAssistiveButton
             self.rootViewController?.endAppearanceTransition()
             NotificationCenter.default.post(name: .DebooggerDidHide, object: nil)
         })
@@ -122,8 +146,14 @@ public final class Deboogger {
                 }
             })
 
-            self.assistiveButtonWindow.isHidden = false
+            self.assistiveButtonWindow.isHidden = !self.shouldShowAssistiveButton
             self.assistiveButtonWindow.addSubview(button)
         }
+    }
+
+    // MARK: - Default section
+
+    private func makeDefaultSection() -> Section {
+        return Section(title: "Deboogger settings", plugins: [DebooggerButtonPlugin()])
     }
 }
