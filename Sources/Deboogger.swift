@@ -56,7 +56,7 @@ public final class Deboogger {
     }
 
     private var configuration: Configuration?
-    private var isCurrentlyShowing: Bool = false
+    private var isShowing: Bool = false
 
     private var _shouldShowAssistiveButton: Bool = false
     var shouldShowAssistiveButton: Bool {
@@ -113,7 +113,7 @@ public final class Deboogger {
         NotificationCenter.default.post(name: .DebooggerWillHide, object: nil)
 
         pluginViewController?.dismiss(animated: true, completion: { [unowned self] in
-            self.isCurrentlyShowing = false
+            self.isShowing = false
             self.assistiveButtonWindow.isHidden = !self.shouldShowAssistiveButton
             self.rootViewController?.endAppearanceTransition()
             NotificationCenter.default.post(name: .DebooggerDidHide, object: nil)
@@ -121,7 +121,7 @@ public final class Deboogger {
     }
 
     public func show() {
-        if isCurrentlyShowing {
+        if isShowing {
             close()
             return
         }
@@ -129,7 +129,7 @@ public final class Deboogger {
         guard let configuration = configuration else {
             return
         }
-        isCurrentlyShowing = true
+        isShowing = true
 
         let pluginViewController = PluginViewController(configuration: configuration)
         pluginViewController.closeEventHandler = { [weak self] in
@@ -146,6 +146,7 @@ public final class Deboogger {
             self.rootViewController?.endAppearanceTransition()
             NotificationCenter.default.post(name: .DebooggerDidShow, object: nil)
         }
+        self.assistiveButtonWindow.isHidden = true
     }
 
     // MARK: - Helpers

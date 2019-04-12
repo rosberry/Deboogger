@@ -6,9 +6,13 @@ import Foundation
 
 final class DebooggerButtonPlugin: SwitchPlugin {
 
+    private enum Constants {
+        static let debooggerSuffix: String = "deboogger_"
+    }
+
     private var shouldShowDebooggerButton: Bool {
         get {
-            if let shouldShow = UserDefaults.standard.object(forKey: "deboogger_\(#function)") as? Bool {
+            if let shouldShow = UserDefaults.standard.object(forKey: Constants.debooggerSuffix + "\(#function)") as? Bool {
                 return shouldShow
             }
 
@@ -16,11 +20,11 @@ final class DebooggerButtonPlugin: SwitchPlugin {
             #if targetEnvironment(simulator)
                 shouldShow = true
             #endif
-            UserDefaults.standard.set(shouldShow, forKey: "deboogger_\(#function)")
+            UserDefaults.standard.set(shouldShow, forKey: Constants.debooggerSuffix + "\(#function)")
             return shouldShow
         }
         set {
-            UserDefaults.standard.set(newValue, forKey: "deboogger_\(#function)")
+            UserDefaults.standard.set(newValue, forKey: Constants.debooggerSuffix + "\(#function)")
         }
     }
 
