@@ -16,10 +16,7 @@ final class DebooggerButtonPlugin: SwitchPlugin {
                 return shouldShow
             }
 
-            var shouldShow = false
-            #if targetEnvironment(simulator)
-                shouldShow = true
-            #endif
+            let shouldShow = Deboogger.shared.shouldShowAssistiveButton
             UserDefaults.standard.set(shouldShow, forKey: Constants.debooggerPrefix + "\(#function)")
             return shouldShow
         }
