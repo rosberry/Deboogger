@@ -33,12 +33,11 @@ private final class AssistiveButtonPresenterViewController: UIViewController {
 
 public final class Deboogger {
 
-    weak var assistiveButton: UIButton?
-
     public static let shared = Deboogger()
 
     private weak var rootViewController: UIViewController?
     private var assistiveButtonPresenterViewController = AssistiveButtonPresenterViewController()
+    private weak var assistiveButton: UIButton?
 
     private lazy var assistiveButtonWindow: UIWindow = {
         let size = AssistiveButton.Layout.size
