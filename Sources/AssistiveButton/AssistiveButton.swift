@@ -79,7 +79,7 @@ final class AssistiveButton: UIButton {
     }
     
     private func stopTimer() {
-         alpha = 1.0
+        alpha = 1.0
         
         opacityTimer?.invalidate()
         opacityTimer = nil
