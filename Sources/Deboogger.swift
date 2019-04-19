@@ -33,6 +33,8 @@ private final class AssistiveButtonPresenterViewController: UIViewController {
 
 public final class Deboogger {
 
+    weak var assistiveButton: UIButton?
+
     public static let shared = Deboogger()
 
     private weak var rootViewController: UIViewController?
@@ -114,8 +116,13 @@ public final class Deboogger {
 
         pluginViewController?.dismiss(animated: true, completion: { [unowned self] in
             self.isShowing = false
-            self.assistiveButtonWindow.isHidden = !self.shouldShowAssistiveButton
             self.rootViewController?.endAppearanceTransition()
+            self.assistiveButtonWindow.isHidden = !self.shouldShowAssistiveButton
+            if let assistiveButton = self.assistiveButton {
+                assistiveButton.removeFromSuperview()
+                self.assistiveButtonWindow.addSubview(assistiveButton)
+            }
+
             NotificationCenter.default.post(name: .DebooggerDidHide, object: nil)
         })
     }
@@ -158,9 +165,9 @@ public final class Deboogger {
             let button = AssistiveButton(tapHandler: { [weak self] in
                 self?.show()
             })
-
             self.assistiveButtonWindow.isHidden = !self.shouldShowAssistiveButton
             self.assistiveButtonWindow.addSubview(button)
+            self.assistiveButton = button
         }
     }
 
