@@ -155,7 +155,6 @@ public final class Deboogger {
         self.configuration = configuration
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-
             let button = AssistiveButton(tapHandler: { [weak self] in
                 self?.show()
             })
