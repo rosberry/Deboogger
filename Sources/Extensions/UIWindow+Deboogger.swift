@@ -10,11 +10,6 @@ private enum AssociationKeys {
 
 extension UIWindow {
 
-    private enum Constants {
-        static let numberOfTouches = 4
-        static let numberOfTaps = 2
-    }
-
     public var debooggerGestureRecognizer: UITapGestureRecognizer? {
         get {
             return objc_getAssociatedObject(self, &AssociationKeys.debooggerGestureRecognizer) as? UITapGestureRecognizer
@@ -30,11 +25,10 @@ extension UIWindow {
         #endif
 
         let recognizer = UITapGestureRecognizer(target: self, action: #selector(showDeboogger))
-        recognizer.numberOfTapsRequired = Constants.numberOfTaps
-        recognizer.numberOfTouchesRequired = Constants.numberOfTouches
         recognizer.requiresExclusiveTouchType = false
         addGestureRecognizer(recognizer)
 
+        Deboogger.shared.setup(recognizer)
         debooggerGestureRecognizer = recognizer
     }
 

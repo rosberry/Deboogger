@@ -171,6 +171,10 @@ public final class Deboogger {
 
     // MARK: - Helpers
 
+    func setup(_ recognizer: UITapGestureRecognizer) {
+        setup(recognizer, with: gesture)
+    }
+
     private func configure(with configuration: Configuration, gesture: DebooggerGesture) {
         self.configuration = configuration
         setup(gesture)
@@ -188,9 +192,15 @@ public final class Deboogger {
     private func setup(_ gesture: DebooggerGesture) {
         self.gesture = gesture
         for window in UIApplication.shared.windows {
-            window.debooggerGestureRecognizer?.numberOfTapsRequired = gesture.numberOfTaps
-            window.debooggerGestureRecognizer?.numberOfTouchesRequired = gesture.numberOfTouches
+            if let recognizer = window.debooggerGestureRecognizer {
+                setup(recognizer, with: gesture)
+            }
         }
+    }
+
+    private func setup(_ recognizer: UITapGestureRecognizer, with gesture: DebooggerGesture) {
+        recognizer.numberOfTapsRequired = gesture.numberOfTaps
+        recognizer.numberOfTouchesRequired = gesture.numberOfTouches
     }
 
     // MARK: - Default section
