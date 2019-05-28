@@ -35,7 +35,7 @@ public struct DebooggerGesture {
     public let numberOfTouches: Int
     public let numberOfTaps: Int
 
-    public init(numberOfTouches: Int = 2, numberOfTaps: Int = 2) {
+    public init(numberOfTouches: Int = 4, numberOfTaps: Int = 2) {
         self.numberOfTouches = numberOfTouches
         self.numberOfTaps = numberOfTaps
     }
