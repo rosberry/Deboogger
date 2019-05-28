@@ -35,7 +35,7 @@ public struct DebooggerGesture {
     public let numberOfTouches: Int
     public let numberOfTaps: Int
 
-    public init(numberOfTouches: Int, numberOfTaps: Int) {
+    public init(numberOfTouches: Int = 2, numberOfTaps: Int = 2) {
         self.numberOfTouches = numberOfTouches
         self.numberOfTaps = numberOfTaps
     }
@@ -49,8 +49,7 @@ public final class Deboogger {
     private var assistiveButtonPresenterViewController = AssistiveButtonPresenterViewController()
     private weak var assistiveButton: UIButton?
 
-    private var gesture: DebooggerGesture = .init(numberOfTouches: 2,
-                                                  numberOfTaps: 2)
+    private var gesture: DebooggerGesture = .init()
 
     private lazy var assistiveButtonWindow: UIWindow = {
         let size = AssistiveButton.Layout.size
@@ -89,8 +88,7 @@ public final class Deboogger {
 
     // MARK: - Configurations
 
-    public static func configure(with plugins: [Plugin], gesture: DebooggerGesture = .init(numberOfTouches: 2,
-                                                                                           numberOfTaps: 2)) {
+    public static func configure(with plugins: [Plugin], gesture: DebooggerGesture = .init()) {
         #if targetEnvironment(simulator)
             shared.configure(with: PluginsConfiguration(plugins: plugins), gesture: gesture)
         #else
@@ -99,18 +97,15 @@ public final class Deboogger {
         #endif
     }
 
-    public static func configure(with plugins: Plugin..., gesture: DebooggerGesture = .init(numberOfTouches: 2,
-                                                                                            numberOfTaps: 2)) {
+    public static func configure(with plugins: Plugin..., gesture: DebooggerGesture = .init()) {
         configure(with: plugins, gesture: gesture)
     }
 
-    public static func configure(with sections: Section..., gesture: DebooggerGesture = .init(numberOfTouches: 2,
-                                                                                              numberOfTaps: 2)) {
+    public static func configure(with sections: Section..., gesture: DebooggerGesture = .init()) {
         configure(with: sections, gesture: gesture)
     }
 
-    public static func configure(with sections: [Section], gesture: DebooggerGesture = .init(numberOfTouches: 2,
-                                                                                             numberOfTaps: 2)) {
+    public static func configure(with sections: [Section], gesture: DebooggerGesture = .init()) {
         #if targetEnvironment(simulator)
             shared.configure(with: SectionsConfiguration(sections: sections), gesture: gesture)
         #else
