@@ -31,6 +31,16 @@ private final class AssistiveButtonPresenterViewController: UIViewController {
     }
 }
 
+public struct DebooggerGesture {
+    public let numberOfTouches: Int
+    public let numberOfTaps: Int
+
+    public init(numberOfTouches: Int = 4, numberOfTaps: Int = 2) {
+        self.numberOfTouches = numberOfTouches
+        self.numberOfTaps = numberOfTaps
+    }
+}
+
 public final class Deboogger {
 
     public static let shared = Deboogger()
@@ -38,6 +48,8 @@ public final class Deboogger {
     private weak var rootViewController: UIViewController?
     private var assistiveButtonPresenterViewController = AssistiveButtonPresenterViewController()
     private weak var assistiveButton: UIButton?
+
+    private var gesture: DebooggerGesture = .init()
 
     private lazy var assistiveButtonWindow: UIWindow = {
         let size = AssistiveButton.Layout.size
@@ -76,30 +88,30 @@ public final class Deboogger {
 
     // MARK: - Configurations
 
-    public static func configure(with plugins: [Plugin]) {
+    public static func configure(with plugins: [Plugin], gesture: DebooggerGesture = .init()) {
         #if targetEnvironment(simulator)
-            shared.configure(with: PluginsConfiguration(plugins: plugins))
+            shared.configure(with: PluginsConfiguration(plugins: plugins), gesture: gesture)
         #else
             let section = Section(title: "App plugins", plugins: plugins)
-            configure(with: [section])
+            configure(with: [section], gesture: gesture)
         #endif
     }
 
-    public static func configure(with plugins: Plugin...) {
-        configure(with: plugins)
+    public static func configure(with plugins: Plugin..., gesture: DebooggerGesture = .init()) {
+        configure(with: plugins, gesture: gesture)
     }
 
-    public static func configure(with sections: Section...) {
-        configure(with: sections)
+    public static func configure(with sections: Section..., gesture: DebooggerGesture = .init()) {
+        configure(with: sections, gesture: gesture)
     }
 
-    public static func configure(with sections: [Section]) {
+    public static func configure(with sections: [Section], gesture: DebooggerGesture = .init()) {
         #if targetEnvironment(simulator)
-            shared.configure(with: SectionsConfiguration(sections: sections))
+            shared.configure(with: SectionsConfiguration(sections: sections), gesture: gesture)
         #else
             var adjustedSections = sections
             adjustedSections.insert(shared.makeDefaultSection(), at: 0)
-            shared.configure(with: SectionsConfiguration(sections: adjustedSections))
+            shared.configure(with: SectionsConfiguration(sections: adjustedSections), gesture: gesture)
         #endif
     }
 
@@ -145,20 +157,27 @@ public final class Deboogger {
         let navigationController = UINavigationController(rootViewController: pluginViewController)
         self.pluginViewController = pluginViewController
 
-        self.rootViewController?.beginAppearanceTransition(false, animated: true)
+        rootViewController?.beginAppearanceTransition(false, animated: true)
         NotificationCenter.default.post(name: .DebooggerWillShow, object: nil)
 
         navigationController.present {
             self.rootViewController?.endAppearanceTransition()
             NotificationCenter.default.post(name: .DebooggerDidShow, object: nil)
         }
-        self.assistiveButtonWindow.isHidden = true
+        assistiveButtonWindow.isHidden = true
+
+        setup(gesture)
     }
 
     // MARK: - Helpers
 
-    private func configure(with configuration: Configuration) {
+    func setup(_ recognizer: UITapGestureRecognizer) {
+        setup(recognizer, with: gesture)
+    }
+
+    private func configure(with configuration: Configuration, gesture: DebooggerGesture) {
         self.configuration = configuration
+        setup(gesture)
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
             let button = AssistiveButton(tapHandler: { [weak self] in
@@ -168,6 +187,20 @@ public final class Deboogger {
             self.assistiveButtonWindow.addSubview(button)
             self.assistiveButton = button
         }
+    }
+
+    private func setup(_ gesture: DebooggerGesture) {
+        self.gesture = gesture
+        for window in UIApplication.shared.windows {
+            if let recognizer = window.debooggerGestureRecognizer {
+                setup(recognizer, with: gesture)
+            }
+        }
+    }
+
+    private func setup(_ recognizer: UITapGestureRecognizer, with gesture: DebooggerGesture) {
+        recognizer.numberOfTapsRequired = gesture.numberOfTaps
+        recognizer.numberOfTouchesRequired = gesture.numberOfTouches
     }
 
     // MARK: - Default section
