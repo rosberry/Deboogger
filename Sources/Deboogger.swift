@@ -155,6 +155,7 @@ public final class Deboogger {
         }
 
         let navigationController = UINavigationController(rootViewController: pluginViewController)
+        navigationController.modalPresentationStyle = .fullScreen
         self.pluginViewController = pluginViewController
 
         rootViewController?.beginAppearanceTransition(false, animated: true)

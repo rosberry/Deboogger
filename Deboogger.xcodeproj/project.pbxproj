@@ -288,22 +288,23 @@
 		849B832C1EC754D400B0DF9D /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 1010;
+				LastUpgradeCheck = 1110;
 				ORGANIZATIONNAME = "Nikita Ermolenko";
 				TargetAttributes = {
 					849B83341EC754D400B0DF9D = {
 						CreatedOnToolsVersion = 8.3.2;
-						LastSwiftMigration = 1010;
+						LastSwiftMigration = 1110;
 						ProvisioningStyle = Automatic;
 					};
 				};
 			};
 			buildConfigurationList = 849B832F1EC754D400B0DF9D /* Build configuration list for PBXProject "Deboogger" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = 849B832B1EC754D400B0DF9D;
 			productRefGroup = 849B83361EC754D400B0DF9D /* Products */;
@@ -370,6 +371,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -432,6 +434,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -498,7 +501,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.otbivnoe.Deboogger;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -517,7 +520,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.otbivnoe.Deboogger;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};

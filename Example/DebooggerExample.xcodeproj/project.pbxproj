@@ -159,20 +159,20 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0830;
-				LastUpgradeCheck = 1010;
+				LastUpgradeCheck = 1110;
 				ORGANIZATIONNAME = "Nikita Ermolenko";
 				TargetAttributes = {
 					849B837F1EC757B800B0DF9D = {
 						CreatedOnToolsVersion = 8.3.2;
 						DevelopmentTeam = GPVA8JVMU3;
-						LastSwiftMigration = 1010;
+						LastSwiftMigration = 1110;
 						ProvisioningStyle = Automatic;
 					};
 				};
 			};
 			buildConfigurationList = 849B837B1EC757B800B0DF9D /* Build configuration list for PBXProject "DebooggerExample" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
@@ -266,6 +266,7 @@
 			baseConfigurationReference = 8416BE31202D58D3008A45E0 /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -326,6 +327,7 @@
 			baseConfigurationReference = 8416BE31202D58D3008A45E0 /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -388,7 +390,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.otbivnoe.DebooggerExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -406,7 +408,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.otbivnoe.DebooggerExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
