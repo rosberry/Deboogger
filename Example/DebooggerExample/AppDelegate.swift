@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        )
 
         Deboogger.configure(with:
-            Section(title: "Section 1", plugins: SwitchTestPlugin(), SliderTestPlugin()),
+            Section(title: "Section 1", style: .nested, plugins: SwitchTestPlugin(), SliderTestPlugin()),
             Section(title: "Section 2", plugins: SegmentTestPlugin(), ButtonTestPlugin())
         )
 

@@ -4,7 +4,7 @@
 
 import UIKit
 
-final class SliderTableViewCell: BaseTextTableViewCell {
+final class SliderTableViewCell: BaseTableViewCell {
 
     @IBOutlet weak var sliderLabel: UILabel!
     @IBOutlet weak var slider: UISlider!
@@ -12,7 +12,7 @@ final class SliderTableViewCell: BaseTextTableViewCell {
     private var plugin: SliderPlugin?
 
     func configure(by plugin: SliderPlugin) {
-        super.configure(by: plugin)
+        super.configure(with: plugin)
         self.plugin = plugin
 
         slider.minimumValue = plugin.minValue

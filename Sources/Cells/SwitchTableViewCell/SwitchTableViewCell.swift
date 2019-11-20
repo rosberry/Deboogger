@@ -1,21 +1,36 @@
 //
-//  Copyright © 2017 Nikita Ermolenko. All rights reserved.
+//  Copyright © 2019 Rosberry. All rights reserved.
 //
 
 import UIKit
 
-final class SwitchTableViewCell: BaseTextTableViewCell {
+final class SwitchTableViewCell: BaseTableViewCell {
 
-    @IBOutlet private weak var `switch`: UISwitch!
     private var plugin: SwitchPlugin?
 
-    @IBAction func valueChanged(_ sender: UISwitch) {
-        plugin?.switchStateChanged(sender)
+    private lazy var switchView: UISwitch = {
+        let view = UISwitch()
+        view.addTarget(self, action: #selector(switchValueChanged), for: .valueChanged)
+        return view
+    }()
+
+    // MARK: -
+
+    override func setup() {
+        super.setup()
+        accessoryView = switchView
     }
 
-    func configure(by plugin: SwitchPlugin) {
-        super.configure(by: plugin)
-        self.plugin = plugin
-        self.switch.isOn = plugin.isOn
+    override func configure(with plugin: Plugin) {
+        super.configure(with: plugin)
+
+        self.plugin = plugin as? SwitchPlugin
+        switchView.isOn = self.plugin?.isOn == true
+    }
+
+    // MARK: - Actions
+
+    @objc func switchValueChanged() {
+        plugin?.switchStateChanged(switchView)
     }
 }

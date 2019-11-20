@@ -10,7 +10,6 @@ import Foundation
 import ObjectiveC
 
 public protocol SliderPlugin: TextPlugin {
-
     var minValue: Float { get }
     var maxValue: Float { get }
     var initialValue: Float { get }
@@ -23,7 +22,9 @@ private var associatedCurrentValue = "currentValue"
 
 public extension SliderPlugin {
 
-    private typealias Cell = SliderTableViewCell
+    var cellClass: BaseTableViewCell.Type {
+        return SliderTableViewCell.self
+    }
 
     var minValue: Float {
         return 0.0
@@ -53,17 +54,5 @@ public extension SliderPlugin {
 
     var sliderTitle: String {
         return "\(currentValue) / \(maxValue)"
-    }
-
-    var nib: UINib {
-        return UINib(nibName: cellIdentifier, bundle: Bundle.deboogger)
-    }
-
-    var cellIdentifier: String {
-        return String(describing: Cell.self)
-    }
-
-    func configure(_ cell: UITableViewCell) {
-        (cell as? Cell)?.configure(by: self)
     }
 }

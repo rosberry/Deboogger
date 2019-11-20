@@ -7,7 +7,9 @@ import Foundation
 final class PluginsConfiguration: NSObject, Configuration {
 
     let plugins: [Plugin]
+
     weak var tableView: UITableView?
+    weak var delegate: ConfigurationDelegate?
 
     init(plugins: [Plugin]) {
         self.plugins = plugins
@@ -15,7 +17,7 @@ final class PluginsConfiguration: NSObject, Configuration {
 
     func configure() {
         plugins.forEach { plugin in
-            self.tableView?.register(plugin.nib, forCellReuseIdentifier: plugin.cellIdentifier)
+            tableView?.register(plugin.cellClass, forCellReuseIdentifier: plugin.cellClass.description())
         }
     }
 
@@ -27,9 +29,9 @@ final class PluginsConfiguration: NSObject, Configuration {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let plugin = plugins[indexPath.row]
-        let cell = tableView.dequeueReusableCell(withIdentifier: plugin.cellIdentifier, for: indexPath)
-        plugin.configure(cell)
-        return cell
+        let cell = tableView.dequeueReusableCell(withIdentifier: plugin.cellClass.description(), for: indexPath) as? BaseTableViewCell
+        cell?.configure(with: plugin)
+        return cell ?? UITableViewCell()
     }
 
     // MARK: - UITableViewDelegate

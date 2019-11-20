@@ -5,7 +5,6 @@
 import UIKit
 
  public protocol SegmentPlugin: TextPlugin {
-    
      var items: [String] { get }
      var initialSelectedIndex: Int { get }
     
@@ -13,18 +12,8 @@ import UIKit
 }
 
 public extension SegmentPlugin {
-    
-    private typealias Cell = SegmentTableViewCell
-    
-    var nib: UINib {
-        return UINib(nibName: cellIdentifier, bundle: Bundle.deboogger)
-    }
-    
-    var cellIdentifier: String {
-        return String(describing: Cell.self)
-    }
-    
-    func configure(_ cell: UITableViewCell) {
-        (cell as? Cell)?.configure(by: self)
+
+    var cellClass: BaseTableViewCell.Type {
+        return SegmentTableViewCell.self
     }
 }

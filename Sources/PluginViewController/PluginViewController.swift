@@ -9,7 +9,7 @@ final class PluginViewController: UIViewController {
     var closeEventHandler: (() -> Void)?
 
     private(set) lazy var tableView: UITableView = {
-        let tableView = UITableView()
+        let tableView = UITableView(frame: .zero, style: .grouped)
         tableView.delegate = configuration
         tableView.dataSource = configuration
         tableView.estimatedRowHeight = 100
@@ -27,10 +27,13 @@ final class PluginViewController: UIViewController {
         return false
     }
 
-    init(configuration: Configuration) {
+    init(configuration: Configuration, title: String? = nil) {
         self.configuration = configuration
+
         super.init(nibName: nil, bundle: nil)
-        
+        self.title = title
+
+        configuration.delegate = self
         configuration.tableView = tableView
     }
     
@@ -42,13 +45,13 @@ final class PluginViewController: UIViewController {
         super.viewDidLoad()
 
         if let appInfo = Bundle.main.infoDictionary,
-            let shortVersionString = appInfo["CFBundleShortVersionString"] as? String,
-            let bundleVersion = appInfo["CFBundleVersion"] as? String,
-            let bundleName = appInfo["CFBundleName"] as? String{
+           let shortVersionString = appInfo["CFBundleShortVersionString"] as? String,
+           let bundleVersion = appInfo["CFBundleVersion"] as? String,
+           let bundleName = appInfo["CFBundleName"] as? String {
             let appVersion = "\(bundleName)\n\(shortVersionString) (\(bundleVersion))"
 
             let titleLabel = UILabel()
-            titleLabel.text = appVersion
+            titleLabel.text = title ?? appVersion
             titleLabel.numberOfLines = 0
             titleLabel.textAlignment = .center
             titleLabel.sizeToFit()
@@ -61,7 +64,9 @@ final class PluginViewController: UIViewController {
 
         configuration.configure()
 
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(closeButtonPressed))
+        if navigationController?.viewControllers.first === self {
+            navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(closeButtonPressed))
+        }
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "🛠", style: .done, target: self, action: #selector(settingsButtonPressed))
     }
 
@@ -88,5 +93,15 @@ final class PluginViewController: UIViewController {
                 UIApplication.shared.openURL(settingsURL)
             }
         }
+    }
+}
+
+// MARK: - ConfigurationDelegate
+
+extension PluginViewController: ConfigurationDelegate {
+
+    func configuration(_ sender: Configuration, didRequest childConfiguration: Configuration, withTitle title: String?) {
+        let controller = PluginViewController(configuration: childConfiguration, title: title)
+        navigationController?.pushViewController(controller, animated: true)
     }
 }

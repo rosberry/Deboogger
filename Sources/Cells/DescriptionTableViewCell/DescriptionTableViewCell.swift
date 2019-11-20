@@ -4,12 +4,12 @@
 
 import UIKit
 
-final class DescriptionTableViewCell: BaseTextTableViewCell {
+final class DescriptionTableViewCell: BaseTableViewCell {
 
     private var plugin: TextPlugin?
     
-    override func configure(by plugin: TextPlugin) {
-        super.configure(by: plugin)
-        self.plugin = plugin
+    override func configure(with plugin: Plugin) {
+        super.configure(with: plugin)
+        self.plugin = plugin as? TextPlugin
     }
 }

@@ -4,29 +4,12 @@
 
 import UIKit
 
- public protocol TextPlugin: Plugin {
-    
-     var title: NSAttributedString { get }
-     var description: NSAttributedString? { get }
+public protocol TextPlugin: Plugin {
+    //
 }
 
 public extension TextPlugin {
-    
-    private typealias Cell = DescriptionTableViewCell
-    
-    var description: NSAttributedString? {
-        return nil
-    }
-    
-    var nib: UINib {
-        return UINib(nibName: cellIdentifier, bundle: Bundle.deboogger)
-    }
-    
-    var cellIdentifier: String {
-        return String(describing: Cell.self)
-    }
-    
-    func configure(_ cell: UITableViewCell) {
-        (cell as? Cell)?.configure(by: self)
+    var cellClass: BaseTableViewCell.Type {
+        return DescriptionTableViewCell.self
     }
 }

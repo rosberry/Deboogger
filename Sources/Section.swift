@@ -6,15 +6,22 @@ import Foundation
 
 public final class Section {
 
-    let title: String
-    let plugins: [Plugin]
-
-    public init(title: String, plugins: [Plugin]) {
-        self.title = title
-        self.plugins = plugins
+    public enum Style {
+        case plain
+        case nested
     }
 
-    public convenience init(title: String, plugins: Plugin...) {
-        self.init(title: title, plugins: plugins)
+    let title: String
+    let plugins: [Plugin]
+    let style: Style
+
+    public init(title: String, style: Style = .plain, plugins: [Plugin]) {
+        self.title = title
+        self.plugins = plugins
+        self.style = style
+    }
+
+    public convenience init(title: String, style: Style = .plain, plugins: Plugin...) {
+        self.init(title: title, style: style, plugins: plugins)
     }
 }
