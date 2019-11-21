@@ -58,14 +58,13 @@ final class SectionsConfiguration: NSObject, Configuration {
 
     private func pluginItem(for section: NavigationPlugin) -> PluginItem {
         let isSingleSection = sections.count == 1
-        register(section.cellClass)
+        let children = pluginItems(for: section.plugins)
 
+        register(section.cellClass)
         switch section.style {
         case .plain:
-            let children = pluginItems(for: section.plugins)
             return PluginItem(title: section.title.string, plugin: section, children: children)
         case .nested:
-            let children = pluginItems(for: section.plugins)
             return isSingleSection ?
                 PluginItem(title: nil, plugin: section, children: children) :
                 navigationItem(for: section)
