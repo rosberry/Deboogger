@@ -15,7 +15,7 @@ final class ButtonTestPlugin: ButtonPlugin {
         return NSAttributedString(string: "Description for segment plugin, Description for segment plugin, Description for segment plugin, Description for segment plugin")
     }
 
-    func buttonPressed(_ sender: UIButton) {
-
+    func buttonPressed(_ sender: UIButton?) {
+        print("Button pressed")
     }
 }

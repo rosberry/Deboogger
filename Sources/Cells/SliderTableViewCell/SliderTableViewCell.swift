@@ -5,30 +5,47 @@
 import UIKit
 
 final class SliderTableViewCell: BaseTableViewCell {
-
-    @IBOutlet weak var sliderLabel: UILabel!
-    @IBOutlet weak var slider: UISlider!
-
     private var plugin: SliderPlugin?
 
-    func configure(by plugin: SliderPlugin) {
-        super.configure(with: plugin)
-        self.plugin = plugin
+    private lazy var sliderView: UISlider = {
+        let view = UISlider()
+        view.addTarget(self, action: #selector(sliderValueChanged), for: .valueChanged)
+        return view
+    }()
 
-        slider.minimumValue = plugin.minValue
-        slider.maximumValue = plugin.maxValue
-        slider.value = plugin.currentValue
+    override func setup() {
+        super.setup()
+        accessoryView = sliderView
+    }
+
+    override func configure(with plugin: Plugin) {
+        super.configure(with: plugin)
+        self.plugin = plugin as? SliderPlugin
+
+        if let plugin = self.plugin {
+            sliderView.minimumValue = plugin.minValue
+            sliderView.maximumValue = plugin.maxValue
+            sliderView.value = plugin.currentValue
+        }
 
         configureSliderTitle()
     }
 
-    @IBAction func sliderValueChanged(_ sender: UISlider) {
+    override func layoutSubviews() {
+        sliderView.bounds = CGRect(x: 0.0, y: 0.0, width: bounds.midX, height: 40.0)
+        super.layoutSubviews()
+    }
+
+    //MARK: - Actions
+
+    @objc private func sliderValueChanged(_ sender: UISlider) {
         plugin?.currentValue = sender.value
         configureSliderTitle()
         plugin?.sliderValueChanged(sender)
     }
 
     private func configureSliderTitle() {
-        sliderLabel.text = plugin?.sliderTitle
+        detailTextLabel?.attributedText = plugin?.description
+        setNeedsLayout()
     }
 }

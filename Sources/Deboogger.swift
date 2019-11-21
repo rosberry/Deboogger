@@ -89,12 +89,8 @@ public final class Deboogger {
     // MARK: - Configurations
 
     public static func configure(with plugins: [Plugin], gesture: DebooggerGesture = .init()) {
-        #if targetEnvironment(simulator)
-            shared.configure(with: PluginsConfiguration(plugins: plugins), gesture: gesture)
-        #else
-            let section = Section(title: "App plugins", plugins: plugins)
-            configure(with: [section], gesture: gesture)
-        #endif
+        let section = Section(title: "App plugins", plugins: plugins)
+        configure(with: [section], gesture: gesture)
     }
 
     public static func configure(with plugins: Plugin..., gesture: DebooggerGesture = .init()) {

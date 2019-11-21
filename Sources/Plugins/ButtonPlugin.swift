@@ -5,11 +5,15 @@
 import UIKit
 
 public protocol ButtonPlugin: TextPlugin {
-    func buttonPressed(_ sender: UIButton)
+    func buttonPressed(_ sender: UIButton?)
 }
 
 public extension ButtonPlugin {
     var cellClass: BaseTableViewCell.Type {
         return ButtonTableViewCell.self
+    }
+
+    func selectionAction() {
+        buttonPressed(nil)
     }
 }

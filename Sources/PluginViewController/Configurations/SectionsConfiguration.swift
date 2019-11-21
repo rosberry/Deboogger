@@ -1,5 +1,6 @@
 //
 //  Copyright © 2017 Nikita Ermolenko. All rights reserved.
+//  Copyright © 2019 Rosberry. All rights reserved.
 //
 
 import Foundation
@@ -7,6 +8,7 @@ import Foundation
 final class SectionsConfiguration: NSObject, Configuration {
 
     let sections: [Section]
+    var sectionItems: [SectionItem] = []
 
     weak var tableView: UITableView?
     weak var delegate: ConfigurationDelegate?
@@ -16,54 +18,73 @@ final class SectionsConfiguration: NSObject, Configuration {
     }
 
     func configure() {
-        tableView?.register(SectionTableViewCell.self, forCellReuseIdentifier: SectionTableViewCell.self.description())
-        sections.flatMap { section in
-            return section.plugins
-        }.forEach { plugin in
-            tableView?.register(plugin.cellClass, forCellReuseIdentifier: plugin.cellClass.description())
-        }
+        let isSingleSection = sections.count == 1
+        sectionItems = sections.map({ (section: Section) -> SectionItem in
+            let title: String?
+            let cellItems: [CellItem]
+
+            switch section.style {
+            case .plain:
+                title = section.title
+                cellItems = pluginCellItems(for: section)
+            case .nested:
+                title = nil
+                cellItems = isSingleSection ?
+                    pluginCellItems(for: section) :
+                    navigationCellItems(for: section)
+            }
+
+            return SectionItem(title: title, section: section, cellItems: cellItems)
+        })
+    }
+
+    private func register(_ cellClass: UITableViewCell.Type) {
+        tableView?.register(cellClass, forCellReuseIdentifier: cellClass.description())
+    }
+
+    private func pluginCellItems(for section: Section) -> [CellItem] {
+        return section.plugins.map({ (plugin: Plugin) -> CellItem in
+            register(plugin.cellClass)
+            return CellItem(plugin: plugin)
+        })
+    }
+
+    private func navigationCellItems(for section: Section) -> [CellItem] {
+        let plugin = SectionNavigationPlugin(title: section.title, action: { [weak self] in
+            guard let self = self else {
+                return
+            }
+
+            let configuration = SectionsConfiguration(sections: [section])
+            self.delegate?.configuration(self, didRequest: configuration, withTitle: section.title)
+        })
+        register(plugin.cellClass)
+
+        return [CellItem(plugin: plugin)]
     }
 
     // MARK: - UITableViewDataSource
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let section = sections[section]
-        switch section.style {
-        case .plain:
-            return section.plugins.count
-        case .nested:
-            return 1
-        }
+        return sectionItems[section].cellItems.count
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {
-        return sections.count
+        return sectionItems.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let section = sections[indexPath.section]
-        if section.style == .nested {
-            let cell = tableView.dequeueReusableCell(withIdentifier: SectionTableViewCell.self.description(), for: indexPath)
-            (cell as? SectionTableViewCell)?.configure(with: section)
-            return cell
-        }
-
-        let plugin = section.plugins[indexPath.row]
-        let cell = tableView.dequeueReusableCell(withIdentifier: plugin.cellClass.description(), for: indexPath) as? BaseTableViewCell
-        cell?.configure(with: plugin)
+        let item = sectionItems[indexPath.section].cellItems[indexPath.row]
+        let identifier = item.plugin.cellClass.description()
+        let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as? BaseTableViewCell
+        cell?.configure(with: item.plugin)
         return cell ?? UITableViewCell()
     }
 
     // MARK: - UITableViewDelegate
 
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        let section = sections[section]
-        switch section.style {
-        case .plain:
-            return section.title
-        case .nested:
-            return nil
-        }
+        return sectionItems[section].title
     }
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -72,15 +93,7 @@ final class SectionsConfiguration: NSObject, Configuration {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-
-        let section = sections[indexPath.section]
-        if section.style == .nested {
-            let configuration = PluginsConfiguration(plugins: section.plugins)
-            delegate?.configuration(self, didRequest: configuration, withTitle: section.title)
-            return
-        }
-
-        let plugin = section.plugins[indexPath.row]
+        let plugin = sectionItems[indexPath.section].cellItems[indexPath.row].plugin
         plugin.selectionAction()
     }
 }

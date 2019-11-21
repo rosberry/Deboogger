@@ -1,9 +1,6 @@
 //
-//  SliderPlugin.swift
-//  Deboogger
-//
-//  Created by Nikita Ermolenko on 08/12/2017.
 //  Copyright © 2017 Nikita Ermolenko. All rights reserved.
+//  Copyright © 2019 Rosberry. All rights reserved.
 //
 
 import Foundation
@@ -13,7 +10,6 @@ public protocol SliderPlugin: TextPlugin {
     var minValue: Float { get }
     var maxValue: Float { get }
     var initialValue: Float { get }
-    var sliderTitle: String { get }
 
     func sliderValueChanged(_ slider: UISlider)
 }
@@ -52,7 +48,8 @@ public extension SliderPlugin {
         }
     }
 
-    var sliderTitle: String {
-        return "\(currentValue) / \(maxValue)"
+    var description: NSAttributedString? {
+        let string = String(format: "%.2f / %.2f", currentValue, maxValue)
+        return NSAttributedString(string: string)
     }
 }

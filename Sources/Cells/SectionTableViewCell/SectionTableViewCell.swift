@@ -4,21 +4,18 @@
 
 import UIKit
 
-class SectionTableViewCell: UITableViewCell {
+class SectionTableViewCell: BaseTableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .default, reuseIdentifier: reuseIdentifier)
-        setup()
     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    private func setup() {
+    override func setup() {
+        super.setup()
+        selectionStyle = .default
         accessoryType = .disclosureIndicator
-    }
-
-    func configure(with section: Section) {
-        textLabel?.text = section.title
     }
 }

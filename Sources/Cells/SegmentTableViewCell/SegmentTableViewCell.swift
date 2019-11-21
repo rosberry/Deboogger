@@ -17,42 +17,7 @@ final class SegmentTableViewCell: BaseTableViewCell {
 
     override func setup() {
         super.setup()
-
-        contentView.addSubview(segmentedControl)
-
-        if let label = textLabel {
-            label.translatesAutoresizingMaskIntoConstraints = false
-            label.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 12.0).isActive = true
-            label.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 12.0).isActive = true
-            label.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -12.0).isActive = true
-        }
-
-        if let label = detailTextLabel {
-            label.translatesAutoresizingMaskIntoConstraints = false
-            if let textLabel = textLabel {
-                label.topAnchor.constraint(equalTo: textLabel.bottomAnchor, constant: 4.0).isActive = true
-            }
-            else {
-                label.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 12.0).isActive = true
-            }
-            label.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 12.0).isActive = true
-            label.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -12.0).isActive = true
-        }
-
-        segmentedControl.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8.0).isActive = true
-        segmentedControl.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 12.0).isActive = true
-    }
-
-    override func systemLayoutSizeFitting(_ targetSize: CGSize,
-                                          withHorizontalFittingPriority horizontalFittingPriority: UILayoutPriority,
-                                          verticalFittingPriority: UILayoutPriority) -> CGSize {
-
-        var size = super.systemLayoutSizeFitting(targetSize,
-                                                 withHorizontalFittingPriority: horizontalFittingPriority,
-                                                 verticalFittingPriority: verticalFittingPriority)
-        size.height += segmentedControl.bounds.height + 8.0
-        return size
-
+        accessoryView = segmentedControl
     }
 
     override func configure(with plugin: Plugin) {
