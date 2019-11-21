@@ -7,74 +7,105 @@ import Foundation
 
 final class SectionsConfiguration: NSObject, Configuration {
 
-    let sections: [Section]
-    var sectionItems: [SectionItem] = []
+    let plugins: [Plugin]
+
+    var sections: [NavigationPlugin] = []
+    var tableViewItems: [PluginItem] = []
 
     weak var tableView: UITableView?
     weak var delegate: ConfigurationDelegate?
 
-    init(sections: [Section]) {
-        self.sections = sections
+    init(plugins: [Plugin]) {
+        self.plugins = plugins
     }
 
     func configure() {
-        let isSingleSection = sections.count == 1
-        sectionItems = sections.map({ (section: Section) -> SectionItem in
-            let title: String?
-            let cellItems: [CellItem]
+        sections = self.sections(for: plugins)
+        tableViewItems = sections.map({ (section: NavigationPlugin) -> PluginItem in
+            return pluginItem(for: section)
+        })
+    }
 
-            switch section.style {
-            case .plain:
-                title = section.title
-                cellItems = pluginCellItems(for: section)
-            case .nested:
-                title = nil
-                cellItems = isSingleSection ?
-                    pluginCellItems(for: section) :
-                    navigationCellItems(for: section)
+    // MARK: - Private
+
+    private func sections(for plugins: [Plugin]) -> [NavigationPlugin] {
+        var sections: [NavigationPlugin] = []
+        var sectionlessPlugins: [Plugin] = []
+        plugins.forEach { (plugin: Plugin) in
+            guard let section = plugin as? NavigationPlugin else {
+                sectionlessPlugins.append(plugin)
+                return
             }
 
-            return SectionItem(title: title, section: section, cellItems: cellItems)
-        })
+            if sectionlessPlugins.isEmpty == false {
+                sections.append(Section(plugins: sectionlessPlugins))
+                sectionlessPlugins.removeAll()
+            }
+
+            sections.append(section)
+        }
+
+        if sectionlessPlugins.isEmpty == false {
+            sections.append(Section(plugins: sectionlessPlugins))
+        }
+
+        return sections
     }
 
     private func register(_ cellClass: UITableViewCell.Type) {
         tableView?.register(cellClass, forCellReuseIdentifier: cellClass.description())
     }
 
-    private func pluginCellItems(for section: Section) -> [CellItem] {
-        return section.plugins.map({ (plugin: Plugin) -> CellItem in
+    private func pluginItem(for section: NavigationPlugin) -> PluginItem {
+        let isSingleSection = sections.count == 1
+        register(section.cellClass)
+
+        switch section.style {
+        case .plain:
+            let children = pluginItems(for: section.plugins)
+            return PluginItem(title: section.title.string, plugin: section, children: children)
+        case .nested:
+            let children = pluginItems(for: section.plugins)
+            return isSingleSection ?
+                PluginItem(title: nil, plugin: section, children: children) :
+                navigationItem(for: section)
+        }
+    }
+
+    private func pluginItems(for plugins: [Plugin]) -> [PluginItem] {
+        return plugins.map({ (plugin: Plugin) -> PluginItem in
             register(plugin.cellClass)
-            return CellItem(plugin: plugin)
+            if let section = plugin as? NavigationPlugin {
+                switch section.style {
+                case .plain:
+                    return pluginItem(for: section)
+                case .nested:
+                    return navigationItem(for: section)
+                }
+            }
+
+            return PluginItem(title: plugin.title.string, plugin: plugin, children: [])
         })
     }
 
-    private func navigationCellItems(for section: Section) -> [CellItem] {
-        let plugin = SectionNavigationPlugin(title: section.title, action: { [weak self] in
-            guard let self = self else {
-                return
-            }
-
-            let configuration = SectionsConfiguration(sections: [section])
-            self.delegate?.configuration(self, didRequest: configuration, withTitle: section.title)
-        })
-        register(plugin.cellClass)
-
-        return [CellItem(plugin: plugin)]
+    private func navigationItem(for section: NavigationPlugin) -> PluginItem {
+        return PluginItem(title: nil, plugin: section, children: [
+            PluginItem(title: section.title.string, plugin: section, children: [])
+        ])
     }
 
     // MARK: - UITableViewDataSource
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return sectionItems[section].cellItems.count
+        return tableViewItems[section].children.count
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {
-        return sectionItems.count
+        return tableViewItems.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let item = sectionItems[indexPath.section].cellItems[indexPath.row]
+        let item = tableViewItems[indexPath.section].children[indexPath.row]
         let identifier = item.plugin.cellClass.description()
         let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as? BaseTableViewCell
         cell?.configure(with: item.plugin)
@@ -84,7 +115,8 @@ final class SectionsConfiguration: NSObject, Configuration {
     // MARK: - UITableViewDelegate
 
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return sectionItems[section].title
+        let item = tableViewItems[section]
+        return item.title
     }
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -93,7 +125,12 @@ final class SectionsConfiguration: NSObject, Configuration {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let plugin = sectionItems[indexPath.section].cellItems[indexPath.row].plugin
+        let plugin = tableViewItems[indexPath.section].children[indexPath.row].plugin
         plugin.selectionAction()
+
+        if let section = plugin as? NavigationPlugin {
+            let configuration = SectionsConfiguration(plugins: section.plugins)
+            delegate?.configuration(self, didRequest: configuration, withTitle: section.title.string)
+        }
     }
 }

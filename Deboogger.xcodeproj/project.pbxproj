@@ -9,10 +9,8 @@
 /* Begin PBXBuildFile section */
 		06D462662085DC610005009C /* Bundle+Deboogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06D462652085DC610005009C /* Bundle+Deboogger.swift */; };
 		2EED8CA6238512A400738BD8 /* SectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EED8CA5238512A400738BD8 /* SectionTableViewCell.swift */; };
-		2EED8CC52386421E00738BD8 /* SectionItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EED8CC42386421E00738BD8 /* SectionItem.swift */; };
-		2EED8CC72386422500738BD8 /* CellItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EED8CC62386422500738BD8 /* CellItem.swift */; };
+		2EED8CC52386421E00738BD8 /* PluginItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EED8CC42386421E00738BD8 /* PluginItem.swift */; };
 		2EED8CC92386445E00738BD8 /* NavigationPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EED8CC82386445E00738BD8 /* NavigationPlugin.swift */; };
-		2EED8CCB2386451B00738BD8 /* SectionNavigationPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EED8CCA2386451B00738BD8 /* SectionNavigationPlugin.swift */; };
 		629A64CAA8FD70B7A8258DD6 /* DebooggerButtonPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 629A6A2E6D28EB4A26442696 /* DebooggerButtonPlugin.swift */; };
 		629A65CBC829B940726B0CD3 /* UIWindow+Deboogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 629A65FCE423F310729E625C /* UIWindow+Deboogger.h */; };
 		629A673D3EBDAFECC1593719 /* UIWindow+Deboogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 629A6936E1B391DE557214E9 /* UIWindow+Deboogger.swift */; };
@@ -43,10 +41,8 @@
 /* Begin PBXFileReference section */
 		06D462652085DC610005009C /* Bundle+Deboogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Deboogger.swift"; sourceTree = "<group>"; };
 		2EED8CA5238512A400738BD8 /* SectionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionTableViewCell.swift; sourceTree = "<group>"; };
-		2EED8CC42386421E00738BD8 /* SectionItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionItem.swift; sourceTree = "<group>"; };
-		2EED8CC62386422500738BD8 /* CellItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellItem.swift; sourceTree = "<group>"; };
+		2EED8CC42386421E00738BD8 /* PluginItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PluginItem.swift; sourceTree = "<group>"; };
 		2EED8CC82386445E00738BD8 /* NavigationPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationPlugin.swift; sourceTree = "<group>"; };
-		2EED8CCA2386451B00738BD8 /* SectionNavigationPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionNavigationPlugin.swift; sourceTree = "<group>"; };
 		629A63D44E7C17FA7B5D3789 /* UIWindow+Deboogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWindow+Deboogger.m"; sourceTree = "<group>"; };
 		629A65FCE423F310729E625C /* UIWindow+Deboogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIWindow+Deboogger.h"; sourceTree = "<group>"; };
 		629A6936E1B391DE557214E9 /* UIWindow+Deboogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIWindow+Deboogger.swift"; sourceTree = "<group>"; };
@@ -98,8 +94,7 @@
 		2EED8CC32386416900738BD8 /* Items */ = {
 			isa = PBXGroup;
 			children = (
-				2EED8CC42386421E00738BD8 /* SectionItem.swift */,
-				2EED8CC62386422500738BD8 /* CellItem.swift */,
+				2EED8CC42386421E00738BD8 /* PluginItem.swift */,
 			);
 			path = Items;
 			sourceTree = "<group>";
@@ -107,8 +102,8 @@
 		629A65EF8623579554689BDA /* DefaultPlugins */ = {
 			isa = PBXGroup;
 			children = (
+				8474585D1FE38B9D00C3B0FA /* Section.swift */,
 				629A6A2E6D28EB4A26442696 /* DebooggerButtonPlugin.swift */,
-				2EED8CCA2386451B00738BD8 /* SectionNavigationPlugin.swift */,
 			);
 			path = DefaultPlugins;
 			sourceTree = "<group>";
@@ -197,7 +192,6 @@
 				849B834C1EC7564000B0DF9D /* Extensions */,
 				849B83511EC7564000B0DF9D /* Plugins */,
 				8474585F1FE38E6100C3B0FA /* PluginViewController */,
-				8474585D1FE38B9D00C3B0FA /* Section.swift */,
 				849B834B1EC7564000B0DF9D /* Deboogger.swift */,
 				629A65EF8623579554689BDA /* DefaultPlugins */,
 			);
@@ -365,13 +359,11 @@
 				84459B9D1FDA43BA00398995 /* SliderPlugin.swift in Sources */,
 				849B83671EC7564000B0DF9D /* UIViewController+Presenter.swift in Sources */,
 				2EED8CC92386445E00738BD8 /* NavigationPlugin.swift in Sources */,
-				2EED8CC72386422500738BD8 /* CellItem.swift in Sources */,
 				849B83681EC7564000B0DF9D /* ButtonPlugin.swift in Sources */,
 				849B83731EC756DA00B0DF9D /* UIView+SuperviewOffset.swift in Sources */,
 				849B835C1EC7564000B0DF9D /* BaseTableViewCell.swift in Sources */,
 				840870421FD7B238007741AB /* DescriptionTableViewCell.swift in Sources */,
-				2EED8CCB2386451B00738BD8 /* SectionNavigationPlugin.swift in Sources */,
-				2EED8CC52386421E00738BD8 /* SectionItem.swift in Sources */,
+				2EED8CC52386421E00738BD8 /* PluginItem.swift in Sources */,
 				629A673D3EBDAFECC1593719 /* UIWindow+Deboogger.swift in Sources */,
 				629A64CAA8FD70B7A8258DD6 /* DebooggerButtonPlugin.swift in Sources */,
 			);

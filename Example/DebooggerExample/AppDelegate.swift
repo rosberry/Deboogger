@@ -18,10 +18,36 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //            ButtonTestPlugin()
 //        )
 
-        Deboogger.configure(with:
-            Section(title: "Section 1", style: .nested, plugins: SwitchTestPlugin(), SliderTestPlugin()),
-            Section(title: "Section 2", plugins: SegmentTestPlugin(), ButtonTestPlugin())
-        )
+        let sectionTree = [
+            Section(title: "Section 1", style: .nested, plugins: [
+                SwitchTestPlugin(),
+                SliderTestPlugin(),
+                Section(title: "Sub-Section 1", plugins: [
+                    Section(title: "Sub-Sub-Section 1", plugins: [
+                        ButtonTestPlugin(),
+                        SwitchTestPlugin()
+                    ]),
+                    Section(title: "Sub-Sub-Section 2", plugins: [
+                        ButtonTestPlugin(),
+                        SwitchTestPlugin()
+                    ]),
+                    Section(title: "Sub-Sub-Section 3", plugins: [
+                        ButtonTestPlugin(),
+                        SwitchTestPlugin()
+                    ])
+                ]),
+                Section(title: "Sub-Section 2", style: .nested, plugins: [
+                    ButtonTestPlugin(),
+                    SwitchTestPlugin()
+                ])
+            ]),
+            Section(title: "Section 2", plugins: [
+                SegmentTestPlugin(),
+                ButtonTestPlugin()
+            ])
+        ]
+
+        Deboogger.configure(with: sectionTree)
 
         return true
     }
