@@ -74,16 +74,16 @@ final class SectionsConfiguration: NSObject, Configuration {
     private func pluginItems(for plugins: [Plugin]) -> [PluginItem] {
         return plugins.map({ (plugin: Plugin) -> PluginItem in
             register(plugin.cellClass)
-            if let section = plugin as? NavigationPlugin {
-                switch section.style {
-                case .plain:
-                    return pluginItem(for: section)
-                case .nested:
-                    return navigationItem(for: section)
-                }
+            guard let section = plugin as? NavigationPlugin else {
+                return PluginItem(title: plugin.title.string, plugin: plugin, children: [])
             }
 
-            return PluginItem(title: plugin.title.string, plugin: plugin, children: [])
+            switch section.style {
+            case .plain:
+                return pluginItem(for: section)
+            case .nested:
+                return navigationItem(for: section)
+            }
         })
     }
 
