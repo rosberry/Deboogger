@@ -9,8 +9,8 @@ final class ButtonTableViewCell: BaseTableViewCell {
     
     private lazy var button: UIButton = {
         let button = UIButton(type: .system)
+        button.isUserInteractionEnabled = false
         button.setTitle("🚀", for: .normal)
-        button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
         button.sizeToFit()
         return button
     }()
@@ -25,11 +25,5 @@ final class ButtonTableViewCell: BaseTableViewCell {
     override func configure(with plugin: Plugin) {
         super.configure(with: plugin)
         self.plugin = plugin as? ButtonPlugin
-    }
-
-    // MARK: - Actions
-
-    @objc private func buttonPressed() {
-        plugin?.buttonPressed(button)
     }
 }

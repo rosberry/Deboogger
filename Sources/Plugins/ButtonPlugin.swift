@@ -5,7 +5,7 @@
 import UIKit
 
 public protocol ButtonPlugin: TextPlugin {
-    func buttonPressed(_ sender: UIButton?)
+    func buttonPressed()
 }
 
 public extension ButtonPlugin {
@@ -14,6 +14,6 @@ public extension ButtonPlugin {
     }
 
     func selectionAction() {
-        buttonPressed(nil)
+        buttonPressed()
     }
 }
