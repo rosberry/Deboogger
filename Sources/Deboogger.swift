@@ -90,7 +90,7 @@ public final class Deboogger {
     // MARK: - Configurations
 
     public static func configure(with plugins: [Plugin], gesture: DebooggerGesture = .init()) {
-        let section = Section(title: "App plugins", plugins: plugins)
+        let section = SectionPlugin(title: "App plugins", plugins: plugins)
         configure(with: [section], gesture: gesture)
     }
 
@@ -98,11 +98,11 @@ public final class Deboogger {
         configure(with: plugins, gesture: gesture)
     }
 
-    public static func configure(with sections: Section..., gesture: DebooggerGesture = .init()) {
+    public static func configure(with sections: SectionPlugin..., gesture: DebooggerGesture = .init()) {
         configure(with: sections, gesture: gesture)
     }
 
-    public static func configure(with sections: [Section], gesture: DebooggerGesture = .init()) {
+    public static func configure(with sections: [SectionPlugin], gesture: DebooggerGesture = .init()) {
         #if targetEnvironment(simulator)
             shared.configure(with: SectionsConfiguration(plugins: sections), gesture: gesture)
         #else
@@ -203,7 +203,7 @@ public final class Deboogger {
 
     // MARK: - Default section
 
-    private func makeDefaultSection() -> Section {
-        return Section(title: "Deboogger settings", plugins: [DebooggerButtonPlugin()])
+    private func makeDefaultSection() -> SectionPlugin {
+        return SectionPlugin(title: "Deboogger settings", plugins: [DebooggerButtonPlugin()])
     }
 }

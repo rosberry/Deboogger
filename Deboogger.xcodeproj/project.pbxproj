@@ -22,7 +22,7 @@
 		840870481FD7B2C0007741AB /* SegmentPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840870471FD7B2C0007741AB /* SegmentPlugin.swift */; };
 		840F804D1FDA40DF00A9B466 /* SliderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840F804B1FDA40DF00A9B466 /* SliderTableViewCell.swift */; };
 		84459B9D1FDA43BA00398995 /* SliderPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84459B9C1FDA43BA00398995 /* SliderPlugin.swift */; };
-		8474585E1FE38B9D00C3B0FA /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8474585D1FE38B9D00C3B0FA /* Section.swift */; };
+		8474585E1FE38B9D00C3B0FA /* SectionPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8474585D1FE38B9D00C3B0FA /* SectionPlugin.swift */; };
 		847458621FE38E7C00C3B0FA /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847458611FE38E7C00C3B0FA /* Configuration.swift */; };
 		847458641FE38EDD00C3B0FA /* SectionsConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847458631FE38EDD00C3B0FA /* SectionsConfiguration.swift */; };
 		849B835B1EC7564000B0DF9D /* AssistiveButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849B83421EC7564000B0DF9D /* AssistiveButton.swift */; };
@@ -54,7 +54,7 @@
 		840870471FD7B2C0007741AB /* SegmentPlugin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentPlugin.swift; sourceTree = "<group>"; };
 		840F804B1FDA40DF00A9B466 /* SliderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderTableViewCell.swift; sourceTree = "<group>"; };
 		84459B9C1FDA43BA00398995 /* SliderPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderPlugin.swift; sourceTree = "<group>"; };
-		8474585D1FE38B9D00C3B0FA /* Section.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Section.swift; sourceTree = "<group>"; };
+		8474585D1FE38B9D00C3B0FA /* SectionPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionPlugin.swift; sourceTree = "<group>"; };
 		847458611FE38E7C00C3B0FA /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		847458631FE38EDD00C3B0FA /* SectionsConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionsConfiguration.swift; sourceTree = "<group>"; };
 		849B83351EC754D400B0DF9D /* Deboogger.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Deboogger.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -102,7 +102,7 @@
 		629A65EF8623579554689BDA /* DefaultPlugins */ = {
 			isa = PBXGroup;
 			children = (
-				8474585D1FE38B9D00C3B0FA /* Section.swift */,
+				8474585D1FE38B9D00C3B0FA /* SectionPlugin.swift */,
 				629A6A2E6D28EB4A26442696 /* DebooggerButtonPlugin.swift */,
 			);
 			path = DefaultPlugins;
@@ -353,7 +353,7 @@
 				06D462662085DC610005009C /* Bundle+Deboogger.swift in Sources */,
 				849B83631EC7564000B0DF9D /* Deboogger.swift in Sources */,
 				849B83691EC7564000B0DF9D /* Plugin.swift in Sources */,
-				8474585E1FE38B9D00C3B0FA /* Section.swift in Sources */,
+				8474585E1FE38B9D00C3B0FA /* SectionPlugin.swift in Sources */,
 				840870481FD7B2C0007741AB /* SegmentPlugin.swift in Sources */,
 				840F804D1FDA40DF00A9B466 /* SliderTableViewCell.swift in Sources */,
 				84459B9D1FDA43BA00398995 /* SliderPlugin.swift in Sources */,

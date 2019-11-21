@@ -38,7 +38,7 @@ final class SectionsConfiguration: NSObject, Configuration {
             }
 
             if sectionlessPlugins.isEmpty == false {
-                sections.append(Section(plugins: sectionlessPlugins))
+                sections.append(SectionPlugin(plugins: sectionlessPlugins))
                 sectionlessPlugins.removeAll()
             }
 
@@ -46,7 +46,7 @@ final class SectionsConfiguration: NSObject, Configuration {
         }
 
         if sectionlessPlugins.isEmpty == false {
-            sections.append(Section(plugins: sectionlessPlugins))
+            sections.append(SectionPlugin(plugins: sectionlessPlugins))
         }
 
         return sections

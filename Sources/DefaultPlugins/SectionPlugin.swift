@@ -5,7 +5,10 @@
 
 import Foundation
 
-public final class Section: NavigationPlugin {
+@available(*, deprecated, message: "Use `SectionPlugin` instead")
+public typealias Section = SectionPlugin
+
+public final class SectionPlugin: NavigationPlugin {
 
     public let title: NSAttributedString
     public let plugins: [Plugin]

@@ -20,29 +20,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        )
 
         let sectionTree = [
-            Section(title: "Section 1", style: .nested, plugins: [
+            SectionPlugin(title: "Section 1", style: .nested, plugins: [
                 SwitchTestPlugin(),
                 SliderTestPlugin(),
-                Section(title: "Sub-Section 1", plugins: [
-                    Section(title: "Sub-Sub-Section 1", plugins: [
+                SectionPlugin(title: "Sub-Section 1", plugins: [
+                    SectionPlugin(title: "Sub-Sub-Section 1", plugins: [
                         ButtonTestPlugin(),
                         SwitchTestPlugin()
                     ]),
-                    Section(title: "Sub-Sub-Section 2", plugins: [
+                    SectionPlugin(title: "Sub-Sub-Section 2", plugins: [
                         ButtonTestPlugin(),
                         SwitchTestPlugin()
                     ]),
-                    Section(title: "Sub-Sub-Section 3", plugins: [
+                    SectionPlugin(title: "Sub-Sub-Section 3", plugins: [
                         ButtonTestPlugin(),
                         SwitchTestPlugin()
                     ])
                 ]),
-                Section(title: "Sub-Section 2", style: .nested, plugins: [
+                SectionPlugin(title: "Sub-Section 2", style: .nested, plugins: [
                     ButtonTestPlugin(),
                     SwitchTestPlugin()
                 ])
             ]),
-            Section(title: "Section 2", plugins: [
+            SectionPlugin(title: "Section 2", plugins: [
                 SegmentTestPlugin(),
                 ButtonTestPlugin()
             ])
