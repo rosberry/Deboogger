@@ -13,6 +13,8 @@ final class SliderTableViewCell: BaseTableViewCell {
         return view
     }()
 
+    // MARK: -
+
     override func setup() {
         super.setup()
         accessoryView = sliderView

@@ -15,6 +15,8 @@ final class SegmentTableViewCell: BaseTableViewCell {
 
     private var plugin: SegmentPlugin?
 
+    // MARK: -
+
     override func setup() {
         super.setup()
         accessoryView = segmentedControl
