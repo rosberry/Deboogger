@@ -5,22 +5,17 @@
 final class PerformanceMonitorPlugin: SwitchPlugin {
 
     var isOn: Bool {
-        get {
-            UserDefaults.standard.isPerformanceMonitorEnabled
-        }
-        set {
-            UserDefaults.standard.isPerformanceMonitorEnabled = newValue
-        }
+        UserDefaults.standard.isPerformanceMonitorEnabled
     }
 
     let title: NSAttributedString = .init(string: "Performance monitor")
 
     func switchStateChanged(_ sender: UISwitch) {
-        isOn = sender.isOn
+        UserDefaults.standard.isPerformanceMonitorEnabled = sender.isOn
     }
 }
 
-extension UserDefaults {
+private extension UserDefaults {
 
     var isPerformanceMonitorEnabled: Bool {
         get {
