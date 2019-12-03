@@ -2,7 +2,7 @@
 //  Copyright © 2019 Rosberry. All rights reserved.
 //
 
-typealias MemoryUsage = (UInt64, UInt64)
+typealias MemoryUsage = (used: UInt64, total: UInt64)
 
 final class PerformanceMonitor {
 
@@ -33,6 +33,9 @@ final class PerformanceMonitor {
     }
 
     func stopMonitoring() {
+        guard isMonitoring else {
+            return
+        }
         displayLink.invalidate()
         isMonitoring = false
     }

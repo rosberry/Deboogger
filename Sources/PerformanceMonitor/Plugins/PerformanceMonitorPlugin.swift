@@ -10,8 +10,13 @@ final class PerformanceMonitorPlugin: SwitchPlugin {
 
     let title: NSAttributedString = .init(string: "Performance monitor")
 
+    init() {
+        Deboogger.shared.shouldShowPerformanceMonitor = isOn
+    }
+
     func switchStateChanged(_ sender: UISwitch) {
         UserDefaults.standard.isPerformanceMonitorEnabled = sender.isOn
+        Deboogger.shared.setPerformanceMonitor(hidden: sender.isOn == false)
     }
 }
 

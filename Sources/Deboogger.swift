@@ -60,6 +60,8 @@ public final class Deboogger {
         return window
     }()
 
+    private lazy var performanceWindow: PerformanceView = .init(performanceMonitor: .init())
+
     weak var pluginViewController: PluginViewController?
     public var viewController: UIViewController? {
         return pluginViewController
@@ -83,6 +85,7 @@ public final class Deboogger {
             _shouldShowAssistiveButton = newValue
         }
     }
+    var shouldShowPerformanceMonitor: Bool = false
 
     private init() {}
 
@@ -176,6 +179,16 @@ public final class Deboogger {
         setup(recognizer, with: gesture)
     }
 
+    func setPerformanceMonitor(hidden: Bool) {
+        shouldShowPerformanceMonitor = hidden == false
+        if hidden {
+            performanceWindow.hide()
+        }
+        else {
+            performanceWindow.show()
+        }
+    }
+
     private func configure(with configuration: Configuration, gesture: DebooggerGesture) {
         self.configuration = configuration
         setup(gesture)
@@ -187,6 +200,7 @@ public final class Deboogger {
             self.assistiveButtonWindow.isHidden = !self.shouldShowAssistiveButton
             self.assistiveButtonWindow.addSubview(button)
             self.assistiveButton = button
+            self.setPerformanceMonitor(hidden: self.shouldShowPerformanceMonitor == false)
         }
     }
 
@@ -207,6 +221,7 @@ public final class Deboogger {
     // MARK: - Default section
 
     private func makeDefaultSection() -> Section {
-        return Section(title: "Deboogger settings", plugins: [DebooggerButtonPlugin()])
+        return Section(title: "Deboogger settings", plugins: [DebooggerButtonPlugin(),
+                                                              PerformanceMonitorPlugin()])
     }
 }
