@@ -4,16 +4,29 @@
 
 import UIKit
 
-final class PerformanceView: UIWindow {
+final class PerformanceWindow: UIWindow {
+
+    private enum Constants {
+        static let labelContentInset: CGFloat = 4
+        static let defaultStatusBarHeight: CGFloat = 20
+    }
 
     private var windowFrame: CGRect {
         guard let window = UIApplication.shared.delegate?.window as? UIWindow else {
             return .zero
         }
-        let height = memoryUsageLabel.frame.height
+        let height: CGFloat
+        if memoryUsageLabel.frame.height < Constants.defaultStatusBarHeight {
+            height = Constants.defaultStatusBarHeight
+        }
+        else {
+            height = memoryUsageLabel.frame.height
+        }
         var topInset: CGFloat = 0
         if #available(iOS 11.0, *), let topSafeAreaInset = window.rootViewController?.view.safeAreaInsets.top {
-            topInset = topSafeAreaInset
+            if topSafeAreaInset > Constants.defaultStatusBarHeight {
+                topInset = topSafeAreaInset
+            }
         }
         return .init(x: 0.0, y: topInset, width: window.bounds.width, height: height)
     }
@@ -22,7 +35,22 @@ final class PerformanceView: UIWindow {
 
     // MARK: - Subviews
 
-    private lazy var memoryUsageLabel: UILabel = .init()
+    private lazy var memoryUsageLabel: PaddingLabel = {
+        let label = PaddingLabel()
+        label.clipsToBounds = true
+        label.layer.cornerRadius = 4
+        label.layer.borderColor = UIColor.black.cgColor
+        label.layer.borderWidth = 1
+        label.backgroundColor = .white
+        label.textColor = .black
+        label.font = .systemFont(ofSize: 10)
+        label.numberOfLines = 0
+        label.textPaddings = UIEdgeInsets(top: 0,
+                                          left: Constants.labelContentInset,
+                                          bottom: 0,
+                                          right: Constants.labelContentInset)
+        return label
+    }()
 
     // MARK: - Lifecycle
 
@@ -73,8 +101,9 @@ final class PerformanceView: UIWindow {
     }
 
     private func layoutInfoLabel() {
+        let labelSize = memoryUsageLabel.sizeThatFits(frame.size)
+        memoryUsageLabel.frame = .init(origin: .zero, size: labelSize)
         memoryUsageLabel.center = CGPoint(x: frame.width / 2, y: frame.height / 2)
-        memoryUsageLabel.sizeToFit()
     }
 
     private func update(with info: PerformanceMonitor.MonitoringInfo) {
