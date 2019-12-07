@@ -20,15 +20,15 @@ final class SectionsConfiguration: NSObject, Configuration {
     }
 
     func configure() {
-        sections = self.sections(for: plugins)
-        tableViewItems = sections.map({ (section: NavigationPlugin) -> PluginItem in
-            return pluginItem(for: section)
-        })
+        sections = self.makeSections(for: plugins)
+        tableViewItems = sections.map { (section: NavigationPlugin) -> PluginItem in
+            return makePluginItem(for: section)
+        }
     }
 
     // MARK: - Private
 
-    private func sections(for plugins: [Plugin]) -> [NavigationPlugin] {
+    private func makeSections(for plugins: [Plugin]) -> [NavigationPlugin] {
         var sections: [NavigationPlugin] = []
         var sectionlessPlugins: [Plugin] = []
         plugins.forEach { (plugin: Plugin) in
@@ -56,9 +56,9 @@ final class SectionsConfiguration: NSObject, Configuration {
         tableView?.register(cellClass, forCellReuseIdentifier: cellClass.description())
     }
 
-    private func pluginItem(for section: NavigationPlugin) -> PluginItem {
+    private func makePluginItem(for section: NavigationPlugin) -> PluginItem {
         let isSingleSection = sections.count == 1
-        let children = pluginItems(for: section.plugins)
+        let children = makePluginItems(for: section.plugins)
 
         register(section.cellClass)
         switch section.style {
@@ -67,12 +67,12 @@ final class SectionsConfiguration: NSObject, Configuration {
         case .nested:
             return isSingleSection ?
                 PluginItem(title: nil, plugin: section, children: children) :
-                navigationItem(for: section)
+                makeNavigationItem(for: section)
         }
     }
 
-    private func pluginItems(for plugins: [Plugin]) -> [PluginItem] {
-        return plugins.map({ (plugin: Plugin) -> PluginItem in
+    private func makePluginItems(for plugins: [Plugin]) -> [PluginItem] {
+        return plugins.map { (plugin: Plugin) -> PluginItem in
             register(plugin.cellClass)
             guard let section = plugin as? NavigationPlugin else {
                 return PluginItem(title: plugin.title.string, plugin: plugin, children: [])
@@ -80,14 +80,14 @@ final class SectionsConfiguration: NSObject, Configuration {
 
             switch section.style {
             case .plain:
-                return pluginItem(for: section)
+                return makePluginItem(for: section)
             case .nested:
-                return navigationItem(for: section)
+                return makeNavigationItem(for: section)
             }
-        })
+        }
     }
 
-    private func navigationItem(for section: NavigationPlugin) -> PluginItem {
+    private func makeNavigationItem(for section: NavigationPlugin) -> PluginItem {
         return PluginItem(title: nil, plugin: section, children: [
             PluginItem(title: section.title.string, plugin: section, children: [])
         ])
