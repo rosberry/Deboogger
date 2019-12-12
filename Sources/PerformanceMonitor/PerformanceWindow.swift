@@ -24,9 +24,7 @@ final class PerformanceWindow: UIWindow {
         }
         var topInset: CGFloat = 0
         if #available(iOS 11.0, *), let topSafeAreaInset = window.rootViewController?.view.safeAreaInsets.top {
-            if topSafeAreaInset > Constants.defaultStatusBarHeight {
-                topInset = topSafeAreaInset
-            }
+            topInset = topSafeAreaInset
         }
         return .init(x: 0.0, y: topInset, width: window.bounds.width, height: height)
     }
@@ -87,8 +85,7 @@ final class PerformanceWindow: UIWindow {
     // MARK: - Private
 
     private func configure() {
-        windowLevel = UIWindow.Level.statusBar + 1
-        backgroundColor = .green
+        windowLevel = UIWindow.Level.alert + 1
         clipsToBounds = true
         isHidden = true
 

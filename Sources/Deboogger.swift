@@ -60,7 +60,7 @@ public final class Deboogger {
         return window
     }()
 
-    private lazy var performanceWindow: PerformanceView = .init(performanceMonitor: .init())
+    private lazy var performanceWindow: PerformanceWindow = .init(performanceMonitor: .init())
 
     weak var pluginViewController: PluginViewController?
     public var viewController: UIViewController? {
