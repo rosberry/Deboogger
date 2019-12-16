@@ -12,6 +12,8 @@ final class SectionsConfiguration: NSObject, Configuration {
     var sections: [NavigationPlugin] = []
     var tableViewItems: [PluginItem] = []
     var filteredTableViewItems: [PluginItem] = []
+    var favoritesSection: NavigationPlugin = SectionPlugin(title: "Favorites", style: .plain, plugins: [])
+    var favoritesPluginItems: [PluginItem] = []
 
     weak var tableView: UITableView?
     weak var delegate: ConfigurationDelegate?
@@ -21,7 +23,13 @@ final class SectionsConfiguration: NSObject, Configuration {
     }
 
     func configure() {
-        sections = self.makeSections(for: plugins)
+        let favoritePlugins = favoritesPluginItems.map { item -> Plugin in
+            item.plugin
+        }
+        sections = makeSections(for: plugins)
+        if favoritePlugins.isEmpty == false {
+            sections.insert(SectionPlugin(title: "Favorites", style: .plain, plugins: favoritePlugins), at: 0)
+        }
         tableViewItems = sections.map { (section: NavigationPlugin) -> PluginItem in
             return makePluginItem(for: section)
         }
@@ -114,6 +122,10 @@ final class SectionsConfiguration: NSObject, Configuration {
         ])
     }
 
+    private func childPluginItem(for indexPath: IndexPath) -> PluginItem {
+        filteredTableViewItems[indexPath.section].children[indexPath.row]
+    }
+
     // MARK: - UITableViewDataSource
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -125,7 +137,7 @@ final class SectionsConfiguration: NSObject, Configuration {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let item = filteredTableViewItems[indexPath.section].children[indexPath.row]
+        let item = childPluginItem(for: indexPath)
         let identifier = item.plugin.cellClass.description()
         let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as? BaseTableViewCell
         cell?.configure(with: item.plugin)
@@ -145,7 +157,7 @@ final class SectionsConfiguration: NSObject, Configuration {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let plugin = filteredTableViewItems[indexPath.section].children[indexPath.row].plugin
+        let plugin = childPluginItem(for: indexPath).plugin
         plugin.selectionAction()
 
         if let section = plugin as? NavigationPlugin {
@@ -156,9 +168,23 @@ final class SectionsConfiguration: NSObject, Configuration {
 
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let favoriteAction = UITableViewRowAction(style: .default, title: "⭐️" , handler: { action, indexPath in
-//            self.tableViewItems[indexPath.section].children[indexPath.row]
+            let item = self.childPluginItem(for: indexPath)
+            self.favoritesPluginItems.append(item)
+            self.configure()
+            self.tableView?.reloadData()
         })
-        favoriteAction.backgroundColor = .blue
-        return [favoriteAction]
+        let deleteAction = UITableViewRowAction(style: .default, title: "🗑" , handler: { action, indexPath in
+            let item = self.childPluginItem(for: indexPath)
+            self.favoritesPluginItems.removeAll { pluginItem -> Bool in
+                pluginItem == item
+            }
+            self.configure()
+            tableView.reloadData()
+        })
+        favoriteAction.backgroundColor = .systemBlue
+        let isFavorite = favoritesPluginItems.contains { pluginItem -> Bool in
+            pluginItem == childPluginItem(for: indexPath)
+        }
+        return isFavorite ? [deleteAction] : [favoriteAction]
     }
 }

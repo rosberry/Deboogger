@@ -10,4 +10,9 @@ struct PluginItem {
     let children: [PluginItem]
 
     var isFavorite: Bool = false
+
+extension PluginItem: Equatable {
+    static func == (lhs: PluginItem, rhs: PluginItem) -> Bool {
+        lhs.plugin.keywords == rhs.plugin.keywords
+    }
 }
