@@ -11,6 +11,7 @@ final class SectionsConfiguration: NSObject, Configuration {
 
     var sections: [NavigationPlugin] = []
     var tableViewItems: [PluginItem] = []
+    var filteredTableViewItems: [PluginItem] = []
 
     weak var tableView: UITableView?
     weak var delegate: ConfigurationDelegate?
@@ -23,6 +24,26 @@ final class SectionsConfiguration: NSObject, Configuration {
         sections = self.makeSections(for: plugins)
         tableViewItems = sections.map { (section: NavigationPlugin) -> PluginItem in
             return makePluginItem(for: section)
+        }
+        filteredTableViewItems = tableViewItems
+    }
+
+    func filterData(with text: String) {
+        defer {
+            tableView?.reloadData()
+        }
+        guard text.isEmpty == false else {
+            filteredTableViewItems = tableViewItems
+            return
+        }
+
+        filteredTableViewItems = tableViewItems.compactMap { pluginItem -> PluginItem? in
+            let filteredChildren = pluginItem.children.filter { childPlugin -> Bool in
+                childPlugin.plugin.keywords.lowercased().contains(text)
+            }
+            return filteredChildren.isEmpty ? nil : PluginItem(title: pluginItem.title,
+                                                               plugin: pluginItem.plugin,
+                                                               children: filteredChildren)
         }
     }
 
@@ -96,15 +117,15 @@ final class SectionsConfiguration: NSObject, Configuration {
     // MARK: - UITableViewDataSource
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return tableViewItems[section].children.count
+        return filteredTableViewItems[section].children.count
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {
-        return tableViewItems.count
+        return filteredTableViewItems.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let item = tableViewItems[indexPath.section].children[indexPath.row]
+        let item = filteredTableViewItems[indexPath.section].children[indexPath.row]
         let identifier = item.plugin.cellClass.description()
         let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as? BaseTableViewCell
         cell?.configure(with: item.plugin)
@@ -114,7 +135,7 @@ final class SectionsConfiguration: NSObject, Configuration {
     // MARK: - UITableViewDelegate
 
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        let item = tableViewItems[section]
+        let item = filteredTableViewItems[section]
         return item.title
     }
 
@@ -124,7 +145,7 @@ final class SectionsConfiguration: NSObject, Configuration {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let plugin = tableViewItems[indexPath.section].children[indexPath.row].plugin
+        let plugin = filteredTableViewItems[indexPath.section].children[indexPath.row].plugin
         plugin.selectionAction()
 
         if let section = plugin as? NavigationPlugin {
