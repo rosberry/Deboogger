@@ -20,8 +20,6 @@ final class PluginViewController: UIViewController {
         return false
     }
 
-    private lazy var tapGestureRecognizer: UITapGestureRecognizer = .init(target: self, action: #selector(viewTapped))
-
     // MARK: - Subviews
 
     private(set) lazy var searchBar: UISearchBar = {
@@ -91,8 +89,6 @@ final class PluginViewController: UIViewController {
         view.backgroundColor = .white
         view.addSubview(searchBar)
         view.addSubview(tableView)
-        
-        view.addGestureRecognizer(tapGestureRecognizer)
 
         configuration.configure()
 
@@ -126,10 +122,6 @@ final class PluginViewController: UIViewController {
     
     @objc private func closeButtonPressed() {
         closeEventHandler?()
-    }
-
-    @objc private func viewTapped() {
-        view.endEditing(true)
     }
 
     @objc private func keyboardDidShow(_ notification: Notification) {
@@ -179,6 +171,18 @@ extension PluginViewController: ConfigurationDelegate {
 extension PluginViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         (configuration as? SectionsConfiguration)?.filterData(with: searchText.trimmingCharacters(in: .whitespaces).lowercased())
+    }
+
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        view.endEditing(true)
+    }
+
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        searchBar.setShowsCancelButton(true, animated: true)
+    }
+
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        searchBar.setShowsCancelButton(false, animated: true)
     }
 
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
