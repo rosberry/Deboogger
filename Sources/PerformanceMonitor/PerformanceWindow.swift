@@ -8,16 +8,18 @@ final class PerformanceWindow: UIWindow {
 
     private enum Constants {
         static let labelContentInset: CGFloat = 4
-        static let defaultStatusBarHeight: CGFloat = 20
+        static let bytesInMegabyte: Double = 1024.0 * 1024.0
     }
 
     private var windowFrame: CGRect {
         guard let window = UIApplication.shared.delegate?.window as? UIWindow else {
             return .zero
         }
+        let statusBarHeight = UIApplication.shared.statusBarFrame.height
+
         let height: CGFloat
-        if memoryUsageLabel.frame.height < Constants.defaultStatusBarHeight {
-            height = Constants.defaultStatusBarHeight
+        if memoryUsageLabel.frame.height < statusBarHeight {
+            height = statusBarHeight
         }
         else {
             height = memoryUsageLabel.frame.height
@@ -104,7 +106,7 @@ final class PerformanceWindow: UIWindow {
     }
 
     private func update(with info: PerformanceMonitor.MonitoringInfo) {
-        let bytesInMegabyte = 1024.0 * 1024.0
+        let bytesInMegabyte = Constants.bytesInMegabyte
         let usedMemory = Double(info.memoryUsage.used) / bytesInMegabyte
         let totalMemory = Double(info.memoryUsage.total) / bytesInMegabyte
         memoryUsageLabel.text = String(format: "%.1f of %.0f MB used", usedMemory, totalMemory)
