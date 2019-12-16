@@ -132,4 +132,12 @@ final class SectionsConfiguration: NSObject, Configuration {
             delegate?.configuration(self, didRequest: configuration, withTitle: section.title.string)
         }
     }
+
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let favoriteAction = UITableViewRowAction(style: .default, title: "⭐️" , handler: { action, indexPath in
+//            self.tableViewItems[indexPath.section].children[indexPath.row]
+        })
+        favoriteAction.backgroundColor = .blue
+        return [favoriteAction]
+    }
 }
