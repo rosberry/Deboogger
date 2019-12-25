@@ -20,6 +20,6 @@ struct SwitchTestPlugin: SwitchPlugin {
     }
     
     func switchStateChanged(_ sender: UISwitch) {
-        
+        print("Switch: \(sender.isOn ? "on" : "off")")
     }
 }

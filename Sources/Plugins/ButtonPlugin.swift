@@ -1,27 +1,20 @@
 //
 //  Copyright © 2017 Nikita Ermolenko. All rights reserved.
+//  Copyright © 2019 Rosberry. All rights reserved.
 //
 
 import UIKit
 
- public protocol ButtonPlugin: TextPlugin {
-    
-    func buttonPressed(_ sender: UIButton)
+public protocol ButtonPlugin: TextPlugin {
+    func buttonPressed()
 }
 
 public extension ButtonPlugin {
-    
-    private typealias Cell = ButtonTableViewCell
-    
-    var nib: UINib {
-        return UINib(nibName: cellIdentifier, bundle: Bundle.deboogger)
+    var cellClass: BaseTableViewCell.Type {
+        return ButtonTableViewCell.self
     }
-    
-    var cellIdentifier: String {
-        return String(describing: Cell.self)
-    }
-    
-    func configure(_ cell: UITableViewCell) {
-        (cell as? Cell)?.configure(by: self)
+
+    func selectionAction() {
+        buttonPressed()
     }
 }
