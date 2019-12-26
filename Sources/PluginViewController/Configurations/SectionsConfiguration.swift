@@ -37,17 +37,33 @@ final class SectionsConfiguration: NSObject, Configuration {
             return
         }
 
-        filteredTableViewItems = tableViewItems.compactMap { pluginItem -> PluginItem? in
-            let filteredChildren = pluginItem.children.filter { childPlugin -> Bool in
-                childPlugin.plugin.keywords.lowercased().contains(text)
-            }
-            return filteredChildren.isEmpty ? nil : PluginItem(title: pluginItem.title,
-                                                               plugin: pluginItem.plugin,
-                                                               children: filteredChildren)
+        var resultPlugins: [Plugin] = []
+        tableViewItems.forEach { pluginItem in
+            resultPlugins.append(contentsOf: searhPlugins(in: pluginItem.plugin, withText: text))
         }
+        let resultPluginItems = resultPlugins.map { plugin -> PluginItem in
+            PluginItem(title: plugin.title.string, plugin: plugin, children: [])
+        }
+        filteredTableViewItems = [PluginItem(title: "Search result",
+                                             plugin: SectionPlugin(plugins: resultPlugins),
+                                             children: resultPluginItems)]
     }
 
     // MARK: - Private
+
+    private func searhPlugins(in plugin: Plugin, withText text: String) -> [Plugin] {
+        var result: [Plugin] = []
+        if plugin.keywords.lowercased().contains(text){
+            result.append(plugin)
+        }
+        if let navigationPlugin = plugin as? NavigationPlugin {
+            navigationPlugin.plugins.forEach { childPlugin in
+                result.append(contentsOf: searhPlugins(in: childPlugin, withText: text))
+            }
+        }
+
+        return result
+    }
 
     private func makeSections(for plugins: [Plugin]) -> [NavigationPlugin] {
         var sections: [NavigationPlugin] = []
