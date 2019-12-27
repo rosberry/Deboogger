@@ -39,7 +39,7 @@ final class SectionsConfiguration: NSObject, Configuration {
 
         var resultPlugins: [Plugin] = []
         tableViewItems.forEach { pluginItem in
-            resultPlugins.append(contentsOf: searhPlugins(in: pluginItem.plugin, withText: text))
+            resultPlugins.append(contentsOf: searchPlugins(in: pluginItem.plugin, withText: text))
         }
         let resultPluginItems = resultPlugins.map { plugin -> PluginItem in
             PluginItem(title: plugin.title.string, plugin: plugin, children: [])
@@ -51,14 +51,14 @@ final class SectionsConfiguration: NSObject, Configuration {
 
     // MARK: - Private
 
-    private func searhPlugins(in plugin: Plugin, withText text: String) -> [Plugin] {
+    private func searchPlugins(in plugin: Plugin, withText text: String) -> [Plugin] {
         var result: [Plugin] = []
-        if plugin.keywords.lowercased().contains(text){
+        if plugin.keywords.lowercased().contains(text) {
             result.append(plugin)
         }
         if let navigationPlugin = plugin as? NavigationPlugin {
             navigationPlugin.plugins.forEach { childPlugin in
-                result.append(contentsOf: searhPlugins(in: childPlugin, withText: text))
+                result.append(contentsOf: searchPlugins(in: childPlugin, withText: text))
             }
         }
 

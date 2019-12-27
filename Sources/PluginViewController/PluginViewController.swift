@@ -115,7 +115,7 @@ final class PluginViewController: UIViewController {
         tableView.frame = CGRect(x: 0,
                                  y: searchBar.frame.maxY,
                                  width: view.bounds.width,
-                                 height: view.bounds.height - searchBar.frame.height - topInset)
+                                 height: view.bounds.height - searchBar.frame.maxY)
     }
     
     // MARK: Actions
@@ -137,7 +137,11 @@ final class PluginViewController: UIViewController {
     }
 
     @objc private func keyboardWillHide(_ notification: Notification) {
-        tableView.contentInset.bottom = 0
+        var bottomInset: CGFloat = 0
+        if #available(iOS 11.0, *) {
+            bottomInset = view.safeAreaInsets.top
+        }
+        tableView.contentInset.bottom = bottomInset
         tableView.scrollIndicatorInsets = tableView.contentInset
     }
 
@@ -174,6 +178,8 @@ extension PluginViewController: UISearchBarDelegate {
     }
 
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.text = nil
+        self.searchBar(searchBar, textDidChange: "")
         view.endEditing(true)
     }
 
