@@ -125,11 +125,9 @@ final class PluginViewController: UIViewController {
     }
 
     @objc private func keyboardDidShow(_ notification: Notification) {
-        guard let userInfo = notification.userInfo else {
-            return
-        }
-        guard let endFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else {
-            return
+        guard let userInfo = notification.userInfo,
+            let endFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else {
+                return
         }
 
         tableView.contentInset.bottom = endFrame.height
