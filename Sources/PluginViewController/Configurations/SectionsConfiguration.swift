@@ -11,7 +11,9 @@ final class SectionsConfiguration: NSObject, Configuration {
 
     var sections: [NavigationPlugin] = []
     var tableViewItems: [PluginItem] = []
-    var filteredTableViewItems: [PluginItem] = []
+
+    private var filteredTableViewItems: [PluginItem] = []
+    private var flatPlugins: [Plugin] = []
 
     weak var tableView: UITableView?
     weak var delegate: ConfigurationDelegate?
@@ -26,6 +28,9 @@ final class SectionsConfiguration: NSObject, Configuration {
             return makePluginItem(for: section)
         }
         filteredTableViewItems = tableViewItems
+        flatPlugins = tableViewItems.flatMap { pluginItem in
+            collectPlugins(in: pluginItem.plugin, sectionTitle: pluginItem.title)
+        }
     }
 
     func filterData(with text: String) {
@@ -37,29 +42,30 @@ final class SectionsConfiguration: NSObject, Configuration {
             return
         }
 
-        var resultPlugins: [Plugin] = []
-        tableViewItems.forEach { pluginItem in
-            resultPlugins.append(contentsOf: searchPlugins(in: pluginItem.plugin, withText: text))
+        let filteredFlatPlugins = flatPlugins.filter { plugin in
+            plugin.keywords.lowercased().contains(text)
         }
-        let resultPluginItems = resultPlugins.map { plugin -> PluginItem in
+        let resultPluginItems = filteredFlatPlugins.map { plugin -> PluginItem in
             PluginItem(title: plugin.title.string, plugin: plugin, children: [])
         }
+
         filteredTableViewItems = [PluginItem(title: "Search result",
-                                             plugin: SectionPlugin(plugins: resultPlugins),
+                                             plugin: SectionPlugin(plugins: filteredFlatPlugins),
                                              children: resultPluginItems)]
     }
 
     // MARK: - Private
 
-    private func searchPlugins(in plugin: Plugin, withText text: String) -> [Plugin] {
+    private func collectPlugins(in plugin: Plugin, sectionTitle: String?) -> [Plugin] {
         var result: [Plugin] = []
-        if plugin.keywords.lowercased().contains(text) {
-            result.append(plugin)
-        }
+
         if let navigationPlugin = plugin as? NavigationPlugin {
             navigationPlugin.plugins.forEach { childPlugin in
-                result.append(contentsOf: searchPlugins(in: childPlugin, withText: text))
+                result.append(contentsOf: collectPlugins(in: childPlugin, sectionTitle: navigationPlugin.title.string))
             }
+        }
+        else {
+            result.append(plugin)
         }
 
         return result
