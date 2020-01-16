@@ -26,6 +26,7 @@ final class PluginViewController: UIViewController {
         let view = UISearchBar()
         view.searchTextField.returnKeyType = .done
         view.delegate = self
+        view.isHidden = true
         return view
     }()
 
@@ -96,6 +97,7 @@ final class PluginViewController: UIViewController {
             navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done,
                                                                target: self,
                                                                action: #selector(closeButtonPressed))
+            searchBar.isHidden = false
         }
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "🛠",
                                                             style: .done,
@@ -110,8 +112,8 @@ final class PluginViewController: UIViewController {
         if #available(iOS 11.0, *) {
             topInset = view.safeAreaInsets.top
         }
-        searchBar.frame.origin = .init(x: 0, y: topInset)
-        searchBar.sizeToFit()
+        let searchBarSize = searchBar.isHidden ? .zero : searchBar.sizeThatFits(view.bounds.size)
+        searchBar.frame = .init(origin: CGPoint(x: 0, y: topInset), size: searchBarSize)
         tableView.frame = CGRect(x: 0,
                                  y: searchBar.frame.maxY,
                                  width: view.bounds.width,
@@ -137,7 +139,7 @@ final class PluginViewController: UIViewController {
     @objc private func keyboardWillHide(_ notification: Notification) {
         var bottomInset: CGFloat = 0
         if #available(iOS 11.0, *) {
-            bottomInset = view.safeAreaInsets.top
+            bottomInset = view.safeAreaInsets.bottom
         }
         tableView.contentInset.bottom = bottomInset
         tableView.scrollIndicatorInsets = tableView.contentInset
