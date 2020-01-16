@@ -60,6 +60,7 @@ final class SectionsConfiguration: NSObject, Configuration {
         var result: [Plugin] = []
 
         if let navigationPlugin = plugin as? NavigationPlugin {
+            result.append(navigationPlugin)
             navigationPlugin.plugins.forEach { childPlugin in
                 result.append(contentsOf: collectPlugins(in: childPlugin, sectionTitle: navigationPlugin.title.string))
             }
