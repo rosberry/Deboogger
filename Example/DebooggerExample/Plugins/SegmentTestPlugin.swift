@@ -16,7 +16,7 @@ final class SegmentTestPlugin: SegmentPlugin {
     }
 
     var description: NSAttributedString? {
-        return NSAttributedString(string: "Description for segment plugin, Description for segment plugin, Description for segment plugin, Description for segment plugin")
+        return NSAttributedString(string: "Description for segment plugin which is long enough to be multi-line")
     }
 
     var initialSelectedIndex: Int {
@@ -24,6 +24,6 @@ final class SegmentTestPlugin: SegmentPlugin {
     }
 
     func segmentValueChanged(_ sender: UISegmentedControl) {
-
+        print("Segment selected: \(sender.selectedSegmentIndex)")
     }
 }

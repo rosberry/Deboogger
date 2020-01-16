@@ -1,5 +1,6 @@
 //
 //  Copyright © 2017 Nikita Ermolenko. All rights reserved.
+//  Copyright © 2019 Rosberry. All rights reserved.
 //
 
 import UIKit
@@ -92,29 +93,25 @@ public final class Deboogger {
     // MARK: - Configurations
 
     public static func configure(with plugins: [Plugin], gesture: DebooggerGesture = .init()) {
-        #if targetEnvironment(simulator)
-            shared.configure(with: PluginsConfiguration(plugins: plugins), gesture: gesture)
-        #else
-            let section = Section(title: "App plugins", plugins: plugins)
-            configure(with: [section], gesture: gesture)
-        #endif
+        let section = SectionPlugin(title: "App plugins", plugins: plugins)
+        configure(with: [section], gesture: gesture)
     }
 
     public static func configure(with plugins: Plugin..., gesture: DebooggerGesture = .init()) {
         configure(with: plugins, gesture: gesture)
     }
 
-    public static func configure(with sections: Section..., gesture: DebooggerGesture = .init()) {
+    public static func configure(with sections: SectionPlugin..., gesture: DebooggerGesture = .init()) {
         configure(with: sections, gesture: gesture)
     }
 
-    public static func configure(with sections: [Section], gesture: DebooggerGesture = .init()) {
+    public static func configure(with sections: [SectionPlugin], gesture: DebooggerGesture = .init()) {
         #if targetEnvironment(simulator)
-            shared.configure(with: SectionsConfiguration(sections: sections), gesture: gesture)
+            shared.configure(with: SectionsConfiguration(plugins: sections), gesture: gesture)
         #else
             var adjustedSections = sections
             adjustedSections.insert(shared.makeDefaultSection(), at: 0)
-            shared.configure(with: SectionsConfiguration(sections: adjustedSections), gesture: gesture)
+            shared.configure(with: SectionsConfiguration(plugins: adjustedSections), gesture: gesture)
         #endif
     }
 
@@ -220,8 +217,8 @@ public final class Deboogger {
 
     // MARK: - Default section
 
-    private func makeDefaultSection() -> Section {
-        return Section(title: "Deboogger settings", plugins: [DebooggerButtonPlugin(),
-                                                              PerformanceMonitorPlugin()])
+    private func makeDefaultSection() -> SectionPlugin {
+        return SectionPlugin(title: "Deboogger settings", plugins: [DebooggerButtonPlugin() ,
+                                                                    PerformanceMonitorPlugin()])
     }
 }

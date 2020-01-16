@@ -1,28 +1,45 @@
 //
 //  Copyright © 2017 Nikita Ermolenko. All rights reserved.
+//  Copyright © 2019 Rosberry. All rights reserved.
 //
 
 import UIKit
 
-final class SegmentTableViewCell: BaseTextTableViewCell {
+final class SegmentTableViewCell: BaseTableViewCell {
 
-    @IBOutlet weak var segmentControl: UISegmentedControl!
+    private lazy var segmentedControl: UISegmentedControl = {
+        let control = UISegmentedControl()
+        control.addTarget(self, action: #selector(segmentValueChanged), for: .valueChanged)
+        control.translatesAutoresizingMaskIntoConstraints = false
+        return control
+    }()
+
     private var plugin: SegmentPlugin?
-    
-    func configure(by plugin: SegmentPlugin) {
-        super.configure(by: plugin)
-        self.plugin = plugin
-        
-        segmentControl.removeAllSegments()        
-        plugin.items.enumerated().forEach { offset, item in
-            segmentControl.insertSegment(withTitle: item, at: offset, animated: false)
-            segmentControl.setTitleTextAttributes([.font: UIFont.systemFont(ofSize: 10, weight: .light)],
-                                                  for: .normal)
-        }
-        segmentControl.selectedSegmentIndex = Int(plugin.initialSelectedIndex)
+
+    // MARK: -
+
+    override func setup() {
+        super.setup()
+        accessoryView = segmentedControl
     }
-    
-    @IBAction func segmentValueChanged(_ sender: UISegmentedControl) {
+
+    override func configure(with plugin: Plugin) {
+        super.configure(with: plugin)
+        self.plugin = plugin as? SegmentPlugin
+
+        if let plugin = self.plugin {
+            segmentedControl.removeAllSegments()
+            plugin.items.enumerated().forEach { offset, item in
+                segmentedControl.insertSegment(withTitle: item, at: offset, animated: false)
+            }
+            segmentedControl.selectedSegmentIndex = Int(plugin.initialSelectedIndex)
+            segmentedControl.sizeToFit()
+        }
+    }
+
+    // MARK: - Actions
+
+    @objc private func segmentValueChanged(_ sender: UISegmentedControl) {
         plugin?.segmentValueChanged(sender)
     }
 }
