@@ -179,8 +179,8 @@ public final class Deboogger {
         setup(recognizer, with: gesture)
     }
 
-    func setPerformanceMonitor(hidden: Bool) {
-        shouldShowPerformanceMonitor = hidden == false
+    func updatePerformanceMonitor(hidden: Bool) {
+        shouldShowPerformanceMonitor = !hidden
         if hidden {
             performanceWindow.hide()
         }
@@ -200,7 +200,7 @@ public final class Deboogger {
             self.assistiveButtonWindow.isHidden = !self.shouldShowAssistiveButton
             self.assistiveButtonWindow.addSubview(button)
             self.assistiveButton = button
-            self.setPerformanceMonitor(hidden: self.shouldShowPerformanceMonitor == false)
+            self.updatePerformanceMonitor(hidden: self.shouldShowPerformanceMonitor == false)
         }
     }
 

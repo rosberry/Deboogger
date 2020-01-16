@@ -16,7 +16,7 @@ final class PerformanceMonitorPlugin: SwitchPlugin {
 
     func switchStateChanged(_ sender: UISwitch) {
         UserDefaults.standard.isPerformanceMonitorEnabled = sender.isOn
-        Deboogger.shared.setPerformanceMonitor(hidden: sender.isOn == false)
+        Deboogger.shared.updatePerformanceMonitor(hidden: sender.isOn == false)
     }
 }
 

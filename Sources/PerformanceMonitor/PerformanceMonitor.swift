@@ -51,9 +51,9 @@ final class PerformanceMonitor {
     private func getMemoryUsage() -> MemoryUsage {
         var taskInfo = task_vm_info_data_t()
         var count = mach_msg_type_number_t(MemoryLayout<task_vm_info>.size) / 4
-        let result: kern_return_t = withUnsafeMutablePointer(to: &taskInfo) {
-            $0.withMemoryRebound(to: integer_t.self, capacity: 1) {
-                task_info(mach_task_self_, task_flavor_t(TASK_VM_INFO), $0, &count)
+        let result: kern_return_t = withUnsafeMutablePointer(to: &taskInfo) { pointer in
+            pointer.withMemoryRebound(to: integer_t.self, capacity: 1) { pointer in
+                task_info(mach_task_self_, task_flavor_t(TASK_VM_INFO), pointer, &count)
             }
         }
 
