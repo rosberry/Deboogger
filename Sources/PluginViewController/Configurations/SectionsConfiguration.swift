@@ -29,7 +29,7 @@ final class SectionsConfiguration: NSObject, Configuration {
         }
         filteredTableViewItems = tableViewItems
         flatPlugins = tableViewItems.flatMap { pluginItem in
-            collectPlugins(in: pluginItem.plugin, sectionTitle: pluginItem.title)
+            return collectPlugins(in: pluginItem.plugin, sectionTitle: pluginItem.title)
         }
     }
 
@@ -42,15 +42,15 @@ final class SectionsConfiguration: NSObject, Configuration {
             return
         }
 
-        let filteredFlatPlugins = flatPlugins.filter { plugin in
-            plugin.keywords.lowercased().contains(text)
-        }
-        let resultPluginItems = filteredFlatPlugins.map { plugin -> PluginItem in
-            PluginItem(title: plugin.title.string, plugin: plugin, children: [])
+        let resultPluginItems = flatPlugins.compactMap { plugin -> PluginItem? in
+            guard plugin.keywords.lowercased().contains(text) else {
+                return nil
+            }
+            return PluginItem(title: plugin.title.string, plugin: plugin, children: [])
         }
 
         filteredTableViewItems = [PluginItem(title: "Search result",
-                                             plugin: SectionPlugin(plugins: filteredFlatPlugins),
+                                             plugin: SectionPlugin(plugins: []),
                                              children: resultPluginItems)]
     }
 
