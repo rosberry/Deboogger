@@ -36,6 +36,9 @@ final class PluginViewController: UIViewController {
         tableView.dataSource = configuration
         tableView.estimatedRowHeight = 100
         tableView.separatorInset = .init(top: 0, left: 10, bottom: 0, right: 0)
+        if #available(iOS 11.0, *) {
+            tableView.contentInsetAdjustmentBehavior = .never
+        }
         return tableView
     }()
 
