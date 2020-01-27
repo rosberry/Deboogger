@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		01AAB6CA23DAD18800C2DB68 /* FavoriteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01AAB6C923DAD18800C2DB68 /* FavoriteService.swift */; };
 		06D462662085DC610005009C /* Bundle+Deboogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06D462652085DC610005009C /* Bundle+Deboogger.swift */; };
 		2EED8CA6238512A400738BD8 /* SectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EED8CA5238512A400738BD8 /* SectionTableViewCell.swift */; };
 		2EED8CC52386421E00738BD8 /* PluginItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EED8CC42386421E00738BD8 /* PluginItem.swift */; };
@@ -39,6 +40,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		01AAB6C923DAD18800C2DB68 /* FavoriteService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteService.swift; sourceTree = "<group>"; };
 		06D462652085DC610005009C /* Bundle+Deboogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Deboogger.swift"; sourceTree = "<group>"; };
 		2EED8CA5238512A400738BD8 /* SectionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionTableViewCell.swift; sourceTree = "<group>"; };
 		2EED8CC42386421E00738BD8 /* PluginItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PluginItem.swift; sourceTree = "<group>"; };
@@ -163,6 +165,7 @@
 				2EED8CC32386416900738BD8 /* Items */,
 				847458611FE38E7C00C3B0FA /* Configuration.swift */,
 				847458631FE38EDD00C3B0FA /* SectionsConfiguration.swift */,
+				01AAB6C923DAD18800C2DB68 /* FavoriteService.swift */,
 			);
 			path = Configurations;
 			sourceTree = "<group>";
@@ -342,6 +345,7 @@
 				629A6C724D7EE0C256CD9035 /* UIWindow+Deboogger.m in Sources */,
 				849B836A1EC7564000B0DF9D /* SwitchPlugin.swift in Sources */,
 				849B836D1EC7564000B0DF9D /* PluginViewController.swift in Sources */,
+				01AAB6CA23DAD18800C2DB68 /* FavoriteService.swift in Sources */,
 				2EED8CA6238512A400738BD8 /* SectionTableViewCell.swift in Sources */,
 				840870441FD7B238007741AB /* SwitchTableViewCell.swift in Sources */,
 				847458621FE38E7C00C3B0FA /* Configuration.swift in Sources */,

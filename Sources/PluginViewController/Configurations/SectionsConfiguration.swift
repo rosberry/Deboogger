@@ -14,22 +14,41 @@ final class SectionsConfiguration: NSObject, Configuration {
     var filteredTableViewItems: [PluginItem] = []
     var favoritesSection: NavigationPlugin = SectionPlugin(title: "Favorites", style: .plain, plugins: [])
     var favoritesPluginItems: [PluginItem] = []
+    var useFavorites: Bool
 
     weak var tableView: UITableView?
     weak var delegate: ConfigurationDelegate?
 
-    init(plugins: [Plugin]) {
+    lazy var favoriteService: FavoriteService = FavoriteService.shared
+
+    init(plugins: [Plugin], useFavorites: Bool = false) {
         self.plugins = plugins
+        self.useFavorites = useFavorites
+        super.init()
+        if useFavorites {
+            NotificationCenter.default.addObserver(self,
+                                                   selector: #selector(favoritesListUpdated),
+                                                   name: FavoriteService.NotificationName.favoritesListUpdated,
+                                                   object: nil)
+        }
+
+    }
+
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
 
     func configure() {
-        let favoritePlugins = favoritesPluginItems.map { item -> Plugin in
-            item.plugin
-        }
+
+        let favoritesPlugins = favoriteService.fetchFavorite(plugins: plugins)
+
         sections = makeSections(for: plugins)
-        if favoritePlugins.isEmpty == false {
-            sections.insert(SectionPlugin(title: "Favorites", style: .plain, plugins: favoritePlugins), at: 0)
+
+        if useFavorites == true, favoritesPlugins.isEmpty == false {
+            let favoriteSectionPlugin = SectionPlugin(title: "Favorites", style: .plain, plugins: favoritesPlugins)
+            sections.insert(favoriteSectionPlugin, at: 0)
         }
+
         tableViewItems = sections.map { (section: NavigationPlugin) -> PluginItem in
             return makePluginItem(for: section)
         }
@@ -126,6 +145,11 @@ final class SectionsConfiguration: NSObject, Configuration {
         filteredTableViewItems[indexPath.section].children[indexPath.row]
     }
 
+    @objc private func favoritesListUpdated() {
+        configure()
+        tableView?.reloadData()
+    }
+
     // MARK: - UITableViewDataSource
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -167,24 +191,24 @@ final class SectionsConfiguration: NSObject, Configuration {
     }
 
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        let favoriteAction = UITableViewRowAction(style: .default, title: "⭐️" , handler: { action, indexPath in
-            let item = self.childPluginItem(for: indexPath)
-            self.favoritesPluginItems.append(item)
-            self.configure()
-            self.tableView?.reloadData()
-        })
-        let deleteAction = UITableViewRowAction(style: .default, title: "🗑" , handler: { action, indexPath in
-            let item = self.childPluginItem(for: indexPath)
-            self.favoritesPluginItems.removeAll { pluginItem -> Bool in
-                pluginItem == item
-            }
-            self.configure()
-            tableView.reloadData()
-        })
-        favoriteAction.backgroundColor = .systemBlue
-        let isFavorite = favoritesPluginItems.contains { pluginItem -> Bool in
-            pluginItem == childPluginItem(for: indexPath)
+
+        func makeAction(title: String, actionHandler: @escaping () -> Void) -> UITableViewRowAction {
+            let action = UITableViewRowAction(style: .default, title: title , handler: { action, indexPath in
+                actionHandler()
+            })
+            action.backgroundColor = .systemBlue
+            return action
         }
-        return isFavorite ? [deleteAction] : [favoriteAction]
+
+        let item = self.childPluginItem(for: indexPath)
+
+        if favoriteService.isFavorite(plugin: item.plugin) {
+            return [makeAction(title: "🗑") {
+                self.favoriteService.remove(plugin: item.plugin)
+            }]
+        }
+        return [makeAction(title: "⭐️") {
+            self.favoriteService.add(plugin: item.plugin)
+        }]
     }
 }

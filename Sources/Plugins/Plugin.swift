@@ -11,6 +11,7 @@ import UIKit
     var title: NSAttributedString { get }
     var description: NSAttributedString? { get }
     var keywords: String { get }
+    var identifier: String { get }
 
     func selectionAction()
 }
@@ -23,6 +24,10 @@ public extension Plugin {
 
     var keywords: String {
         return title.string + (description?.string ?? "")
+    }
+
+    var identifier: String {
+        String(describing: type(of: self)) + keywords
     }
 
     func selectionAction() {
