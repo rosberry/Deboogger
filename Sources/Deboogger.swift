@@ -104,11 +104,11 @@ public final class Deboogger {
 
     public static func configure(with sections: [SectionPlugin], gesture: DebooggerGesture = .init()) {
         #if targetEnvironment(simulator)
-            shared.configure(with: SectionsConfiguration(plugins: sections), gesture: gesture)
+            shared.configure(with: SectionsConfiguration(plugins: sections, useFavorites: true), gesture: gesture)
         #else
             var adjustedSections = sections
             adjustedSections.insert(shared.makeDefaultSection(), at: 0)
-            shared.configure(with: SectionsConfiguration(plugins: adjustedSections), gesture: gesture)
+            shared.configure(with: SectionsConfiguration(plugins: adjustedSections, useFavorites: true), gesture: gesture)
         #endif
     }
 

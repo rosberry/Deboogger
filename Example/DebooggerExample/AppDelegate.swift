@@ -20,31 +20,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        )
 
         let sectionTree = [
-            SectionPlugin(title: "Section 1", style: .nested, plugins: [
-                SwitchTestPlugin(),
-                SliderTestPlugin(),
-                SectionPlugin(title: "Sub-Section 1", plugins: [
-                    SectionPlugin(title: "Sub-Sub-Section 1", plugins: [
-                        ButtonTestPlugin(),
-                        SwitchTestPlugin()
+            SectionPlugin(title: "Content", style: .nested, plugins: [
+                SwitchTestPlugin(title: .init(string: "Drop connection")),
+                SliderTestPlugin(title: .init(string: "Response delay")),
+                SectionPlugin(title: "Profile", plugins: [
+                    SectionPlugin(title: "Authentication", plugins: [
+                        ButtonTestPlugin(title: .init(string: "Expire the token")),
+                        SwitchTestPlugin(title: .init(string: "Is admin"))
                     ]),
-                    SectionPlugin(title: "Sub-Sub-Section 2", plugins: [
-                        ButtonTestPlugin(),
-                        SwitchTestPlugin()
+                    SectionPlugin(title: "Avatar", plugins: [
+                        ButtonTestPlugin(title: .init(string: "Remove the photo")),
+                        SwitchTestPlugin(title: .init(string: "Is visible"))
                     ]),
-                    SectionPlugin(title: "Sub-Sub-Section 3", plugins: [
-                        ButtonTestPlugin(),
-                        SwitchTestPlugin()
+                    SectionPlugin(title: "Socials", plugins: [
+                        ButtonTestPlugin(title: .init(string: "Unlink facebook")),
+                        ButtonTestPlugin(title: .init(string: "Unlink twitter")),
                     ])
                 ]),
-                SectionPlugin(title: "Sub-Section 2", style: .nested, plugins: [
-                    ButtonTestPlugin(),
-                    SwitchTestPlugin()
+                SectionPlugin(title: "Bookmarks", style: .nested, plugins: [
+                    ButtonTestPlugin(title: .init(string: "Remove all bookmarks")),
+                    SwitchTestPlugin(title: .init(string: "Fail bookmark request"))
                 ])
             ]),
-            SectionPlugin(title: "Section 2", plugins: [
-                SegmentTestPlugin(),
-                ButtonTestPlugin()
+            SectionPlugin(title: "System", plugins: [
+                SegmentTestPlugin(title: .init(string: "Region")),
+                ButtonTestPlugin(title: .init(string: "Reset stored properties"))
             ])
         ]
 

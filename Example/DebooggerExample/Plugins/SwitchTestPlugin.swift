@@ -7,16 +7,16 @@ import Deboogger
 
 struct SwitchTestPlugin: SwitchPlugin {
     
-    var title: NSAttributedString {
-        return NSAttributedString(string: "Title")
-    }
-    
-    var description: NSAttributedString? {
-        return NSAttributedString(string: "Description Description Description Description Description Description Description Description Description Description ")
-    }
+    let title: NSAttributedString
+    let description: NSAttributedString?
     
     var isOn: Bool {
         return true
+    }
+
+    init(title: NSAttributedString, description: NSAttributedString? = .init(string: "Description Description Description Description Description Description Description Description Description Description ")) {
+        self.title = title
+        self.description = description
     }
     
     func switchStateChanged(_ sender: UISwitch) {
