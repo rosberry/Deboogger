@@ -14,6 +14,7 @@ final class SectionsConfiguration: NSObject, Configuration {
     var filteredTableViewItems: [PluginItem] = []
     var favoritesSection: NavigationPlugin = SectionPlugin(title: "Favorites", style: .plain, plugins: [])
     var favoritesPluginItems: [PluginItem] = []
+    private var flatPlugins: [Plugin] = []
     var useFavorites: Bool
 
     weak var tableView: UITableView?
@@ -53,6 +54,9 @@ final class SectionsConfiguration: NSObject, Configuration {
             return makePluginItem(for: section)
         }
         filteredTableViewItems = tableViewItems
+        flatPlugins = tableViewItems.flatMap { pluginItem in
+            return collectPlugins(in: pluginItem.plugin, sectionTitle: pluginItem.title)
+        }
     }
 
     func filterData(with text: String) {
@@ -64,17 +68,35 @@ final class SectionsConfiguration: NSObject, Configuration {
             return
         }
 
-        filteredTableViewItems = tableViewItems.compactMap { pluginItem -> PluginItem? in
-            let filteredChildren = pluginItem.children.filter { childPlugin -> Bool in
-                childPlugin.plugin.keywords.lowercased().contains(text)
+        let resultPluginItems = flatPlugins.compactMap { plugin -> PluginItem? in
+            guard plugin.keywords.lowercased().contains(text) else {
+                return nil
             }
-            return filteredChildren.isEmpty ? nil : PluginItem(title: pluginItem.title,
-                                                               plugin: pluginItem.plugin,
-                                                               children: filteredChildren)
+            return PluginItem(title: plugin.title.string, plugin: plugin, children: [])
         }
+
+        filteredTableViewItems = [PluginItem(title: "Search result",
+                                             plugin: SectionPlugin(plugins: []),
+                                             children: resultPluginItems)]
     }
 
     // MARK: - Private
+
+    private func collectPlugins(in plugin: Plugin, sectionTitle: String?) -> [Plugin] {
+        var result: [Plugin] = []
+
+        if let navigationPlugin = plugin as? NavigationPlugin {
+            result.append(navigationPlugin)
+            navigationPlugin.plugins.forEach { childPlugin in
+                result.append(contentsOf: collectPlugins(in: childPlugin, sectionTitle: navigationPlugin.title.string))
+            }
+        }
+        else {
+            result.append(plugin)
+        }
+
+        return result
+    }
 
     private func makeSections(for plugins: [Plugin]) -> [NavigationPlugin] {
         var sections: [NavigationPlugin] = []
