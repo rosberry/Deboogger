@@ -12,12 +12,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-//        Deboogger.configure(with:
-//            SwitchTestPlugin(),
-//            SliderTestPlugin(),
-//            SegmentTestPlugin(),
-//            ButtonTestPlugin()
-//        )
 
         let sectionTree = [
             SectionPlugin(title: "Content", style: .nested, plugins: [

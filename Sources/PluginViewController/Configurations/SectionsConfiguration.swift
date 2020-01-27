@@ -14,8 +14,9 @@ final class SectionsConfiguration: NSObject, Configuration {
     var filteredTableViewItems: [PluginItem] = []
     var favoritesSection: NavigationPlugin = SectionPlugin(title: "Favorites", style: .plain, plugins: [])
     var favoritesPluginItems: [PluginItem] = []
-    private var flatPlugins: [Plugin] = []
     var useFavorites: Bool
+    var filterMask: String = ""
+    private var flatPlugins: [Plugin] = []
 
     weak var tableView: UITableView?
     weak var delegate: ConfigurationDelegate?
@@ -60,6 +61,7 @@ final class SectionsConfiguration: NSObject, Configuration {
     }
 
     func filterData(with text: String) {
+        filterMask = text
         defer {
             tableView?.reloadData()
         }
@@ -169,7 +171,7 @@ final class SectionsConfiguration: NSObject, Configuration {
 
     @objc private func favoritesListUpdated() {
         configure()
-        tableView?.reloadData()
+        filterData(with: filterMask)
     }
 
     // MARK: - UITableViewDataSource
