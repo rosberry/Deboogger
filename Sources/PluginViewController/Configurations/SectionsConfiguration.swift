@@ -12,6 +12,9 @@ final class SectionsConfiguration: NSObject, Configuration {
     var sections: [NavigationPlugin] = []
     var tableViewItems: [PluginItem] = []
 
+    private var filteredTableViewItems: [PluginItem] = []
+    private var flatPlugins: [Plugin] = []
+
     weak var tableView: UITableView?
     weak var delegate: ConfigurationDelegate?
 
@@ -24,9 +27,50 @@ final class SectionsConfiguration: NSObject, Configuration {
         tableViewItems = sections.map { (section: NavigationPlugin) -> PluginItem in
             return makePluginItem(for: section)
         }
+        filteredTableViewItems = tableViewItems
+        flatPlugins = tableViewItems.flatMap { pluginItem in
+            return collectPlugins(in: pluginItem.plugin, sectionTitle: pluginItem.title)
+        }
+    }
+
+    func filterData(with text: String) {
+        defer {
+            tableView?.reloadData()
+        }
+        guard text.isEmpty == false else {
+            filteredTableViewItems = tableViewItems
+            return
+        }
+
+        let resultPluginItems = flatPlugins.compactMap { plugin -> PluginItem? in
+            guard plugin.keywords.lowercased().contains(text) else {
+                return nil
+            }
+            return PluginItem(title: plugin.title.string, plugin: plugin, children: [])
+        }
+
+        filteredTableViewItems = [PluginItem(title: "Search result",
+                                             plugin: SectionPlugin(plugins: []),
+                                             children: resultPluginItems)]
     }
 
     // MARK: - Private
+
+    private func collectPlugins(in plugin: Plugin, sectionTitle: String?) -> [Plugin] {
+        var result: [Plugin] = []
+
+        if let navigationPlugin = plugin as? NavigationPlugin {
+            result.append(navigationPlugin)
+            navigationPlugin.plugins.forEach { childPlugin in
+                result.append(contentsOf: collectPlugins(in: childPlugin, sectionTitle: navigationPlugin.title.string))
+            }
+        }
+        else {
+            result.append(plugin)
+        }
+
+        return result
+    }
 
     private func makeSections(for plugins: [Plugin]) -> [NavigationPlugin] {
         var sections: [NavigationPlugin] = []
@@ -96,15 +140,15 @@ final class SectionsConfiguration: NSObject, Configuration {
     // MARK: - UITableViewDataSource
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return tableViewItems[section].children.count
+        return filteredTableViewItems[section].children.count
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {
-        return tableViewItems.count
+        return filteredTableViewItems.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let item = tableViewItems[indexPath.section].children[indexPath.row]
+        let item = filteredTableViewItems[indexPath.section].children[indexPath.row]
         let identifier = item.plugin.cellClass.description()
         let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as? BaseTableViewCell
         cell?.configure(with: item.plugin)
@@ -114,7 +158,7 @@ final class SectionsConfiguration: NSObject, Configuration {
     // MARK: - UITableViewDelegate
 
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        let item = tableViewItems[section]
+        let item = filteredTableViewItems[section]
         return item.title
     }
 
@@ -124,7 +168,7 @@ final class SectionsConfiguration: NSObject, Configuration {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let plugin = tableViewItems[indexPath.section].children[indexPath.row].plugin
+        let plugin = filteredTableViewItems[indexPath.section].children[indexPath.row].plugin
         plugin.selectionAction()
 
         if let section = plugin as? NavigationPlugin {
