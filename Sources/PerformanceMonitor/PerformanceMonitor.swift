@@ -28,6 +28,7 @@ final class PerformanceMonitor {
         guard isMonitoring == false else {
             return
         }
+        displayLink = .init(target: self, selector: #selector(step))
         displayLink.add(to: .current, forMode: .common)
         isMonitoring = true
     }
