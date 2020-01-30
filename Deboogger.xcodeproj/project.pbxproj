@@ -36,6 +36,10 @@
 		849B836D1EC7564000B0DF9D /* PluginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849B83571EC7564000B0DF9D /* PluginViewController.swift */; };
 		849B83731EC756DA00B0DF9D /* UIView+SuperviewOffset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849B83721EC756DA00B0DF9D /* UIView+SuperviewOffset.swift */; };
 		849B83761EC7570E00B0DF9D /* Deboogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 849B83751EC7570E00B0DF9D /* Deboogger.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8586C8F62394D410006DC167 /* PerformanceMonitorPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8586C8F52394D410006DC167 /* PerformanceMonitorPlugin.swift */; };
+		8586C8F923951D10006DC167 /* PerformanceMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8586C8F823951D10006DC167 /* PerformanceMonitor.swift */; };
+		8597BD68239A062B000FBE9F /* PaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8597BD67239A062B000FBE9F /* PaddingLabel.swift */; };
+		85A1A35023952708005A6F6B /* PerformanceWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85A1A34F23952708005A6F6B /* PerformanceWindow.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -70,6 +74,10 @@
 		849B835A1EC7564000B0DF9D /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		849B83721EC756DA00B0DF9D /* UIView+SuperviewOffset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+SuperviewOffset.swift"; sourceTree = "<group>"; };
 		849B83751EC7570E00B0DF9D /* Deboogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Deboogger.h; sourceTree = "<group>"; };
+		8586C8F52394D410006DC167 /* PerformanceMonitorPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerformanceMonitorPlugin.swift; sourceTree = "<group>"; };
+		8586C8F823951D10006DC167 /* PerformanceMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerformanceMonitor.swift; sourceTree = "<group>"; };
+		8597BD67239A062B000FBE9F /* PaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingLabel.swift; sourceTree = "<group>"; };
+		85A1A34F23952708005A6F6B /* PerformanceWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerformanceWindow.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -186,6 +194,8 @@
 		849B83401EC7564000B0DF9D /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				8597BD66239A0617000FBE9F /* Views */,
+				8586C8F723951C42006DC167 /* PerformanceMonitor */,
 				849B83581EC7564000B0DF9D /* Supporting Files */,
 				849B83411EC7564000B0DF9D /* AssistiveButton */,
 				849B83431EC7564000B0DF9D /* Cells */,
@@ -254,6 +264,32 @@
 				849B835A1EC7564000B0DF9D /* Info.plist */,
 			);
 			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		8586C8F42394D388006DC167 /* Plugins */ = {
+			isa = PBXGroup;
+			children = (
+				8586C8F52394D410006DC167 /* PerformanceMonitorPlugin.swift */,
+			);
+			path = Plugins;
+			sourceTree = "<group>";
+		};
+		8586C8F723951C42006DC167 /* PerformanceMonitor */ = {
+			isa = PBXGroup;
+			children = (
+				8586C8F42394D388006DC167 /* Plugins */,
+				8586C8F823951D10006DC167 /* PerformanceMonitor.swift */,
+				85A1A34F23952708005A6F6B /* PerformanceWindow.swift */,
+			);
+			path = PerformanceMonitor;
+			sourceTree = "<group>";
+		};
+		8597BD66239A0617000FBE9F /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				8597BD67239A062B000FBE9F /* PaddingLabel.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -341,12 +377,15 @@
 			files = (
 				629A6C724D7EE0C256CD9035 /* UIWindow+Deboogger.m in Sources */,
 				849B836A1EC7564000B0DF9D /* SwitchPlugin.swift in Sources */,
+				8586C8F923951D10006DC167 /* PerformanceMonitor.swift in Sources */,
 				849B836D1EC7564000B0DF9D /* PluginViewController.swift in Sources */,
 				2EED8CA6238512A400738BD8 /* SectionTableViewCell.swift in Sources */,
 				840870441FD7B238007741AB /* SwitchTableViewCell.swift in Sources */,
 				847458621FE38E7C00C3B0FA /* Configuration.swift in Sources */,
 				840870461FD7B238007741AB /* ButtonTableViewCell.swift in Sources */,
+				8586C8F62394D410006DC167 /* PerformanceMonitorPlugin.swift in Sources */,
 				840870401FD7B238007741AB /* SegmentTableViewCell.swift in Sources */,
+				85A1A35023952708005A6F6B /* PerformanceWindow.swift in Sources */,
 				847458641FE38EDD00C3B0FA /* SectionsConfiguration.swift in Sources */,
 				849B836C1EC7564000B0DF9D /* TextPlugin.swift in Sources */,
 				849B835B1EC7564000B0DF9D /* AssistiveButton.swift in Sources */,
@@ -356,6 +395,7 @@
 				8474585E1FE38B9D00C3B0FA /* SectionPlugin.swift in Sources */,
 				840870481FD7B2C0007741AB /* SegmentPlugin.swift in Sources */,
 				840F804D1FDA40DF00A9B466 /* SliderTableViewCell.swift in Sources */,
+				8597BD68239A062B000FBE9F /* PaddingLabel.swift in Sources */,
 				84459B9D1FDA43BA00398995 /* SliderPlugin.swift in Sources */,
 				849B83671EC7564000B0DF9D /* UIViewController+Presenter.swift in Sources */,
 				2EED8CC92386445E00738BD8 /* NavigationPlugin.swift in Sources */,
