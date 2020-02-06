@@ -13,25 +13,14 @@ final class FavoriteService {
 
     // MARK: - Private properties
 
-    private var _identifiers: Set<String>?
-
     private var storageURL: URL? {
         return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent(".deboogger")
     }
 
     // MARK: - Public properties
 
-    private var identifiers: Set<String> {
-        get {
-            if let identifiers = _identifiers {
-                return identifiers
-            }
-            let identifiers = loadIdentifiers()
-            _identifiers = identifiers
-            return identifiers
-        }
-        set {
-            _identifiers = newValue
+    private var identifiers: Set<String> = .init() {
+        didSet {
             saveIdentifiers()
         }
     }
@@ -39,32 +28,33 @@ final class FavoriteService {
     // MARK: - Lifecycle
 
     private init() {
+        identifiers = loadIdentifiers()
     }
 
     // MARK: - Public methods
 
-    func add(plugin: Plugin) {
+    func add(_ plugin: Plugin) {
         identifiers.insert(plugin.identifier)
         NotificationCenter.default.post(name: NotificationName.favoritesListUpdated, object: nil)
     }
 
-    func remove(plugin: Plugin) {
+    func remove(_ plugin: Plugin) {
         identifiers.remove(plugin.identifier)
         NotificationCenter.default.post(name: NotificationName.favoritesListUpdated, object: nil)
     }
 
-    func isFavorite(plugin: Plugin) -> Bool {
+    func isFavorite(_ plugin: Plugin) -> Bool {
         return identifiers.contains(plugin.identifier)
     }
 
-    func fetchFavorite(plugins: [Plugin]) -> [Plugin] {
+    func fetchFavorite(_ plugins: [Plugin]) -> [Plugin] {
         return plugins.flatMap { plugin -> [Plugin] in
             var result = [Plugin]()
             if identifiers.contains(plugin.identifier) {
                 result.append(plugin)
             }
             if let sectionPlugin = plugin as? SectionPlugin {
-                result.append(contentsOf: fetchFavorite(plugins: sectionPlugin.plugins))
+                result.append(contentsOf: fetchFavorite(sectionPlugin.plugins))
             }
             return result
         }
@@ -74,7 +64,7 @@ final class FavoriteService {
 
     private func loadIdentifiers() -> Set<String> {
         guard let url = storageURL,
-            let array = NSArray(contentsOf: url) as? [String]  else {
+            let array = NSArray(contentsOf: url) as? [String] else {
             return []
         }
         return .init(array)
