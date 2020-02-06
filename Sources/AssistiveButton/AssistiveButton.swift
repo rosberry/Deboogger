@@ -18,7 +18,6 @@ final class AssistiveButton: UIButton {
     private let storage = UserDefaults(suiteName: "deboogger")
 
     private var tapHandler: TapHandler
-    private var touchBeganTime: TimeInterval?
     
     deinit {
         stopTimer()
@@ -30,6 +29,8 @@ final class AssistiveButton: UIButton {
         let size = Layout.size
         
         super.init(frame: CGRect(x: 0, y: 0, width: size, height: size))
+
+        addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
         
         setTitle("🛠", for: .normal)
         
@@ -87,7 +88,7 @@ final class AssistiveButton: UIButton {
     
     // MARK: - Actions
     
-     private func buttonPressed() {
+     @objc private func buttonPressed() {
         if isMoving {
             return
         }
@@ -126,7 +127,6 @@ extension AssistiveButton {
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
-        touchBeganTime = event?.timestamp
 
         guard let touch = touches.first else {
             return
@@ -155,13 +155,7 @@ extension AssistiveButton {
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesEnded(touches, with: event)
-        if let beganTime = touchBeganTime, let endTime = event?.timestamp, endTime - beganTime < 0.2 {
-            tapHandler()
-            removeOffset()
-        }
-        else {
-            removeOffset()
-        }
+        removeOffset()
     }
     
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
