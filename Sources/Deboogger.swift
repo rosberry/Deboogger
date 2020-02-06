@@ -52,14 +52,9 @@ public final class Deboogger {
 
     private var gesture: DebooggerGesture = .init()
 
-    private lazy var assistiveButtonWindow: UIWindow = {
-        let size = AssistiveButton.Layout.size
-        let window = UIWindow(frame: CGRect(x: 0, y: 0, width: size, height: size))
-        window.windowLevel = AssistiveButtonWindowLevel
-        window.rootViewController = self.assistiveButtonPresenterViewController
-        window.isHidden = true
-        return window
-    }()
+    private var keyWindow: UIWindow {
+        UIApplication.shared.keyWindow ?? UIWindow()
+    }
 
     private lazy var performanceWindow: PerformanceWindow = .init(performanceMonitor: .init())
 
@@ -128,10 +123,11 @@ public final class Deboogger {
         pluginViewController?.dismiss(animated: true, completion: { [unowned self] in
             self.isShowing = false
             self.rootViewController?.endAppearanceTransition()
-            self.assistiveButtonWindow.isHidden = !self.shouldShowAssistiveButton
+
             if let assistiveButton = self.assistiveButton {
                 assistiveButton.removeFromSuperview()
-                self.assistiveButtonWindow.addSubview(assistiveButton)
+                self.keyWindow.addSubview(assistiveButton)
+                assistiveButton.isHidden = !self.shouldShowAssistiveButton
             }
 
             NotificationCenter.default.post(name: .DebooggerDidHide, object: nil)
@@ -165,7 +161,7 @@ public final class Deboogger {
             self.rootViewController?.endAppearanceTransition()
             NotificationCenter.default.post(name: .DebooggerDidShow, object: nil)
         }
-        assistiveButtonWindow.isHidden = true
+        assistiveButton?.isHidden = true
 
         setup(gesture)
     }
@@ -194,8 +190,8 @@ public final class Deboogger {
             let button = AssistiveButton(tapHandler: { [weak self] in
                 self?.show()
             })
-            self.assistiveButtonWindow.isHidden = !self.shouldShowAssistiveButton
-            self.assistiveButtonWindow.addSubview(button)
+            self.assistiveButton?.isHidden = !self.shouldShowAssistiveButton
+            self.keyWindow.addSubview(button)
             self.assistiveButton = button
             self.updatePerformanceMonitor(hidden: self.shouldShowPerformanceMonitor == false)
         }
