@@ -51,11 +51,11 @@ final class AssistiveButton: UIButton {
     
     override func didMoveToSuperview() {
         if let frame = storage?.currentButtonFrame {
-            window?.frame = frame
+            self.frame = frame
         }
         else {
-            window?.frame.origin.x = UIScreen.main.bounds.width - Layout.size
-            window?.frame.origin.y = UIScreen.main.bounds.height / 2.0 - Layout.size / 2.0
+            frame.origin.x = UIScreen.main.bounds.width - Layout.size
+            frame.origin.y = UIScreen.main.bounds.height / 2.0 - Layout.size / 2.0
         }
         startTimer()
     }
@@ -99,16 +99,16 @@ final class AssistiveButton: UIButton {
     // MARK: - Helpers
 
     private func saveButtonPosition() {
-        storage?.currentButtonFrame = window?.frame
+        storage?.currentButtonFrame = frame
     }
 
     private func removeOffset() {
         UIView.animate(withDuration: 0.2, animations: {
-            if self.window?.negativeOffsets.isEmpty == true {
-                self.window?.smallestOffset.remove()
+            if self.negativeOffsets.isEmpty == true {
+                self.smallestOffset.remove()
             }
             else {
-                self.window?.negativeOffsets.forEach { offset in
+                self.negativeOffsets.forEach { offset in
                     offset.remove()
                 }
             }
@@ -147,8 +147,8 @@ extension AssistiveButton {
         let offsetX = currentPosition.x - beginPoint.x
         let offsetY = currentPosition.y - beginPoint.y
         
-        window?.center.x += offsetX
-        window?.center.y += offsetY
+        center.x += offsetX
+        center.y += offsetY
         
         isMoving = true
     }
