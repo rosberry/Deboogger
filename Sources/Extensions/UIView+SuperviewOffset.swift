@@ -12,7 +12,7 @@ enum Offset {
     
     var value: CGFloat {
         switch self {
-        case let .top(view):    return view.frame.origin.y
+        case let .top(view):    return view.frame.origin.y - 20
         case let .left(view):   return view.frame.origin.x
         case let .bottom(view): return UIScreen.main.bounds.height - (view.frame.origin.y + view.bounds.height)
         case let .right(view):  return UIScreen.main.bounds.width - (view.frame.origin.x + view.bounds.width)
