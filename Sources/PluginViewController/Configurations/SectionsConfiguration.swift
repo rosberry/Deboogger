@@ -44,17 +44,19 @@ final class SectionsConfiguration: NSObject, Configuration {
         let favoritesPlugins = favoriteService.fetchFavorite(plugins)
 
         sections = makeSections(for: plugins)
+        var flatIndex = 0
 
         if useFavorites, favoritesPlugins.isEmpty == false {
             let favoriteSectionPlugin = SectionPlugin(title: "Favorites", style: .plain, plugins: favoritesPlugins)
             sections.insert(favoriteSectionPlugin, at: 0)
+            flatIndex = 1
         }
 
         tableViewItems = sections.map { (section: NavigationPlugin) -> PluginItem in
             return makePluginItem(for: section)
         }
         filteredTableViewItems = tableViewItems
-        flatPlugins = tableViewItems[1...].flatMap { pluginItem in
+        flatPlugins = tableViewItems[flatIndex...].flatMap { pluginItem in
             return collectPlugins(in: pluginItem.plugin, sectionTitle: pluginItem.title)
         }
     }
