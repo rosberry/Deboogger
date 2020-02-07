@@ -17,11 +17,23 @@ final class AssistiveButton: UIButton {
     private var opacityTimer: Timer?
     private let storage = UserDefaults(suiteName: "deboogger")
 
+    private lazy var movingPanGestureRecognizer: UIPanGestureRecognizer = .init(target: self,
+                                                                                action: #selector(panRecognizerHandler))
+
     private var tapHandler: TapHandler
 
     override var canBecomeFirstResponder: Bool {
         true
     }
+
+    override var safeAreaInsets: UIEdgeInsets {
+        if #available(iOS 11.0, *) {
+            return superview?.safeAreaInsets ?? .zero
+        } else {
+            return .zero
+        }
+    }
+
     override var keyCommands: [UIKeyCommand]? {
         return [UIKeyCommand(input: UIKeyCommand.inputUpArrow,
                              modifierFlags: .command,
@@ -41,6 +53,7 @@ final class AssistiveButton: UIButton {
         super.init(frame: CGRect(x: 0, y: 0, width: size, height: size))
 
         addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
+        addGestureRecognizer(movingPanGestureRecognizer)
         
         setTitle("🛠", for: .normal)
         
@@ -110,6 +123,30 @@ final class AssistiveButton: UIButton {
     @objc private func hardwareShortcutPressed() {
         tapHandler()
     }
+
+    @objc private func panRecognizerHandler(_ recognizer: UIPanGestureRecognizer) {
+        let view = recognizer.view
+        switch recognizer.state {
+            case .began:
+                stopTimer()
+                beginPoint = recognizer.location(in: view)
+            case .changed:
+                recognizer.setTranslation(.zero, in: view)
+                let point = recognizer.location(in: view)
+
+                let offsetX = point.x - beginPoint.x
+                let offsetY = point.y - beginPoint.y
+
+                center.x += offsetX
+                center.y += offsetY
+                isMoving = true
+            case .ended, .failed, .cancelled:
+                removeOffset()
+            default:
+                return
+        }
+    }
+
     // MARK: - Helpers
 
     private func saveButtonPosition() {
@@ -131,49 +168,6 @@ final class AssistiveButton: UIButton {
             self.saveButtonPosition()
             self.startTimer()
         })
-    }
-}
-
-// MARK: - Touches
-
-extension AssistiveButton {
-
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesBegan(touches, with: event)
-
-        guard let touch = touches.first else {
-            return
-        }
-        
-        stopTimer()
-        beginPoint = touch.location(in: self)
-    }
-    
-    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesMoved(touches, with: event)
-        
-        guard let touch = touches.first else {
-            return
-        }
-        
-        let currentPosition = touch.location(in: self)
-        let offsetX = currentPosition.x - beginPoint.x
-        let offsetY = currentPosition.y - beginPoint.y
-        
-        center.x += offsetX
-        center.y += offsetY
-        
-        isMoving = true
-    }
-    
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesEnded(touches, with: event)
-        removeOffset()
-    }
-    
-    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesCancelled(touches, with: event)
-        removeOffset()
     }
 }
 

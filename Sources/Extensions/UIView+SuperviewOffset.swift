@@ -12,10 +12,14 @@ enum Offset {
     
     var value: CGFloat {
         switch self {
-        case let .top(view):    return view.frame.origin.y - 20
-        case let .left(view):   return view.frame.origin.x
-        case let .bottom(view): return UIScreen.main.bounds.height - (view.frame.origin.y + view.bounds.height)
-        case let .right(view):  return UIScreen.main.bounds.width - (view.frame.origin.x + view.bounds.width)
+        case let .top(view):
+            return view.frame.origin.y - view.insets.top
+        case let .left(view):
+            return view.frame.origin.x
+        case let .bottom(view):
+            return UIScreen.main.bounds.height - (view.frame.origin.y + view.bounds.height) - view.insets.bottom
+        case let .right(view):
+            return UIScreen.main.bounds.width - (view.frame.origin.x + view.bounds.width)
         }
     }
     
@@ -30,6 +34,15 @@ enum Offset {
 }
 
 extension UIView {
+
+    fileprivate var insets: UIEdgeInsets {
+        if #available(iOS 11.0, *) {
+            return safeAreaInsets
+        }
+        else {
+            return .zero
+        }
+    }
   
     private var topOffset: Offset {
         return .top(self)
