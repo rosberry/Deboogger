@@ -125,8 +125,6 @@ public final class Deboogger {
             self.rootViewController?.endAppearanceTransition()
 
             if let assistiveButton = self.assistiveButton {
-                assistiveButton.removeFromSuperview()
-                self.keyWindow.addSubview(assistiveButton)
                 assistiveButton.isHidden = !self.shouldShowAssistiveButton
             }
 
@@ -190,9 +188,10 @@ public final class Deboogger {
             let button = AssistiveButton(tapHandler: { [weak self] in
                 self?.show()
             })
-            self.assistiveButton?.isHidden = !self.shouldShowAssistiveButton
+            button.becomeFirstResponder()
             self.keyWindow.addSubview(button)
             self.assistiveButton = button
+            self.assistiveButton?.isHidden = !self.shouldShowAssistiveButton
             self.updatePerformanceMonitor(hidden: self.shouldShowPerformanceMonitor == false)
         }
     }

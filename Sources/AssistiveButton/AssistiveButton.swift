@@ -18,6 +18,16 @@ final class AssistiveButton: UIButton {
     private let storage = UserDefaults(suiteName: "deboogger")
 
     private var tapHandler: TapHandler
+
+    override var canBecomeFirstResponder: Bool {
+        true
+    }
+    override var keyCommands: [UIKeyCommand]? {
+        return [UIKeyCommand(input: UIKeyCommand.inputUpArrow,
+                             modifierFlags: .command,
+                             action: #selector(hardwareShortcutPressed),
+                             discoverabilityTitle: "Open deboogger")]
+    }
     
     deinit {
         stopTimer()
@@ -97,6 +107,9 @@ final class AssistiveButton: UIButton {
         tapHandler()
     }
 
+    @objc private func hardwareShortcutPressed() {
+        tapHandler()
+    }
     // MARK: - Helpers
 
     private func saveButtonPosition() {
