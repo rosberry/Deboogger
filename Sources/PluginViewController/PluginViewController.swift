@@ -24,7 +24,7 @@ final class PluginViewController: UIViewController {
 
     private(set) lazy var searchBar: UISearchBar = {
         let view = UISearchBar()
-        view.searchTextField.returnKeyType = .done
+        view.returnKeyType = .done
         view.delegate = self
         view.isHidden = true
         return view
