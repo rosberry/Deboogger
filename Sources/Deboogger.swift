@@ -52,10 +52,6 @@ public final class Deboogger {
 
     private var gesture: DebooggerGesture = .init()
 
-    private var keyWindow: UIWindow {
-        UIApplication.shared.keyWindow ?? UIWindow()
-    }
-
     private lazy var performanceWindow: PerformanceWindow = .init(performanceMonitor: .init())
 
     weak var pluginViewController: PluginViewController?
@@ -87,26 +83,26 @@ public final class Deboogger {
 
     // MARK: - Configurations
 
-    public static func configure(with plugins: [Plugin], gesture: DebooggerGesture = .init()) {
+    public static func configure(with plugins: [Plugin], gesture: DebooggerGesture = .init(), window: UIWindow) {
         let section = SectionPlugin(title: "App plugins", plugins: plugins)
-        configure(with: [section], gesture: gesture)
+        configure(with: [section], gesture: gesture, window: window)
     }
 
-    public static func configure(with plugins: Plugin..., gesture: DebooggerGesture = .init()) {
-        configure(with: plugins, gesture: gesture)
+    public static func configure(with plugins: Plugin..., gesture: DebooggerGesture = .init(), window: UIWindow) {
+        configure(with: plugins, gesture: gesture, window: window)
     }
 
-    public static func configure(with sections: SectionPlugin..., gesture: DebooggerGesture = .init()) {
-        configure(with: sections, gesture: gesture)
+    public static func configure(with sections: SectionPlugin..., gesture: DebooggerGesture = .init(), window: UIWindow) {
+        configure(with: sections, gesture: gesture, window: window)
     }
 
-    public static func configure(with sections: [SectionPlugin], gesture: DebooggerGesture = .init()) {
+    public static func configure(with sections: [SectionPlugin], gesture: DebooggerGesture = .init(), window: UIWindow) {
         #if targetEnvironment(simulator)
-            shared.configure(with: SectionsConfiguration(plugins: sections), gesture: gesture)
+            shared.configure(with: SectionsConfiguration(plugins: sections), gesture: gesture, window: window)
         #else
             var adjustedSections = sections
             adjustedSections.insert(shared.makeDefaultSection(), at: 0)
-            shared.configure(with: SectionsConfiguration(plugins: adjustedSections), gesture: gesture)
+            shared.configure(with: SectionsConfiguration(plugins: adjustedSections), gesture: gesture, window: window)
         #endif
     }
 
@@ -180,7 +176,7 @@ public final class Deboogger {
         }
     }
 
-    private func configure(with configuration: Configuration, gesture: DebooggerGesture) {
+    private func configure(with configuration: Configuration, gesture: DebooggerGesture, window: UIWindow) {
         self.configuration = configuration
         setup(gesture)
 
@@ -189,7 +185,7 @@ public final class Deboogger {
                 self?.show()
             })
             button.becomeFirstResponder()
-            self.keyWindow.addSubview(button)
+            window.addSubview(button)
             self.assistiveButton = button
             self.assistiveButton?.isHidden = !self.shouldShowAssistiveButton
             self.updatePerformanceMonitor(hidden: self.shouldShowPerformanceMonitor == false)
