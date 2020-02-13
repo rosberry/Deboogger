@@ -17,8 +17,8 @@ final class AssistiveButton: UIButton {
     private var opacityTimer: Timer?
     private let storage = UserDefaults(suiteName: "deboogger")
 
-    private lazy var movingPanGestureRecognizer: UIPanGestureRecognizer = .init(target: self,
-                                                                                action: #selector(panRecognizerHandler))
+    private lazy var panGestureRecognizer: UIPanGestureRecognizer = .init(target: self,
+                                                                          action: #selector(panGestureRecognized))
 
     private var tapHandler: TapHandler
 
@@ -53,7 +53,7 @@ final class AssistiveButton: UIButton {
         super.init(frame: CGRect(x: 0, y: 0, width: size, height: size))
 
         addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
-        addGestureRecognizer(movingPanGestureRecognizer)
+        addGestureRecognizer(panGestureRecognizer)
         
         setTitle("🛠", for: .normal)
         
@@ -124,7 +124,7 @@ final class AssistiveButton: UIButton {
         tapHandler()
     }
 
-    @objc private func panRecognizerHandler(_ recognizer: UIPanGestureRecognizer) {
+    @objc private func panGestureRecognized(_ recognizer: UIPanGestureRecognizer) {
         let view = recognizer.view
         switch recognizer.state {
             case .began:
