@@ -35,7 +35,7 @@ final class AssistiveButton: UIButton {
     }
 
     override var keyCommands: [UIKeyCommand]? {
-        return [UIKeyCommand(input: UIKeyCommand.inputUpArrow,
+        return [UIKeyCommand(input: "D",
                              modifierFlags: .command,
                              action: #selector(hardwareShortcutPressed),
                              discoverabilityTitle: "Open deboogger")]
