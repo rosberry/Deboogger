@@ -22,23 +22,12 @@ final class AssistiveButton: UIButton {
 
     private var tapHandler: TapHandler
 
-    override var canBecomeFirstResponder: Bool {
-        true
-    }
-
     override var safeAreaInsets: UIEdgeInsets {
         if #available(iOS 11.0, *) {
             return superview?.safeAreaInsets ?? .zero
         } else {
             return .zero
         }
-    }
-
-    override var keyCommands: [UIKeyCommand]? {
-        return [UIKeyCommand(input: "D",
-                             modifierFlags: .command,
-                             action: #selector(hardwareShortcutPressed),
-                             discoverabilityTitle: "Open deboogger")]
     }
     
     deinit {
@@ -117,10 +106,6 @@ final class AssistiveButton: UIButton {
         }
         stopTimer()
         startTimer()
-        tapHandler()
-    }
-
-    @objc private func hardwareShortcutPressed() {
         tapHandler()
     }
 
