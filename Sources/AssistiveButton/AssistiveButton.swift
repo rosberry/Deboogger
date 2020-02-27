@@ -17,8 +17,18 @@ final class AssistiveButton: UIButton {
     private var opacityTimer: Timer?
     private let storage = UserDefaults(suiteName: "deboogger")
 
+    private lazy var panGestureRecognizer: UIPanGestureRecognizer = .init(target: self,
+                                                                          action: #selector(panGestureRecognized))
+
     private var tapHandler: TapHandler
-    private var touchBeganTime: TimeInterval?
+
+    override var safeAreaInsets: UIEdgeInsets {
+        if #available(iOS 11.0, *) {
+            return superview?.safeAreaInsets ?? .zero
+        } else {
+            return .zero
+        }
+    }
     
     deinit {
         stopTimer()
@@ -30,6 +40,9 @@ final class AssistiveButton: UIButton {
         let size = Layout.size
         
         super.init(frame: CGRect(x: 0, y: 0, width: size, height: size))
+
+        addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
+        addGestureRecognizer(panGestureRecognizer)
         
         setTitle("🛠", for: .normal)
         
@@ -51,11 +64,11 @@ final class AssistiveButton: UIButton {
     
     override func didMoveToSuperview() {
         if let frame = storage?.currentButtonFrame {
-            window?.frame = frame
+            self.frame = frame
         }
         else {
-            window?.frame.origin.x = UIScreen.main.bounds.width - Layout.size
-            window?.frame.origin.y = UIScreen.main.bounds.height / 2.0 - Layout.size / 2.0
+            frame.origin.x = UIScreen.main.bounds.width - Layout.size
+            frame.origin.y = UIScreen.main.bounds.height / 2.0 - Layout.size / 2.0
         }
         startTimer()
     }
@@ -87,7 +100,7 @@ final class AssistiveButton: UIButton {
     
     // MARK: - Actions
     
-     private func buttonPressed() {
+     @objc private func buttonPressed() {
         if isMoving {
             return
         }
@@ -96,19 +109,42 @@ final class AssistiveButton: UIButton {
         tapHandler()
     }
 
+    @objc private func panGestureRecognized(_ recognizer: UIPanGestureRecognizer) {
+        let view = recognizer.view
+        switch recognizer.state {
+            case .began:
+                stopTimer()
+                beginPoint = recognizer.location(in: view)
+            case .changed:
+                recognizer.setTranslation(.zero, in: view)
+                let point = recognizer.location(in: view)
+
+                let offsetX = point.x - beginPoint.x
+                let offsetY = point.y - beginPoint.y
+
+                center.x += offsetX
+                center.y += offsetY
+                isMoving = true
+            case .ended, .failed, .cancelled:
+                removeOffset()
+            default:
+                return
+        }
+    }
+
     // MARK: - Helpers
 
     private func saveButtonPosition() {
-        storage?.currentButtonFrame = window?.frame
+        storage?.currentButtonFrame = frame
     }
 
     private func removeOffset() {
         UIView.animate(withDuration: 0.2, animations: {
-            if self.window?.negativeOffsets.isEmpty == true {
-                self.window?.smallestOffset.remove()
+            if self.negativeOffsets.isEmpty == true {
+                self.smallestOffset.remove()
             }
             else {
-                self.window?.negativeOffsets.forEach { offset in
+                self.negativeOffsets.forEach { offset in
                     offset.remove()
                 }
             }
@@ -117,56 +153,6 @@ final class AssistiveButton: UIButton {
             self.saveButtonPosition()
             self.startTimer()
         })
-    }
-}
-
-// MARK: - Touches
-
-extension AssistiveButton {
-
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesBegan(touches, with: event)
-        touchBeganTime = event?.timestamp
-
-        guard let touch = touches.first else {
-            return
-        }
-        
-        stopTimer()
-        beginPoint = touch.location(in: self)
-    }
-    
-    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesMoved(touches, with: event)
-        
-        guard let touch = touches.first else {
-            return
-        }
-        
-        let currentPosition = touch.location(in: self)
-        let offsetX = currentPosition.x - beginPoint.x
-        let offsetY = currentPosition.y - beginPoint.y
-        
-        window?.center.x += offsetX
-        window?.center.y += offsetY
-        
-        isMoving = true
-    }
-    
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesEnded(touches, with: event)
-        if let beganTime = touchBeganTime, let endTime = event?.timestamp, endTime - beganTime < 0.2 {
-            tapHandler()
-            removeOffset()
-        }
-        else {
-            removeOffset()
-        }
-    }
-    
-    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesCancelled(touches, with: event)
-        removeOffset()
     }
 }
 
