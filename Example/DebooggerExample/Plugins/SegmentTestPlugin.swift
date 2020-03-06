@@ -11,16 +11,16 @@ final class SegmentTestPlugin: SegmentPlugin {
         return ["First", "2", "Third"]
     }
 
-    var title: NSAttributedString {
-        return NSAttributedString(string: "Title for segment plugin")
-    }
-
-    var description: NSAttributedString? {
-        return NSAttributedString(string: "Description for segment plugin which is long enough to be multi-line")
-    }
+    let title: NSAttributedString
+    let description: NSAttributedString?
 
     var initialSelectedIndex: Int {
         return 0
+    }
+
+    init(title: NSAttributedString, description: NSAttributedString? = .init(string: "Description for segment plugin which is long enough to be multi-line")) {
+        self.title = title
+        self.description = description
     }
 
     func segmentValueChanged(_ sender: UISegmentedControl) {

@@ -11,7 +11,7 @@ public typealias Section = SectionPlugin
 public final class SectionPlugin: NavigationPlugin {
 
     public let title: NSAttributedString
-    public let plugins: [Plugin]
+    public var plugins: [Plugin]
     public let style: NavigationStyle
 
     public init(title: String = .init(), style: NavigationStyle = .plain, plugins: [Plugin]) {

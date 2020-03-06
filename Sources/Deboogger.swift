@@ -16,14 +16,14 @@ let AssistiveButtonWindowLevel: UIWindow.Level = UIWindow.Level.alert + 1
 let PluginControllerWindowLevel: UIWindow.Level = UIWindow.Level.statusBar - 1
 
 private final class AssistiveButtonPresenterViewController: UIViewController {
-    
+
     override var prefersStatusBarHidden: Bool {
         if let vc = UIApplication.shared.keyWindow?.rootViewController, vc !== self {
             return vc.prefersStatusBarHidden
         }
         return false
     }
-    
+
     override var preferredStatusBarStyle: UIStatusBarStyle {
         if let vc = UIApplication.shared.keyWindow?.rootViewController, vc !== self {
             return vc.preferredStatusBarStyle
@@ -98,11 +98,11 @@ public final class Deboogger {
 
     public static func configure(with sections: [SectionPlugin], gesture: DebooggerGesture = .init(), window: UIWindow) {
         #if targetEnvironment(simulator)
-            shared.configure(with: SectionsConfiguration(plugins: sections), gesture: gesture, window: window)
+            shared.configure(with: SectionsConfiguration(plugins: sections, useFavorites: true), gesture: gesture, window: window)
         #else
             var adjustedSections = sections
             adjustedSections.insert(shared.makeDefaultSection(), at: 0)
-            shared.configure(with: SectionsConfiguration(plugins: adjustedSections), gesture: gesture, window: window)
+            shared.configure(with: SectionsConfiguration(plugins: adjustedSections, useFavorites: true), gesture: gesture, window: window)
         #endif
     }
 
@@ -111,7 +111,7 @@ public final class Deboogger {
     public func reload() {
         pluginViewController?.tableView.reloadData()
     }
-    
+
     public func close() {
         rootViewController?.beginAppearanceTransition(true, animated: true)
         NotificationCenter.default.post(name: .DebooggerWillHide, object: nil)
