@@ -18,7 +18,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .red
+        view.backgroundColor = .systemRed
 
         NotificationCenter.default.addObserver(forName: .DebooggerWillShow, object: nil, queue: nil) { _ in
             print("DebooggerWillShow")

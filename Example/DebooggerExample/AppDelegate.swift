@@ -42,7 +42,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             ])
         ]
 
-        Deboogger.configure(with: sectionTree)
+        if let window = window {
+            Deboogger.configure(with: sectionTree, window: window)
+        }
 
         return true
     }
