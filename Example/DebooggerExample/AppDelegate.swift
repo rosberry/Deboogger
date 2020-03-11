@@ -38,7 +38,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             ]),
             SectionPlugin(title: "System", plugins: [
                 SegmentTestPlugin(title: .init(string: "Region")),
-                ButtonTestPlugin(title: .init(string: "Reset stored properties"))
+                ButtonTestPlugin(title: .init(string: "Reset stored properties")),
+                DefaultsTestPlugin()
             ])
         ]
 

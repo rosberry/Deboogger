@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		06482CF92418BB4000C0D7F0 /* DefaultsTestPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06482CF82418BB4000C0D7F0 /* DefaultsTestPlugin.swift */; };
 		840870521FD7B488007741AB /* Deboogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 840870511FD7B481007741AB /* Deboogger.framework */; };
 		840870531FD7B488007741AB /* Deboogger.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 840870511FD7B481007741AB /* Deboogger.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		8411201F1FE2286600513333 /* SegmentTestPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8411201E1FE2286600513333 /* SegmentTestPlugin.swift */; };
@@ -52,6 +53,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		06482CF82418BB4000C0D7F0 /* DefaultsTestPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultsTestPlugin.swift; sourceTree = "<group>"; };
 		8408704C1FD7B481007741AB /* Deboogger.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Deboogger.xcodeproj; path = ../Deboogger.xcodeproj; sourceTree = "<group>"; };
 		8411201E1FE2286600513333 /* SegmentTestPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentTestPlugin.swift; sourceTree = "<group>"; };
 		841120201FE22FFF00513333 /* ButtonTestPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonTestPlugin.swift; sourceTree = "<group>"; };
@@ -94,6 +96,7 @@
 				84459BA21FDA4BFD00398995 /* SliderTestPlugin.swift */,
 				8411201E1FE2286600513333 /* SegmentTestPlugin.swift */,
 				841120201FE22FFF00513333 /* ButtonTestPlugin.swift */,
+				06482CF82418BB4000C0D7F0 /* DefaultsTestPlugin.swift */,
 			);
 			path = Plugins;
 			sourceTree = "<group>";
@@ -226,6 +229,7 @@
 				8463C62A1EC8C0BD00AF7779 /* SwitchTestPlugin.swift in Sources */,
 				849B83861EC757B800B0DF9D /* ViewController.swift in Sources */,
 				8411201F1FE2286600513333 /* SegmentTestPlugin.swift in Sources */,
+				06482CF92418BB4000C0D7F0 /* DefaultsTestPlugin.swift in Sources */,
 				849B83841EC757B800B0DF9D /* AppDelegate.swift in Sources */,
 				84459BA31FDA4BFD00398995 /* SliderTestPlugin.swift in Sources */,
 			);
