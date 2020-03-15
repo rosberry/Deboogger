@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		01AAB6CA23DAD18800C2DB68 /* FavoriteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01AAB6C923DAD18800C2DB68 /* FavoriteService.swift */; };
-		06482CF72418AD9A00C0D7F0 /* UserDefaults+Deboogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06482CF62418AD9A00C0D7F0 /* UserDefaults+Deboogger.swift */; };
+		06482CF72418AD9A00C0D7F0 /* Deboogger+UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06482CF62418AD9A00C0D7F0 /* Deboogger+UserDefaults.swift */; };
 		06D462662085DC610005009C /* Bundle+Deboogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06D462652085DC610005009C /* Bundle+Deboogger.swift */; };
 		2EED8CA6238512A400738BD8 /* SectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EED8CA5238512A400738BD8 /* SectionTableViewCell.swift */; };
 		2EED8CC52386421E00738BD8 /* PluginItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EED8CC42386421E00738BD8 /* PluginItem.swift */; };
@@ -46,7 +46,7 @@
 
 /* Begin PBXFileReference section */
 		01AAB6C923DAD18800C2DB68 /* FavoriteService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteService.swift; sourceTree = "<group>"; };
-		06482CF62418AD9A00C0D7F0 /* UserDefaults+Deboogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Deboogger.swift"; sourceTree = "<group>"; };
+		06482CF62418AD9A00C0D7F0 /* Deboogger+UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Deboogger+UserDefaults.swift"; sourceTree = "<group>"; };
 		06D462652085DC610005009C /* Bundle+Deboogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Deboogger.swift"; sourceTree = "<group>"; };
 		2EED8CA5238512A400738BD8 /* SectionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionTableViewCell.swift; sourceTree = "<group>"; };
 		2EED8CC42386421E00738BD8 /* PluginItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PluginItem.swift; sourceTree = "<group>"; };
@@ -209,7 +209,7 @@
 				8474585F1FE38E6100C3B0FA /* PluginViewController */,
 				849B834B1EC7564000B0DF9D /* Deboogger.swift */,
 				629A65EF8623579554689BDA /* DefaultPlugins */,
-				06482CF62418AD9A00C0D7F0 /* UserDefaults+Deboogger.swift */,
+				06482CF62418AD9A00C0D7F0 /* Deboogger+UserDefaults.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -405,7 +405,7 @@
 				8597BD68239A062B000FBE9F /* PaddingLabel.swift in Sources */,
 				84459B9D1FDA43BA00398995 /* SliderPlugin.swift in Sources */,
 				849B83671EC7564000B0DF9D /* UIViewController+Presenter.swift in Sources */,
-				06482CF72418AD9A00C0D7F0 /* UserDefaults+Deboogger.swift in Sources */,
+				06482CF72418AD9A00C0D7F0 /* Deboogger+UserDefaults.swift in Sources */,
 				2EED8CC92386445E00738BD8 /* NavigationPlugin.swift in Sources */,
 				849B83681EC7564000B0DF9D /* ButtonPlugin.swift in Sources */,
 				849B83731EC756DA00B0DF9D /* UIView+SuperviewOffset.swift in Sources */,
@@ -551,7 +551,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.otbivnoe.Deboogger;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rosberry.Deboogger;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
@@ -570,7 +570,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.otbivnoe.Deboogger;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rosberry.Deboogger;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
