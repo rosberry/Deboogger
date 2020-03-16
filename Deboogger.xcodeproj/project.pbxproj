@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		01AAB6CA23DAD18800C2DB68 /* FavoriteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01AAB6C923DAD18800C2DB68 /* FavoriteService.swift */; };
-		0640CDEC241E7C0800FFAA3F /* Deboogger+Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0640CDEB241E7C0800FFAA3F /* Deboogger+Keychain.swift */; };
-		06482CF72418AD9A00C0D7F0 /* Deboogger+UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06482CF62418AD9A00C0D7F0 /* Deboogger+UserDefaults.swift */; };
 		06986A28241F218C00A7144F /* Deboogger+Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06986A27241F218C00A7144F /* Deboogger+Storage.swift */; };
 		06986A2A241F25BE00A7144F /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06986A29241F25BE00A7144F /* Keychain.swift */; };
 		06D462662085DC610005009C /* Bundle+Deboogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06D462652085DC610005009C /* Bundle+Deboogger.swift */; };
@@ -49,8 +47,6 @@
 
 /* Begin PBXFileReference section */
 		01AAB6C923DAD18800C2DB68 /* FavoriteService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteService.swift; sourceTree = "<group>"; };
-		0640CDEB241E7C0800FFAA3F /* Deboogger+Keychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Deboogger+Keychain.swift"; sourceTree = "<group>"; };
-		06482CF62418AD9A00C0D7F0 /* Deboogger+UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Deboogger+UserDefaults.swift"; sourceTree = "<group>"; };
 		06986A27241F218C00A7144F /* Deboogger+Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Deboogger+Storage.swift"; sourceTree = "<group>"; };
 		06986A29241F25BE00A7144F /* Keychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keychain.swift; sourceTree = "<group>"; };
 		06D462652085DC610005009C /* Bundle+Deboogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Deboogger.swift"; sourceTree = "<group>"; };
@@ -215,8 +211,6 @@
 				8474585F1FE38E6100C3B0FA /* PluginViewController */,
 				849B834B1EC7564000B0DF9D /* Deboogger.swift */,
 				629A65EF8623579554689BDA /* DefaultPlugins */,
-				06482CF62418AD9A00C0D7F0 /* Deboogger+UserDefaults.swift */,
-				0640CDEB241E7C0800FFAA3F /* Deboogger+Keychain.swift */,
 				06986A27241F218C00A7144F /* Deboogger+Storage.swift */,
 				06986A29241F25BE00A7144F /* Keychain.swift */,
 			);
@@ -392,7 +386,6 @@
 			files = (
 				629A6C724D7EE0C256CD9035 /* UIWindow+Deboogger.m in Sources */,
 				849B836A1EC7564000B0DF9D /* SwitchPlugin.swift in Sources */,
-				0640CDEC241E7C0800FFAA3F /* Deboogger+Keychain.swift in Sources */,
 				8586C8F923951D10006DC167 /* PerformanceMonitor.swift in Sources */,
 				849B836D1EC7564000B0DF9D /* PluginViewController.swift in Sources */,
 				06986A2A241F25BE00A7144F /* Keychain.swift in Sources */,
@@ -417,7 +410,6 @@
 				8597BD68239A062B000FBE9F /* PaddingLabel.swift in Sources */,
 				84459B9D1FDA43BA00398995 /* SliderPlugin.swift in Sources */,
 				849B83671EC7564000B0DF9D /* UIViewController+Presenter.swift in Sources */,
-				06482CF72418AD9A00C0D7F0 /* Deboogger+UserDefaults.swift in Sources */,
 				2EED8CC92386445E00738BD8 /* NavigationPlugin.swift in Sources */,
 				849B83681EC7564000B0DF9D /* ButtonPlugin.swift in Sources */,
 				849B83731EC756DA00B0DF9D /* UIView+SuperviewOffset.swift in Sources */,

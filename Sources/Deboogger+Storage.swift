@@ -6,6 +6,10 @@ import Foundation
 
 public extension Deboogger {
 
+    private enum Constants {
+        static let domain = "com.rosberry.Deboogger"
+    }
+
     class Storage {
 
         public subscript(defaults key: String) -> Any? {
@@ -26,6 +30,10 @@ public extension Deboogger {
             }
         }
     }
+
+    static internal let userDefaults: UserDefaults = UserDefaults(suiteName: Constants.domain) ?? .standard
+
+    static internal let keychain: Keychain = .init(service: Constants.domain)
 
     static let storage: Storage = .init()
 }
