@@ -20,20 +20,20 @@ class ViewController: UIViewController {
         
         view.backgroundColor = .systemRed
 
-        NotificationCenter.default.addObserver(forName: .DebooggerWillShow, object: nil, queue: nil) { _ in
-            print("DebooggerWillShow")
+        NotificationCenter.default.addObserver(forName: .DebooggerWillShow, object: nil, queue: nil) { notification in
+            print(notification.name)
         }
 
-        NotificationCenter.default.addObserver(forName: .DebooggerDidShow, object: nil, queue: nil) { _ in
-            print("DebooggerDidShow")
+        NotificationCenter.default.addObserver(forName: .DebooggerDidShow, object: nil, queue: nil) { notification in
+            print(notification.name)
         }
 
-        NotificationCenter.default.addObserver(forName: .DebooggerWillHide, object: nil, queue: nil) { _ in
-            print("DebooggerWillHide")
+        NotificationCenter.default.addObserver(forName: .DebooggerWillHide, object: nil, queue: nil) { notification in
+            print(notification.name)
         }
 
-        NotificationCenter.default.addObserver(forName: .DebooggerDidHide, object: nil, queue: nil) { _ in
-            print("DebooggerDidHide")
+        NotificationCenter.default.addObserver(forName: .DebooggerDidHide, object: nil, queue: nil) { notification in
+            print(notification.name)
         }        
     }
 

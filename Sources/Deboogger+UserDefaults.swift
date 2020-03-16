@@ -5,27 +5,13 @@
 
 import Foundation
 
-public extension Deboogger {
+extension Deboogger {
+
+    private enum Constants {
+        static let suiteName = "com.rosberry.Deboogger"
+    }
 
     static var userDefaults: UserDefaults {
-        UserDefaults(suiteName: "com.rosberry.Deboogger") ?? .standard
-    }
-
-    static subscript(defaults key: String) -> Bool {
-        get {
-            userDefaults.bool(forKey: key)
-        }
-        set {
-            userDefaults.set(newValue, forKey: key)
-        }
-    }
-
-    static var shouldShowDebooggerButton: Bool {
-        get {
-            self[defaults: #function]
-        }
-        set {
-            self[defaults: #function] = newValue
-        }
+        UserDefaults(suiteName: Constants.suiteName) ?? .standard
     }
 }

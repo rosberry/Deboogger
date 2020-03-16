@@ -9,15 +9,15 @@ final class DebooggerButtonPlugin: SwitchPlugin {
     var title: NSAttributedString = .init(string: "Show debug menu button on screen")
 
     var isOn: Bool {
-        Deboogger.shouldShowDebooggerButton
+        Deboogger.storage.shouldShowDebooggerButton
     }
 
     init() {
-        Deboogger.shared.shouldShowAssistiveButton = Deboogger.shouldShowDebooggerButton
+        Deboogger.shared.shouldShowAssistiveButton = Deboogger.storage.shouldShowDebooggerButton
     }
 
     func switchStateChanged(_ sender: UISwitch) {
-        Deboogger.shouldShowDebooggerButton = sender.isOn
+        Deboogger.storage.shouldShowDebooggerButton = sender.isOn
         Deboogger.shared.shouldShowAssistiveButton = sender.isOn
     }
 }

@@ -15,10 +15,10 @@ final class DefaultsTestPlugin: SwitchPlugin {
     let description: NSAttributedString = .init(string: "Save value to Deboogger's defaults")
 
     var isOn: Bool {
-        UserDefaults.deboogger.bool(forKey: Constants.key)
+        Deboogger.storage[defaults: Constants.key] as? Bool ?? false
     }
 
     func switchStateChanged(_ sender: UISwitch) {
-        UserDefaults.deboogger.set(sender.isOn, forKey: Constants.key)
+        Deboogger.storage[defaults: Constants.key] = sender.isOn
     }
 }
