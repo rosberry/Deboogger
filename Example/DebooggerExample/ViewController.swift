@@ -20,21 +20,15 @@ class ViewController: UIViewController {
         
         view.backgroundColor = .systemRed
 
-        NotificationCenter.default.addObserver(forName: .DebooggerWillShow, object: nil, queue: nil) { notification in
-            print(notification.name)
-        }
-
-        NotificationCenter.default.addObserver(forName: .DebooggerDidShow, object: nil, queue: nil) { notification in
-            print(notification.name)
-        }
-
-        NotificationCenter.default.addObserver(forName: .DebooggerWillHide, object: nil, queue: nil) { notification in
-            print(notification.name)
-        }
-
-        NotificationCenter.default.addObserver(forName: .DebooggerDidHide, object: nil, queue: nil) { notification in
-            print(notification.name)
-        }        
+        let names: [NSNotification.Name] = [.DebooggerWillShow,
+                                            .DebooggerDidShow,
+                                            .DebooggerWillHide,
+                                            .DebooggerDidHide]
+        for name in names {
+            NotificationCenter.default.addObserver(forName: name, object: nil, queue: nil) { notification in
+                print(notification.name)
+            }
+        }       
     }
 
     override func viewWillAppear(_ animated: Bool) {
