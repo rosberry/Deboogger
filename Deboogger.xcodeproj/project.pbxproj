@@ -43,6 +43,8 @@
 		8586C8F923951D10006DC167 /* PerformanceMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8586C8F823951D10006DC167 /* PerformanceMonitor.swift */; };
 		8597BD68239A062B000FBE9F /* PaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8597BD67239A062B000FBE9F /* PaddingLabel.swift */; };
 		85A1A35023952708005A6F6B /* PerformanceWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85A1A34F23952708005A6F6B /* PerformanceWindow.swift */; };
+		85B95AA8243C33BB00035F87 /* TextFieldPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85B95AA7243C33BB00035F87 /* TextFieldPlugin.swift */; };
+		85B95AAB243C342400035F87 /* TextFieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85B95AAA243C342400035F87 /* TextFieldTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -84,6 +86,8 @@
 		8586C8F823951D10006DC167 /* PerformanceMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerformanceMonitor.swift; sourceTree = "<group>"; };
 		8597BD67239A062B000FBE9F /* PaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingLabel.swift; sourceTree = "<group>"; };
 		85A1A34F23952708005A6F6B /* PerformanceWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerformanceWindow.swift; sourceTree = "<group>"; };
+		85B95AA7243C33BB00035F87 /* TextFieldPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldPlugin.swift; sourceTree = "<group>"; };
+		85B95AAA243C342400035F87 /* TextFieldTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -234,6 +238,7 @@
 				840870331FD7B237007741AB /* SegmentTableViewCell */,
 				840870391FD7B238007741AB /* SwitchTableViewCell */,
 				840F80481FDA401100A9B466 /* SliderTableViewCell */,
+				85B95AA9243C340700035F87 /* TextFieldTableViewCell */,
 				2EED8CA42385127800738BD8 /* SectionTableViewCell */,
 			);
 			path = Cells;
@@ -262,6 +267,7 @@
 				840870471FD7B2C0007741AB /* SegmentPlugin.swift */,
 				84459B9C1FDA43BA00398995 /* SliderPlugin.swift */,
 				2EED8CC82386445E00738BD8 /* NavigationPlugin.swift */,
+				85B95AA7243C33BB00035F87 /* TextFieldPlugin.swift */,
 			);
 			path = Plugins;
 			sourceTree = "<group>";
@@ -299,6 +305,14 @@
 				8597BD67239A062B000FBE9F /* PaddingLabel.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		85B95AA9243C340700035F87 /* TextFieldTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				85B95AAA243C342400035F87 /* TextFieldTableViewCell.swift */,
+			);
+			path = TextFieldTableViewCell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -390,6 +404,7 @@
 				849B836D1EC7564000B0DF9D /* PluginViewController.swift in Sources */,
 				06986A2A241F25BE00A7144F /* Keychain.swift in Sources */,
 				01AAB6CA23DAD18800C2DB68 /* FavoriteService.swift in Sources */,
+				85B95AA8243C33BB00035F87 /* TextFieldPlugin.swift in Sources */,
 				2EED8CA6238512A400738BD8 /* SectionTableViewCell.swift in Sources */,
 				840870441FD7B238007741AB /* SwitchTableViewCell.swift in Sources */,
 				847458621FE38E7C00C3B0FA /* Configuration.swift in Sources */,
@@ -398,6 +413,7 @@
 				06986A28241F218C00A7144F /* Deboogger+Storage.swift in Sources */,
 				840870401FD7B238007741AB /* SegmentTableViewCell.swift in Sources */,
 				85A1A35023952708005A6F6B /* PerformanceWindow.swift in Sources */,
+				85B95AAB243C342400035F87 /* TextFieldTableViewCell.swift in Sources */,
 				847458641FE38EDD00C3B0FA /* SectionsConfiguration.swift in Sources */,
 				849B836C1EC7564000B0DF9D /* TextPlugin.swift in Sources */,
 				849B835B1EC7564000B0DF9D /* AssistiveButton.swift in Sources */,
