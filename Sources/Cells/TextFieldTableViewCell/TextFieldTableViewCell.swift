@@ -16,4 +16,16 @@ final class TextFieldTableViewCell: BaseTableViewCell {
         return view
     }()
 
+
+    @objc private func textFieldValueChanged(_ sender: UITextField) {
+
+    }
+}
+
+// MARK: - UITextFieldDelegate
+
+extension TextFieldTableViewCell: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        endEditing(true)
+    }
 }
