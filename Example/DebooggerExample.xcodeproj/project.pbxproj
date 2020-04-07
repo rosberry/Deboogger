@@ -19,6 +19,7 @@
 		849B83891EC757B800B0DF9D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 849B83871EC757B800B0DF9D /* Main.storyboard */; };
 		849B838B1EC757B800B0DF9D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 849B838A1EC757B800B0DF9D /* Assets.xcassets */; };
 		849B838E1EC757B800B0DF9D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 849B838C1EC757B800B0DF9D /* LaunchScreen.storyboard */; };
+		85B95AAD243C41FE00035F87 /* TextFieldTestPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85B95AAC243C41FE00035F87 /* TextFieldTestPlugin.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +68,7 @@
 		849B838A1EC757B800B0DF9D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		849B838D1EC757B800B0DF9D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		849B838F1EC757B800B0DF9D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		85B95AAC243C41FE00035F87 /* TextFieldTestPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldTestPlugin.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +99,7 @@
 				8411201E1FE2286600513333 /* SegmentTestPlugin.swift */,
 				841120201FE22FFF00513333 /* ButtonTestPlugin.swift */,
 				06482CF82418BB4000C0D7F0 /* DefaultsTestPlugin.swift */,
+				85B95AAC243C41FE00035F87 /* TextFieldTestPlugin.swift */,
 			);
 			path = Plugins;
 			sourceTree = "<group>";
@@ -225,6 +228,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				85B95AAD243C41FE00035F87 /* TextFieldTestPlugin.swift in Sources */,
 				841120211FE22FFF00513333 /* ButtonTestPlugin.swift in Sources */,
 				8463C62A1EC8C0BD00AF7779 /* SwitchTestPlugin.swift in Sources */,
 				849B83861EC757B800B0DF9D /* ViewController.swift in Sources */,

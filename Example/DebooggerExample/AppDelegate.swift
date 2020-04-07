@@ -17,6 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             SectionPlugin(title: "Content", style: .nested) {
                 SwitchTestPlugin(title: .init(string: "Drop connection"))
                 SliderTestPlugin(title: .init(string: "Response delay"))
+                TextFieldTestPlugin()
                 SectionPlugin(title: "Profile") {
                     SectionPlugin(title: "Authentication") {
                         ButtonTestPlugin(title: .init(string: "Expire the token"))
