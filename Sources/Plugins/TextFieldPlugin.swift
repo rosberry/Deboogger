@@ -1,5 +1,5 @@
 //
-//  Copyright © 2019 Rosberry. All rights reserved.
+//  Copyright © 2020 Rosberry. All rights reserved.
 //
 
 public protocol TextFieldPlugin: Plugin {

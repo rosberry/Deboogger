@@ -8,6 +8,8 @@ final class TextFieldTableViewCell: BaseTableViewCell {
 
     private var plugin: TextFieldPlugin?
 
+    // MARK: - Subviews
+
     private lazy var textField: UITextField = {
         let view = UITextField()
         view.borderStyle = .roundedRect
@@ -15,6 +17,8 @@ final class TextFieldTableViewCell: BaseTableViewCell {
         view.addTarget(self, action: #selector(textFieldValueChanged), for: .editingChanged)
         return view
     }()
+
+    // MARK: - Lifecycle
 
     override func setup() {
         super.setup()
@@ -36,6 +40,8 @@ final class TextFieldTableViewCell: BaseTableViewCell {
         textField.bounds = CGRect(origin: .zero, size: .init(width: contentView.bounds.midX, height: 40))
         super.layoutSubviews()
     }
+
+    // MARK: - Actions
 
     @objc private func textFieldValueChanged(_ sender: UITextField) {
         plugin?.textFieldValueChanged(sender)

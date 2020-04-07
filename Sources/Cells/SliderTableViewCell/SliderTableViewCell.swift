@@ -42,7 +42,7 @@ final class SliderTableViewCell: BaseTableViewCell {
     //MARK: - Actions
 
     @objc private func sliderValueChanged(_ sender: UISlider) {
-        plugin?.currentValue = sender.value 
+        plugin?.currentValue = sender.value
         configureSliderTitle()
         plugin?.sliderValueChanged(sender)
     }
