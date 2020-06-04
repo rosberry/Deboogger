@@ -22,6 +22,10 @@ final class AssistiveButton: UIButton {
 
     private var tapHandler: TapHandler
 
+    override var canBecomeFirstResponder: Bool {
+        true
+    }
+
     override var safeAreaInsets: UIEdgeInsets {
         if #available(iOS 11.0, *) {
             return superview?.safeAreaInsets ?? .zero
@@ -71,6 +75,19 @@ final class AssistiveButton: UIButton {
             frame.origin.y = UIScreen.main.bounds.height / 2.0 - Layout.size / 2.0
         }
         startTimer()
+    }
+
+    override func pressesBegan(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
+        guard let key = presses.first?.key else {
+            return super.pressesBegan(presses, with: event)
+        }
+
+        switch key.keyCode {
+        case .keyboardD:
+            tapHandler()
+        default:
+            super.pressesBegan(presses, with: event)
+        }
     }
     
     @objc private func orientationChanged() {
