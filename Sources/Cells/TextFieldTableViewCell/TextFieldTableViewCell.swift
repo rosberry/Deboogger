@@ -37,7 +37,7 @@ final class TextFieldTableViewCell: BaseTableViewCell {
     }
 
     override func layoutSubviews() {
-        textField.bounds = CGRect(origin: .zero, size: .init(width: contentView.bounds.midX, height: 40))
+        textField.bounds = CGRect(origin: .zero, size: .init(width: bounds.midX, height: 40))
         super.layoutSubviews()
     }
 
