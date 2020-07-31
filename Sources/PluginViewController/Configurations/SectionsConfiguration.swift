@@ -11,29 +11,58 @@ final class SectionsConfiguration: NSObject, Configuration {
 
     var sections: [NavigationPlugin] = []
     var tableViewItems: [PluginItem] = []
-
-    private var filteredTableViewItems: [PluginItem] = []
-    private var flatPlugins: [Plugin] = []
+    var filteredTableViewItems: [PluginItem] = []
+    var filterMask: String = ""
 
     weak var tableView: UITableView?
     weak var delegate: ConfigurationDelegate?
 
-    init(plugins: [Plugin]) {
+    lazy var favoriteService: FavoriteService = FavoriteService.shared
+
+    private let useFavorites: Bool
+    private var flatPlugins: [Plugin] = []
+
+    init(plugins: [Plugin], useFavorites: Bool = false) {
         self.plugins = plugins
+        self.useFavorites = useFavorites
+        super.init()
+        if useFavorites {
+            NotificationCenter.default.addObserver(self,
+                                                   selector: #selector(favoritesListUpdated),
+                                                   name: FavoriteService.NotificationName.favoritesListUpdated,
+                                                   object: nil)
+        }
+
+    }
+
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
 
     func configure() {
-        sections = self.makeSections(for: plugins)
+
+        let favoritesPlugins = favoriteService.fetchFavorite(plugins)
+
+        sections = makeSections(for: plugins)
+        var flatIndex = 0
+
+        if useFavorites, favoritesPlugins.isEmpty == false {
+            let favoriteSectionPlugin = SectionPlugin(title: "Favorites", style: .plain, plugins: favoritesPlugins)
+            sections.insert(favoriteSectionPlugin, at: 0)
+            flatIndex = 1
+        }
+
         tableViewItems = sections.map { (section: NavigationPlugin) -> PluginItem in
             return makePluginItem(for: section)
         }
         filteredTableViewItems = tableViewItems
-        flatPlugins = tableViewItems.flatMap { pluginItem in
+        flatPlugins = tableViewItems[flatIndex...].flatMap { pluginItem in
             return collectPlugins(in: pluginItem.plugin, sectionTitle: pluginItem.title)
         }
     }
 
     func filterData(with text: String) {
+        filterMask = text
         defer {
             tableView?.reloadData()
         }
@@ -137,6 +166,15 @@ final class SectionsConfiguration: NSObject, Configuration {
         ])
     }
 
+    private func childPluginItem(for indexPath: IndexPath) -> PluginItem {
+        filteredTableViewItems[indexPath.section].children[indexPath.row]
+    }
+
+    @objc private func favoritesListUpdated() {
+        configure()
+        filterData(with: filterMask)
+    }
+
     // MARK: - UITableViewDataSource
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -148,7 +186,7 @@ final class SectionsConfiguration: NSObject, Configuration {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let item = filteredTableViewItems[indexPath.section].children[indexPath.row]
+        let item = childPluginItem(for: indexPath)
         let identifier = item.plugin.cellClass.description()
         let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as? BaseTableViewCell
         cell?.configure(with: item.plugin)
@@ -168,12 +206,34 @@ final class SectionsConfiguration: NSObject, Configuration {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let plugin = filteredTableViewItems[indexPath.section].children[indexPath.row].plugin
+        let plugin = childPluginItem(for: indexPath).plugin
         plugin.selectionAction()
 
         if let section = plugin as? NavigationPlugin {
             let configuration = SectionsConfiguration(plugins: section.plugins)
             delegate?.configuration(self, didRequest: configuration, withTitle: section.title.string)
         }
+    }
+
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+
+        func makeAction(title: String, backgroundColor: UIColor, actionHandler: @escaping () -> Void) -> UITableViewRowAction {
+            let action = UITableViewRowAction(style: .default, title: title , handler: { action, indexPath in
+                actionHandler()
+            })
+            action.backgroundColor = backgroundColor
+            return action
+        }
+
+        let item = self.childPluginItem(for: indexPath)
+
+        if favoriteService.isFavorite(item.plugin) {
+            return [makeAction(title: "🗑", backgroundColor: .systemRed) {
+                self.favoriteService.remove(item.plugin)
+            }]
+        }
+        return [makeAction(title: "⭐️", backgroundColor: .systemBlue) {
+            self.favoriteService.add(item.plugin)
+        }]
     }
 }

@@ -11,7 +11,7 @@ public typealias Section = SectionPlugin
 public final class SectionPlugin: NavigationPlugin {
 
     public let title: NSAttributedString
-    public let plugins: [Plugin]
+    public var plugins: [Plugin]
     public let style: NavigationStyle
 
     public init(title: String = .init(), style: NavigationStyle = .plain, plugins: [Plugin]) {
@@ -20,7 +20,26 @@ public final class SectionPlugin: NavigationPlugin {
         self.style = style
     }
 
-    public convenience init(title: String, style: NavigationStyle = .plain, plugins: Plugin...) {
+    public convenience init(title: String = .init(), style: NavigationStyle = .plain, plugins: Plugin...) {
         self.init(title: title, style: style, plugins: plugins)
+    }
+}
+
+@_functionBuilder
+public struct SectionPluginsBuilder {
+
+    public static func buildBlock(_ plugins: Plugin...) -> [Plugin] {
+        plugins
+    }
+}
+
+public extension SectionPlugin {
+
+    convenience init(title: String = .init(), style: NavigationStyle = .plain, @SectionPluginsBuilder content: () -> Plugin) {
+        self.init(title: title, style: style, plugins: [content()])
+    }
+
+    convenience init(title: String = .init(), style: NavigationStyle = .plain, @SectionPluginsBuilder content: () -> [Plugin]) {
+        self.init(title: title, style: style, plugins: content())
     }
 }

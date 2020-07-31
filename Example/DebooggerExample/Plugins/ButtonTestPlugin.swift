@@ -7,12 +7,12 @@ import Deboogger
 
 final class ButtonTestPlugin: ButtonPlugin {
 
-    var title: NSAttributedString {
-        return NSAttributedString(string: "Title for button plugin")
-    }
+    let title: NSAttributedString
+    let description: NSAttributedString?
 
-    var description: NSAttributedString? {
-        return NSAttributedString(string: "Description for segment plugin, Description for segment plugin, Description for segment plugin, Description for segment plugin")
+    init(title: NSAttributedString, description: NSAttributedString? = .init(string: "Description for button plugin, Description for button plugin, Description for button plugin, Description for button plugin")) {
+        self.title = title
+        self.description = description
     }
 
     func buttonPressed() {

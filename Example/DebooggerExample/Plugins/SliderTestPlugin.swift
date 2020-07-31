@@ -17,7 +17,11 @@ final class SliderTestPlugin: SliderPlugin {
         return "\(Int(currentValue)) / \(Int(maxValue))"
     }
 
-    let title: NSAttributedString = .init(string: "Title")
+    let title: NSAttributedString
+
+    init(title: NSAttributedString) {
+        self.title = title
+    }
 
     func sliderValueChanged(_ slider: UISlider) {
         print(currentValue)

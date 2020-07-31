@@ -12,43 +12,41 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-//        Deboogger.configure(with:
-//            SwitchTestPlugin(),
-//            SliderTestPlugin(),
-//            SegmentTestPlugin(),
-//            ButtonTestPlugin()
-//        )
 
         let sectionTree = [
-            SectionPlugin(title: "Section 1", style: .nested, plugins: [
-                SwitchTestPlugin(),
-                SliderTestPlugin(),
-                SectionPlugin(title: "Sub-Section 1", plugins: [
-                    SectionPlugin(title: "Sub-Sub-Section 1", plugins: [
-                        ButtonTestPlugin(),
-                        SwitchTestPlugin()
-                    ]),
-                    SectionPlugin(title: "Sub-Sub-Section 2", plugins: [
-                        ButtonTestPlugin(),
-                        SwitchTestPlugin()
-                    ]),
-                    SectionPlugin(title: "Sub-Sub-Section 3", plugins: [
-                        ButtonTestPlugin(),
-                        SwitchTestPlugin()
-                    ])
-                ]),
-                SectionPlugin(title: "Sub-Section 2", style: .nested, plugins: [
-                    ButtonTestPlugin(),
-                    SwitchTestPlugin()
-                ])
-            ]),
-            SectionPlugin(title: "Section 2", plugins: [
-                SegmentTestPlugin(),
-                ButtonTestPlugin()
-            ])
+            SectionPlugin(title: "Content", style: .nested) {
+                SwitchTestPlugin(title: .init(string: "Drop connection"))
+                SliderTestPlugin(title: .init(string: "Response delay"))
+                TextFieldTestPlugin()
+                SectionPlugin(title: "Profile") {
+                    SectionPlugin(title: "Authentication") {
+                        ButtonTestPlugin(title: .init(string: "Expire the token"))
+                        SwitchTestPlugin(title: .init(string: "Is admin"))
+                    }
+                    SectionPlugin(title: "Avatar") {
+                        ButtonTestPlugin(title: .init(string: "Remove the photo"))
+                        SwitchTestPlugin(title: .init(string: "Is visible"))
+                    }
+                    SectionPlugin(title: "Socials") {
+                        ButtonTestPlugin(title: .init(string: "Unlink facebook"))
+                        ButtonTestPlugin(title: .init(string: "Unlink twitter"))
+                    }
+                }
+                SectionPlugin(title: "Bookmarks", style: .nested) {
+                    ButtonTestPlugin(title: .init(string: "Remove all bookmarks"))
+                    SwitchTestPlugin(title: .init(string: "Fail bookmark request"))
+                }
+            },
+            SectionPlugin(title: "System") {
+                SegmentTestPlugin(title: .init(string: "Region"))
+                ButtonTestPlugin(title: .init(string: "Reset stored properties"))
+                DefaultsTestPlugin()
+            }
         ]
 
-        Deboogger.configure(with: sectionTree)
+        if let window = window {
+            Deboogger.configure(with: sectionTree, window: window)
+        }
 
         return true
     }
