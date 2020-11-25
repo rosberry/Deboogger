@@ -25,7 +25,7 @@ Deboogger.configure(with:
 
 ### Carthage:
 ```
-github "Otbivnoe/Deboogger"
+github "rosberry/Deboogger"
 ```
 
 ## License
