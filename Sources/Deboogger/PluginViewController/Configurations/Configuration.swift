@@ -3,6 +3,8 @@
 //  Copyright © 2019 Rosberry. All rights reserved.
 //
 
+import UIKit
+
 protocol ConfigurationDelegate: class {
     func configuration(_ sender: Configuration, didRequest childConfiguration: Configuration, withTitle title: String?)
 }

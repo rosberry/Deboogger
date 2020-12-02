@@ -2,6 +2,8 @@
 //  Copyright © 2019 Rosberry. All rights reserved.
 //
 
+import UIKit
+
 typealias MemoryUsage = (used: UInt64, total: UInt64)
 
 final class PerformanceMonitor {

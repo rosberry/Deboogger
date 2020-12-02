@@ -2,6 +2,7 @@
 // Copyright (c) 2019 Rosberry. All rights reserved.
 //
 
+import UIKit
 import Foundation
 
 final class DebooggerButtonPlugin: SwitchPlugin {
