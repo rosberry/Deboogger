@@ -23,16 +23,16 @@ Deboogger.configure(with:
 
 ## Installation
 
-### Carthage:
-```
-github "rosberry/Deboogger"
-```
-
 ### [Depo](https://github.com/rosberry/depo):
 ```yaml
 carts:
   - kind: github
     identifier: rosberry/Deboogger
+```
+
+### Carthage:
+```
+github "rosberry/Deboogger"
 ```
 
 ## About
