@@ -28,6 +28,13 @@ Deboogger.configure(with:
 github "rosberry/Deboogger"
 ```
 
+### [Depo](https://github.com/rosberry/depo):
+```yaml
+carts:
+  - kind: github
+    identifier: rosberry/Deboogger
+```
+
 ## About
 
 <img src="https://github.com/rosberry/Foundation/blob/master/Assets/full_logo.png?raw=true" height="100" />
