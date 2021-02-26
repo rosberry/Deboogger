@@ -1,0 +1,1128 @@
+// !$*UTF8*$!
+{
+   archiveVersion = "1";
+   objectVersion = "46";
+   objects = {
+      "Deboogger::Deboogger" = {
+         isa = "PBXNativeTarget";
+         buildConfigurationList = "OBJ_74";
+         buildPhases = (
+            "OBJ_77",
+            "OBJ_114"
+         );
+         dependencies = (
+         );
+         name = "Deboogger";
+         productName = "Deboogger";
+         productReference = "Deboogger::Deboogger::Product";
+         productType = "com.apple.product-type.framework";
+      };
+      "Deboogger::Deboogger::Product" = {
+         isa = "PBXFileReference";
+         path = "Deboogger.framework";
+         sourceTree = "BUILT_PRODUCTS_DIR";
+      };
+      "Deboogger::DebooggerPackageTests::ProductTarget" = {
+         isa = "PBXAggregateTarget";
+         buildConfigurationList = "OBJ_122";
+         buildPhases = (
+         );
+         dependencies = (
+            "OBJ_125"
+         );
+         name = "DebooggerPackageTests";
+         productName = "DebooggerPackageTests";
+      };
+      "Deboogger::DebooggerTests" = {
+         isa = "PBXNativeTarget";
+         buildConfigurationList = "OBJ_127";
+         buildPhases = (
+            "OBJ_130",
+            "OBJ_133"
+         );
+         dependencies = (
+            "OBJ_135"
+         );
+         name = "DebooggerTests";
+         productName = "DebooggerTests";
+         productReference = "Deboogger::DebooggerTests::Product";
+         productType = "com.apple.product-type.bundle.unit-test";
+      };
+      "Deboogger::DebooggerTests::Product" = {
+         isa = "PBXFileReference";
+         path = "DebooggerTests.xctest";
+         sourceTree = "BUILT_PRODUCTS_DIR";
+      };
+      "Deboogger::SwiftPMPackageDescription" = {
+         isa = "PBXNativeTarget";
+         buildConfigurationList = "OBJ_116";
+         buildPhases = (
+            "OBJ_119"
+         );
+         dependencies = (
+         );
+         name = "DebooggerPackageDescription";
+         productName = "DebooggerPackageDescription";
+         productType = "com.apple.product-type.framework";
+      };
+      "OBJ_1" = {
+         isa = "PBXProject";
+         attributes = {
+            LastSwiftMigration = "9999";
+            LastUpgradeCheck = "9999";
+         };
+         buildConfigurationList = "OBJ_2";
+         compatibilityVersion = "Xcode 3.2";
+         developmentRegion = "en";
+         hasScannedForEncodings = "0";
+         knownRegions = (
+            "en"
+         );
+         mainGroup = "OBJ_5";
+         productRefGroup = "OBJ_67";
+         projectDirPath = ".";
+         targets = (
+            "Deboogger::Deboogger",
+            "Deboogger::SwiftPMPackageDescription",
+            "Deboogger::DebooggerPackageTests::ProductTarget",
+            "Deboogger::DebooggerTests"
+         );
+      };
+      "OBJ_10" = {
+         isa = "PBXFileReference";
+         path = "AssistiveButton.swift";
+         sourceTree = "<group>";
+      };
+      "OBJ_100" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_46";
+      };
+      "OBJ_101" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_47";
+      };
+      "OBJ_102" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_49";
+      };
+      "OBJ_103" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_50";
+      };
+      "OBJ_104" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_51";
+      };
+      "OBJ_105" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_53";
+      };
+      "OBJ_106" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_54";
+      };
+      "OBJ_107" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_55";
+      };
+      "OBJ_108" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_56";
+      };
+      "OBJ_109" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_57";
+      };
+      "OBJ_11" = {
+         isa = "PBXGroup";
+         children = (
+            "OBJ_12",
+            "OBJ_13",
+            "OBJ_15",
+            "OBJ_17",
+            "OBJ_19",
+            "OBJ_21",
+            "OBJ_23",
+            "OBJ_25"
+         );
+         name = "Cells";
+         path = "Cells";
+         sourceTree = "<group>";
+      };
+      "OBJ_110" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_58";
+      };
+      "OBJ_111" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_59";
+      };
+      "OBJ_112" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_60";
+      };
+      "OBJ_113" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_62";
+      };
+      "OBJ_114" = {
+         isa = "PBXFrameworksBuildPhase";
+         files = (
+         );
+      };
+      "OBJ_116" = {
+         isa = "XCConfigurationList";
+         buildConfigurations = (
+            "OBJ_117",
+            "OBJ_118"
+         );
+         defaultConfigurationIsVisible = "0";
+         defaultConfigurationName = "Release";
+      };
+      "OBJ_117" = {
+         isa = "XCBuildConfiguration";
+         buildSettings = {
+            LD = "/usr/bin/true";
+            OTHER_SWIFT_FLAGS = (
+               "-swift-version",
+               "5",
+               "-I",
+               "$(TOOLCHAIN_DIR)/usr/lib/swift/pm/4_2",
+               "-sdk",
+               "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk",
+               "-package-description-version",
+               "5.3.0"
+            );
+            SWIFT_VERSION = "5.0";
+         };
+         name = "Debug";
+      };
+      "OBJ_118" = {
+         isa = "XCBuildConfiguration";
+         buildSettings = {
+            LD = "/usr/bin/true";
+            OTHER_SWIFT_FLAGS = (
+               "-swift-version",
+               "5",
+               "-I",
+               "$(TOOLCHAIN_DIR)/usr/lib/swift/pm/4_2",
+               "-sdk",
+               "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk",
+               "-package-description-version",
+               "5.3.0"
+            );
+            SWIFT_VERSION = "5.0";
+         };
+         name = "Release";
+      };
+      "OBJ_119" = {
+         isa = "PBXSourcesBuildPhase";
+         files = (
+            "OBJ_120"
+         );
+      };
+      "OBJ_12" = {
+         isa = "PBXFileReference";
+         path = "BaseTableViewCell.swift";
+         sourceTree = "<group>";
+      };
+      "OBJ_120" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_6";
+      };
+      "OBJ_122" = {
+         isa = "XCConfigurationList";
+         buildConfigurations = (
+            "OBJ_123",
+            "OBJ_124"
+         );
+         defaultConfigurationIsVisible = "0";
+         defaultConfigurationName = "Release";
+      };
+      "OBJ_123" = {
+         isa = "XCBuildConfiguration";
+         buildSettings = {
+         };
+         name = "Debug";
+      };
+      "OBJ_124" = {
+         isa = "XCBuildConfiguration";
+         buildSettings = {
+         };
+         name = "Release";
+      };
+      "OBJ_125" = {
+         isa = "PBXTargetDependency";
+         target = "Deboogger::DebooggerTests";
+      };
+      "OBJ_127" = {
+         isa = "XCConfigurationList";
+         buildConfigurations = (
+            "OBJ_128",
+            "OBJ_129"
+         );
+         defaultConfigurationIsVisible = "0";
+         defaultConfigurationName = "Release";
+      };
+      "OBJ_128" = {
+         isa = "XCBuildConfiguration";
+         buildSettings = {
+            CLANG_ENABLE_MODULES = "YES";
+            EMBEDDED_CONTENT_CONTAINS_SWIFT = "YES";
+            FRAMEWORK_SEARCH_PATHS = (
+               "$(inherited)",
+               "$(PLATFORM_DIR)/Developer/Library/Frameworks"
+            );
+            HEADER_SEARCH_PATHS = (
+               "$(inherited)"
+            );
+            INFOPLIST_FILE = "Deboogger.xcodeproj/DebooggerTests_Info.plist";
+            IPHONEOS_DEPLOYMENT_TARGET = "14.0";
+            LD_RUNPATH_SEARCH_PATHS = (
+               "$(inherited)",
+               "@loader_path/../Frameworks",
+               "@loader_path/Frameworks"
+            );
+            MACOSX_DEPLOYMENT_TARGET = "10.15";
+            OTHER_CFLAGS = (
+               "$(inherited)"
+            );
+            OTHER_LDFLAGS = (
+               "$(inherited)"
+            );
+            OTHER_SWIFT_FLAGS = (
+               "$(inherited)"
+            );
+            SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
+               "$(inherited)"
+            );
+            SWIFT_VERSION = "5.0";
+            TARGET_NAME = "DebooggerTests";
+            TVOS_DEPLOYMENT_TARGET = "9.0";
+            WATCHOS_DEPLOYMENT_TARGET = "2.0";
+         };
+         name = "Debug";
+      };
+      "OBJ_129" = {
+         isa = "XCBuildConfiguration";
+         buildSettings = {
+            CLANG_ENABLE_MODULES = "YES";
+            EMBEDDED_CONTENT_CONTAINS_SWIFT = "YES";
+            FRAMEWORK_SEARCH_PATHS = (
+               "$(inherited)",
+               "$(PLATFORM_DIR)/Developer/Library/Frameworks"
+            );
+            HEADER_SEARCH_PATHS = (
+               "$(inherited)"
+            );
+            INFOPLIST_FILE = "Deboogger.xcodeproj/DebooggerTests_Info.plist";
+            IPHONEOS_DEPLOYMENT_TARGET = "14.0";
+            LD_RUNPATH_SEARCH_PATHS = (
+               "$(inherited)",
+               "@loader_path/../Frameworks",
+               "@loader_path/Frameworks"
+            );
+            MACOSX_DEPLOYMENT_TARGET = "10.15";
+            OTHER_CFLAGS = (
+               "$(inherited)"
+            );
+            OTHER_LDFLAGS = (
+               "$(inherited)"
+            );
+            OTHER_SWIFT_FLAGS = (
+               "$(inherited)"
+            );
+            SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
+               "$(inherited)"
+            );
+            SWIFT_VERSION = "5.0";
+            TARGET_NAME = "DebooggerTests";
+            TVOS_DEPLOYMENT_TARGET = "9.0";
+            WATCHOS_DEPLOYMENT_TARGET = "2.0";
+         };
+         name = "Release";
+      };
+      "OBJ_13" = {
+         isa = "PBXGroup";
+         children = (
+            "OBJ_14"
+         );
+         name = "ButtonTableViewCell";
+         path = "ButtonTableViewCell";
+         sourceTree = "<group>";
+      };
+      "OBJ_130" = {
+         isa = "PBXSourcesBuildPhase";
+         files = (
+            "OBJ_131",
+            "OBJ_132"
+         );
+      };
+      "OBJ_131" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_65";
+      };
+      "OBJ_132" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_66";
+      };
+      "OBJ_133" = {
+         isa = "PBXFrameworksBuildPhase";
+         files = (
+            "OBJ_134"
+         );
+      };
+      "OBJ_134" = {
+         isa = "PBXBuildFile";
+         fileRef = "Deboogger::Deboogger::Product";
+      };
+      "OBJ_135" = {
+         isa = "PBXTargetDependency";
+         target = "Deboogger::Deboogger";
+      };
+      "OBJ_14" = {
+         isa = "PBXFileReference";
+         path = "ButtonTableViewCell.swift";
+         sourceTree = "<group>";
+      };
+      "OBJ_15" = {
+         isa = "PBXGroup";
+         children = (
+            "OBJ_16"
+         );
+         name = "DescriptionTableViewCell";
+         path = "DescriptionTableViewCell";
+         sourceTree = "<group>";
+      };
+      "OBJ_16" = {
+         isa = "PBXFileReference";
+         path = "DescriptionTableViewCell.swift";
+         sourceTree = "<group>";
+      };
+      "OBJ_17" = {
+         isa = "PBXGroup";
+         children = (
+            "OBJ_18"
+         );
+         name = "SectionTableViewCell";
+         path = "SectionTableViewCell";
+         sourceTree = "<group>";
+      };
+      "OBJ_18" = {
+         isa = "PBXFileReference";
+         path = "SectionTableViewCell.swift";
+         sourceTree = "<group>";
+      };
+      "OBJ_19" = {
+         isa = "PBXGroup";
+         children = (
+            "OBJ_20"
+         );
+         name = "SegmentTableViewCell";
+         path = "SegmentTableViewCell";
+         sourceTree = "<group>";
+      };
+      "OBJ_2" = {
+         isa = "XCConfigurationList";
+         buildConfigurations = (
+            "OBJ_3",
+            "OBJ_4"
+         );
+         defaultConfigurationIsVisible = "0";
+         defaultConfigurationName = "Release";
+      };
+      "OBJ_20" = {
+         isa = "PBXFileReference";
+         path = "SegmentTableViewCell.swift";
+         sourceTree = "<group>";
+      };
+      "OBJ_21" = {
+         isa = "PBXGroup";
+         children = (
+            "OBJ_22"
+         );
+         name = "SliderTableViewCell";
+         path = "SliderTableViewCell";
+         sourceTree = "<group>";
+      };
+      "OBJ_22" = {
+         isa = "PBXFileReference";
+         path = "SliderTableViewCell.swift";
+         sourceTree = "<group>";
+      };
+      "OBJ_23" = {
+         isa = "PBXGroup";
+         children = (
+            "OBJ_24"
+         );
+         name = "SwitchTableViewCell";
+         path = "SwitchTableViewCell";
+         sourceTree = "<group>";
+      };
+      "OBJ_24" = {
+         isa = "PBXFileReference";
+         path = "SwitchTableViewCell.swift";
+         sourceTree = "<group>";
+      };
+      "OBJ_25" = {
+         isa = "PBXGroup";
+         children = (
+            "OBJ_26"
+         );
+         name = "TextFieldTableViewCell";
+         path = "TextFieldTableViewCell";
+         sourceTree = "<group>";
+      };
+      "OBJ_26" = {
+         isa = "PBXFileReference";
+         path = "TextFieldTableViewCell.swift";
+         sourceTree = "<group>";
+      };
+      "OBJ_27" = {
+         isa = "PBXFileReference";
+         path = "Deboogger+Storage.swift";
+         sourceTree = "<group>";
+      };
+      "OBJ_28" = {
+         isa = "PBXFileReference";
+         path = "Deboogger.swift";
+         sourceTree = "<group>";
+      };
+      "OBJ_29" = {
+         isa = "PBXGroup";
+         children = (
+            "OBJ_30",
+            "OBJ_31"
+         );
+         name = "DefaultPlugins";
+         path = "DefaultPlugins";
+         sourceTree = "<group>";
+      };
+      "OBJ_3" = {
+         isa = "XCBuildConfiguration";
+         buildSettings = {
+            CLANG_ENABLE_OBJC_ARC = "YES";
+            COMBINE_HIDPI_IMAGES = "YES";
+            COPY_PHASE_STRIP = "NO";
+            DEBUG_INFORMATION_FORMAT = "dwarf";
+            DYLIB_INSTALL_NAME_BASE = "@rpath";
+            ENABLE_NS_ASSERTIONS = "YES";
+            GCC_OPTIMIZATION_LEVEL = "0";
+            GCC_PREPROCESSOR_DEFINITIONS = (
+               "$(inherited)",
+               "SWIFT_PACKAGE=1",
+               "DEBUG=1"
+            );
+            MACOSX_DEPLOYMENT_TARGET = "10.10";
+            ONLY_ACTIVE_ARCH = "YES";
+            OTHER_SWIFT_FLAGS = (
+               "$(inherited)",
+               "-DXcode"
+            );
+            PRODUCT_NAME = "$(TARGET_NAME)";
+            SDKROOT = "macosx";
+            SUPPORTED_PLATFORMS = (
+               "macosx",
+               "iphoneos",
+               "iphonesimulator",
+               "appletvos",
+               "appletvsimulator",
+               "watchos",
+               "watchsimulator"
+            );
+            SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
+               "$(inherited)",
+               "SWIFT_PACKAGE",
+               "DEBUG"
+            );
+            SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+            USE_HEADERMAP = "NO";
+         };
+         name = "Debug";
+      };
+      "OBJ_30" = {
+         isa = "PBXFileReference";
+         path = "DebooggerButtonPlugin.swift";
+         sourceTree = "<group>";
+      };
+      "OBJ_31" = {
+         isa = "PBXFileReference";
+         path = "SectionPlugin.swift";
+         sourceTree = "<group>";
+      };
+      "OBJ_32" = {
+         isa = "PBXGroup";
+         children = (
+            "OBJ_33",
+            "OBJ_34",
+            "OBJ_35",
+            "OBJ_36",
+            "OBJ_37"
+         );
+         name = "Extensions";
+         path = "Extensions";
+         sourceTree = "<group>";
+      };
+      "OBJ_33" = {
+         isa = "PBXFileReference";
+         path = "Bundle+Deboogger.swift";
+         sourceTree = "<group>";
+      };
+      "OBJ_34" = {
+         isa = "PBXFileReference";
+         path = "Swizzling.swift";
+         sourceTree = "<group>";
+      };
+      "OBJ_35" = {
+         isa = "PBXFileReference";
+         path = "UIView+SuperviewOffset.swift";
+         sourceTree = "<group>";
+      };
+      "OBJ_36" = {
+         isa = "PBXFileReference";
+         path = "UIViewController+Presenter.swift";
+         sourceTree = "<group>";
+      };
+      "OBJ_37" = {
+         isa = "PBXFileReference";
+         path = "UIWindow+Deboogger.swift";
+         sourceTree = "<group>";
+      };
+      "OBJ_38" = {
+         isa = "PBXFileReference";
+         path = "Keychain.swift";
+         sourceTree = "<group>";
+      };
+      "OBJ_39" = {
+         isa = "PBXGroup";
+         children = (
+            "OBJ_40",
+            "OBJ_41",
+            "OBJ_42"
+         );
+         name = "PerformanceMonitor";
+         path = "PerformanceMonitor";
+         sourceTree = "<group>";
+      };
+      "OBJ_4" = {
+         isa = "XCBuildConfiguration";
+         buildSettings = {
+            CLANG_ENABLE_OBJC_ARC = "YES";
+            COMBINE_HIDPI_IMAGES = "YES";
+            COPY_PHASE_STRIP = "YES";
+            DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+            DYLIB_INSTALL_NAME_BASE = "@rpath";
+            GCC_OPTIMIZATION_LEVEL = "s";
+            GCC_PREPROCESSOR_DEFINITIONS = (
+               "$(inherited)",
+               "SWIFT_PACKAGE=1"
+            );
+            MACOSX_DEPLOYMENT_TARGET = "10.10";
+            OTHER_SWIFT_FLAGS = (
+               "$(inherited)",
+               "-DXcode"
+            );
+            PRODUCT_NAME = "$(TARGET_NAME)";
+            SDKROOT = "macosx";
+            SUPPORTED_PLATFORMS = (
+               "macosx",
+               "iphoneos",
+               "iphonesimulator",
+               "appletvos",
+               "appletvsimulator",
+               "watchos",
+               "watchsimulator"
+            );
+            SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
+               "$(inherited)",
+               "SWIFT_PACKAGE"
+            );
+            SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+            USE_HEADERMAP = "NO";
+         };
+         name = "Release";
+      };
+      "OBJ_40" = {
+         isa = "PBXFileReference";
+         path = "PerformanceMonitor.swift";
+         sourceTree = "<group>";
+      };
+      "OBJ_41" = {
+         isa = "PBXFileReference";
+         path = "PerformanceWindow.swift";
+         sourceTree = "<group>";
+      };
+      "OBJ_42" = {
+         isa = "PBXGroup";
+         children = (
+            "OBJ_43"
+         );
+         name = "Plugins";
+         path = "Plugins";
+         sourceTree = "<group>";
+      };
+      "OBJ_43" = {
+         isa = "PBXFileReference";
+         path = "PerformanceMonitorPlugin.swift";
+         sourceTree = "<group>";
+      };
+      "OBJ_44" = {
+         isa = "PBXGroup";
+         children = (
+            "OBJ_45",
+            "OBJ_51"
+         );
+         name = "PluginViewController";
+         path = "PluginViewController";
+         sourceTree = "<group>";
+      };
+      "OBJ_45" = {
+         isa = "PBXGroup";
+         children = (
+            "OBJ_46",
+            "OBJ_47",
+            "OBJ_48",
+            "OBJ_50"
+         );
+         name = "Configurations";
+         path = "Configurations";
+         sourceTree = "<group>";
+      };
+      "OBJ_46" = {
+         isa = "PBXFileReference";
+         path = "Configuration.swift";
+         sourceTree = "<group>";
+      };
+      "OBJ_47" = {
+         isa = "PBXFileReference";
+         path = "FavoriteService.swift";
+         sourceTree = "<group>";
+      };
+      "OBJ_48" = {
+         isa = "PBXGroup";
+         children = (
+            "OBJ_49"
+         );
+         name = "Items";
+         path = "Items";
+         sourceTree = "<group>";
+      };
+      "OBJ_49" = {
+         isa = "PBXFileReference";
+         path = "PluginItem.swift";
+         sourceTree = "<group>";
+      };
+      "OBJ_5" = {
+         isa = "PBXGroup";
+         children = (
+            "OBJ_6",
+            "OBJ_7",
+            "OBJ_63",
+            "OBJ_67",
+            "OBJ_70",
+            "OBJ_71",
+            "OBJ_72"
+         );
+         path = "";
+         sourceTree = "<group>";
+      };
+      "OBJ_50" = {
+         isa = "PBXFileReference";
+         path = "SectionsConfiguration.swift";
+         sourceTree = "<group>";
+      };
+      "OBJ_51" = {
+         isa = "PBXFileReference";
+         path = "PluginViewController.swift";
+         sourceTree = "<group>";
+      };
+      "OBJ_52" = {
+         isa = "PBXGroup";
+         children = (
+            "OBJ_53",
+            "OBJ_54",
+            "OBJ_55",
+            "OBJ_56",
+            "OBJ_57",
+            "OBJ_58",
+            "OBJ_59",
+            "OBJ_60"
+         );
+         name = "Plugins";
+         path = "Plugins";
+         sourceTree = "<group>";
+      };
+      "OBJ_53" = {
+         isa = "PBXFileReference";
+         path = "ButtonPlugin.swift";
+         sourceTree = "<group>";
+      };
+      "OBJ_54" = {
+         isa = "PBXFileReference";
+         path = "NavigationPlugin.swift";
+         sourceTree = "<group>";
+      };
+      "OBJ_55" = {
+         isa = "PBXFileReference";
+         path = "Plugin.swift";
+         sourceTree = "<group>";
+      };
+      "OBJ_56" = {
+         isa = "PBXFileReference";
+         path = "SegmentPlugin.swift";
+         sourceTree = "<group>";
+      };
+      "OBJ_57" = {
+         isa = "PBXFileReference";
+         path = "SliderPlugin.swift";
+         sourceTree = "<group>";
+      };
+      "OBJ_58" = {
+         isa = "PBXFileReference";
+         path = "SwitchPlugin.swift";
+         sourceTree = "<group>";
+      };
+      "OBJ_59" = {
+         isa = "PBXFileReference";
+         path = "TextFieldPlugin.swift";
+         sourceTree = "<group>";
+      };
+      "OBJ_6" = {
+         isa = "PBXFileReference";
+         explicitFileType = "sourcecode.swift";
+         path = "Package.swift";
+         sourceTree = "<group>";
+      };
+      "OBJ_60" = {
+         isa = "PBXFileReference";
+         path = "TextPlugin.swift";
+         sourceTree = "<group>";
+      };
+      "OBJ_61" = {
+         isa = "PBXGroup";
+         children = (
+            "OBJ_62"
+         );
+         name = "Views";
+         path = "Views";
+         sourceTree = "<group>";
+      };
+      "OBJ_62" = {
+         isa = "PBXFileReference";
+         path = "PaddingLabel.swift";
+         sourceTree = "<group>";
+      };
+      "OBJ_63" = {
+         isa = "PBXGroup";
+         children = (
+            "OBJ_64"
+         );
+         name = "Tests";
+         path = "";
+         sourceTree = "SOURCE_ROOT";
+      };
+      "OBJ_64" = {
+         isa = "PBXGroup";
+         children = (
+            "OBJ_65",
+            "OBJ_66"
+         );
+         name = "DebooggerTests";
+         path = "Tests/DebooggerTests";
+         sourceTree = "SOURCE_ROOT";
+      };
+      "OBJ_65" = {
+         isa = "PBXFileReference";
+         path = "DebooggerTests.swift";
+         sourceTree = "<group>";
+      };
+      "OBJ_66" = {
+         isa = "PBXFileReference";
+         path = "XCTestManifests.swift";
+         sourceTree = "<group>";
+      };
+      "OBJ_67" = {
+         isa = "PBXGroup";
+         children = (
+            "Deboogger::Deboogger::Product",
+            "Deboogger::DebooggerTests::Product"
+         );
+         name = "Products";
+         path = "";
+         sourceTree = "BUILT_PRODUCTS_DIR";
+      };
+      "OBJ_7" = {
+         isa = "PBXGroup";
+         children = (
+            "OBJ_8"
+         );
+         name = "Sources";
+         path = "";
+         sourceTree = "SOURCE_ROOT";
+      };
+      "OBJ_70" = {
+         isa = "PBXFileReference";
+         path = "Example";
+         sourceTree = "SOURCE_ROOT";
+      };
+      "OBJ_71" = {
+         isa = "PBXFileReference";
+         path = "LICENSE";
+         sourceTree = "<group>";
+      };
+      "OBJ_72" = {
+         isa = "PBXFileReference";
+         path = "README.md";
+         sourceTree = "<group>";
+      };
+      "OBJ_74" = {
+         isa = "XCConfigurationList";
+         buildConfigurations = (
+            "OBJ_75",
+            "OBJ_76"
+         );
+         defaultConfigurationIsVisible = "0";
+         defaultConfigurationName = "Release";
+      };
+      "OBJ_75" = {
+         isa = "XCBuildConfiguration";
+         buildSettings = {
+            ENABLE_TESTABILITY = "YES";
+            FRAMEWORK_SEARCH_PATHS = (
+               "$(inherited)",
+               "$(PLATFORM_DIR)/Developer/Library/Frameworks"
+            );
+            HEADER_SEARCH_PATHS = (
+               "$(inherited)"
+            );
+            INFOPLIST_FILE = "Deboogger.xcodeproj/Deboogger_Info.plist";
+            IPHONEOS_DEPLOYMENT_TARGET = "12.0";
+            LD_RUNPATH_SEARCH_PATHS = (
+               "$(inherited)",
+               "$(TOOLCHAIN_DIR)/usr/lib/swift/macosx"
+            );
+            MACOSX_DEPLOYMENT_TARGET = "10.10";
+            OTHER_CFLAGS = (
+               "$(inherited)"
+            );
+            OTHER_LDFLAGS = (
+               "$(inherited)"
+            );
+            OTHER_SWIFT_FLAGS = (
+               "$(inherited)"
+            );
+            PRODUCT_BUNDLE_IDENTIFIER = "Deboogger";
+            PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
+            PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+            SKIP_INSTALL = "YES";
+            SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
+               "$(inherited)"
+            );
+            SWIFT_VERSION = "5.0";
+            TARGET_NAME = "Deboogger";
+            TVOS_DEPLOYMENT_TARGET = "9.0";
+            WATCHOS_DEPLOYMENT_TARGET = "2.0";
+         };
+         name = "Debug";
+      };
+      "OBJ_76" = {
+         isa = "XCBuildConfiguration";
+         buildSettings = {
+            ENABLE_TESTABILITY = "YES";
+            FRAMEWORK_SEARCH_PATHS = (
+               "$(inherited)",
+               "$(PLATFORM_DIR)/Developer/Library/Frameworks"
+            );
+            HEADER_SEARCH_PATHS = (
+               "$(inherited)"
+            );
+            INFOPLIST_FILE = "Deboogger.xcodeproj/Deboogger_Info.plist";
+            IPHONEOS_DEPLOYMENT_TARGET = "12.0";
+            LD_RUNPATH_SEARCH_PATHS = (
+               "$(inherited)",
+               "$(TOOLCHAIN_DIR)/usr/lib/swift/macosx"
+            );
+            MACOSX_DEPLOYMENT_TARGET = "10.10";
+            OTHER_CFLAGS = (
+               "$(inherited)"
+            );
+            OTHER_LDFLAGS = (
+               "$(inherited)"
+            );
+            OTHER_SWIFT_FLAGS = (
+               "$(inherited)"
+            );
+            PRODUCT_BUNDLE_IDENTIFIER = "Deboogger";
+            PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
+            PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+            SKIP_INSTALL = "YES";
+            SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
+               "$(inherited)"
+            );
+            SWIFT_VERSION = "5.0";
+            TARGET_NAME = "Deboogger";
+            TVOS_DEPLOYMENT_TARGET = "9.0";
+            WATCHOS_DEPLOYMENT_TARGET = "2.0";
+         };
+         name = "Release";
+      };
+      "OBJ_77" = {
+         isa = "PBXSourcesBuildPhase";
+         files = (
+            "OBJ_78",
+            "OBJ_79",
+            "OBJ_80",
+            "OBJ_81",
+            "OBJ_82",
+            "OBJ_83",
+            "OBJ_84",
+            "OBJ_85",
+            "OBJ_86",
+            "OBJ_87",
+            "OBJ_88",
+            "OBJ_89",
+            "OBJ_90",
+            "OBJ_91",
+            "OBJ_92",
+            "OBJ_93",
+            "OBJ_94",
+            "OBJ_95",
+            "OBJ_96",
+            "OBJ_97",
+            "OBJ_98",
+            "OBJ_99",
+            "OBJ_100",
+            "OBJ_101",
+            "OBJ_102",
+            "OBJ_103",
+            "OBJ_104",
+            "OBJ_105",
+            "OBJ_106",
+            "OBJ_107",
+            "OBJ_108",
+            "OBJ_109",
+            "OBJ_110",
+            "OBJ_111",
+            "OBJ_112",
+            "OBJ_113"
+         );
+      };
+      "OBJ_78" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_10";
+      };
+      "OBJ_79" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_12";
+      };
+      "OBJ_8" = {
+         isa = "PBXGroup";
+         children = (
+            "OBJ_9",
+            "OBJ_11",
+            "OBJ_27",
+            "OBJ_28",
+            "OBJ_29",
+            "OBJ_32",
+            "OBJ_38",
+            "OBJ_39",
+            "OBJ_44",
+            "OBJ_52",
+            "OBJ_61"
+         );
+         name = "Deboogger";
+         path = "Sources/Deboogger";
+         sourceTree = "SOURCE_ROOT";
+      };
+      "OBJ_80" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_14";
+      };
+      "OBJ_81" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_16";
+      };
+      "OBJ_82" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_18";
+      };
+      "OBJ_83" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_20";
+      };
+      "OBJ_84" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_22";
+      };
+      "OBJ_85" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_24";
+      };
+      "OBJ_86" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_26";
+      };
+      "OBJ_87" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_27";
+      };
+      "OBJ_88" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_28";
+      };
+      "OBJ_89" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_30";
+      };
+      "OBJ_9" = {
+         isa = "PBXGroup";
+         children = (
+            "OBJ_10"
+         );
+         name = "AssistiveButton";
+         path = "AssistiveButton";
+         sourceTree = "<group>";
+      };
+      "OBJ_90" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_31";
+      };
+      "OBJ_91" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_33";
+      };
+      "OBJ_92" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_34";
+      };
+      "OBJ_93" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_35";
+      };
+      "OBJ_94" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_36";
+      };
+      "OBJ_95" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_37";
+      };
+      "OBJ_96" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_38";
+      };
+      "OBJ_97" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_40";
+      };
+      "OBJ_98" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_41";
+      };
+      "OBJ_99" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_43";
+      };
+   };
+   rootObject = "OBJ_1";
+}
