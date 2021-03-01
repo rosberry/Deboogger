@@ -3,6 +3,7 @@
 //  Copyright © 2019 Rosberry. All rights reserved.
 //
 
+import UIKit
 import Foundation
 
 final class SectionsConfiguration: NSObject, Configuration {

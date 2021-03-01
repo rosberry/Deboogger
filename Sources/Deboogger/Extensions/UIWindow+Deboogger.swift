@@ -18,6 +18,21 @@ extension UIWindow {
             objc_setAssociatedObject(self, &AssociationKeys.debooggerGestureRecognizer, newValue, .OBJC_ASSOCIATION_ASSIGN)
         }
     }
+    
+    public static let prepareInitSwizzling: Void = {
+        swizzle(UIWindow.self, #selector(UIWindow.init(frame:)), #selector(UIWindow.swizzled_initWithFrame))
+        swizzle(UIWindow.self, #selector(UIWindow.init(coder:)), #selector(UIWindow.swizzled_initWithCoder))
+    }()
+
+    @objc func swizzled_initWithFrame(rect: CGRect) -> UIWindow {
+        setupGestureRecognizer()
+        return swizzled_initWithFrame(rect: rect)
+    }
+
+    @objc func swizzled_initWithCoder(coder: NSCoder) -> UIWindow {
+        setupGestureRecognizer()
+        return swizzled_initWithCoder(coder: coder)
+    }
 
     @objc private func setupGestureRecognizer() {
         #if targetEnvironment(simulator)

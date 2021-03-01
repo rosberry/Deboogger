@@ -83,6 +83,10 @@ public final class Deboogger {
 
     // MARK: - Configurations
 
+    public static func swizzleUIWindowInit() {
+        print(UIWindow.prepareInitSwizzling)
+    }
+
     public static func configure(with plugins: [Plugin], gesture: DebooggerGesture = .init(), window: UIWindow) {
         let section = SectionPlugin(title: "App plugins", plugins: plugins)
         configure(with: [section], gesture: gesture, window: window)

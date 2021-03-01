@@ -5,6 +5,7 @@
 
 import Foundation
 import ObjectiveC
+import UIKit
 
 public protocol SliderPlugin: TextPlugin {
     var minValue: Float { get }

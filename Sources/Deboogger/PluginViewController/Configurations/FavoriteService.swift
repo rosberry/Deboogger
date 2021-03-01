@@ -4,6 +4,8 @@
 //  Copyright © 2020 Nikita Ermolenko. All rights reserved.
 //
 
+import UIKit
+
 final class FavoriteService {
 
     enum NotificationName {
