@@ -12,16 +12,20 @@ extension UIWindow {
 
     public var debooggerGestureRecognizer: UITapGestureRecognizer? {
         get {
-            return objc_getAssociatedObject(self, &AssociationKeys.debooggerGestureRecognizer) as? UITapGestureRecognizer
+            if let recognizer = objc_getAssociatedObject(self, &AssociationKeys.debooggerGestureRecognizer) as? UITapGestureRecognizer {
+                return recognizer
+            }
+            
+            return setupDebooggerGestureRecognizer()
         }
         set {
             objc_setAssociatedObject(self, &AssociationKeys.debooggerGestureRecognizer, newValue, .OBJC_ASSOCIATION_ASSIGN)
         }
     }
 
-    @objc private func setupGestureRecognizer() {
+    public func setupDebooggerGestureRecognizer() -> UITapGestureRecognizer? {
         #if targetEnvironment(simulator)
-            return
+            return nil
         #endif
 
         let recognizer = UITapGestureRecognizer(target: self, action: #selector(showDeboogger))
@@ -30,6 +34,7 @@ extension UIWindow {
 
         Deboogger.shared.setup(recognizer)
         debooggerGestureRecognizer = recognizer
+        return recognizer
     }
 
     // MARK: Show/Hide

@@ -2,6 +2,8 @@
 //  Copyright © 2020 Rosberry. All rights reserved.
 //
 
+import UIKit
+
 public protocol TextFieldPlugin: Plugin {
 
     var placeholder: String { get }
